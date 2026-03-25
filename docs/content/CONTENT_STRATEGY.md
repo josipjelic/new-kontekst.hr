@@ -2,17 +2,17 @@
 
 > **Owner**: @copywriter-seo
 > **Personas**: Defined in `PRD.md` — always read before writing copy
-> **Last updated**: [YYYY-MM-DD]
+> **Last updated**: 2026-03-25
 
 ---
 
 ## Overview
 
-[2–3 sentences: what this product does, who it's for, and the core promise that all content should reinforce. Must align with PRD.md — do not contradict it.]
+Kontekst.hr je specijalizirana agencija za automatizaciju poslovanja i AI rješenja namijenjena vlasnicima tvrtki u Hrvatskoj koji žele eliminirati ručni rad i ubrzati rast. Nudimo n8n workflow automatizacije, automatizaciju poslovnih procesa i AI aplikacije po mjeri. Osnovna obećanje branda: vaš tim oslobođen od ponavljajućih zadataka, uz tehnologiju koja radi 24/7 umjesto vas.
 
-**Primary value proposition**: [One sentence. The single most compelling reason to choose this product.]
+**Primary value proposition**: Zamjenjujemo sate ručnog rada pametnim automatizacijama — vaš tim fokusiran na rast, ostatak prepustite nama.
 
-**Canonical brand statement**: [The one line that appears most consistently across all channels. This is the gravitational centre of all copy.]
+**Canonical brand statement**: "Automatizacija poslovanja koja zaista radi."
 
 ---
 
@@ -79,20 +79,24 @@
 
 ### Domain & Canonical URL
 
-- **Primary domain**: [https://example.com]
-- **Canonical protocol + www preference**: [https://www.example.com OR https://example.com — pick one; must be consistent]
+- **Primary domain**: `https://kontekst.hr`
+- **Canonical protocol + www preference**: `https://kontekst.hr/` (no www — must be consistent across all tags)
 
 ### Primary Keyword Targets
 
 | Keyword | Intent | Mapped Page | Monthly Volume | Difficulty | Status | Date Added |
 |---------|--------|-------------|---------------|------------|--------|------------|
-| [keyword] | [informational/navigational/commercial/transactional] | [/page-slug] | [volume or "verify"] | [low/med/high or "verify"] | [targeting/ranking/not started] | [YYYY-MM-DD] |
+| automatizacija poslovanja | commercial | / | verify | med | targeting | 2026-03-25 |
+| n8n Hrvatska | commercial | / | verify | low | targeting | 2026-03-25 |
+| AI aplikacije za poslovanje | commercial | / | verify | med | targeting | 2026-03-25 |
+| poslovne automatizacije | commercial | / | verify | med | targeting | 2026-03-25 |
+| automatizacija poslovnih procesa | commercial | / | verify | med | targeting | 2026-03-25 |
 
 ### Secondary Keywords (supporting, per page)
 
 | Page | Secondary Keywords |
 |------|--------------------|
-| [/page-slug] | [keyword 1], [keyword 2], [keyword 3] |
+| / | workflow automatizacija, n8n workflow, AI rješenja za tvrtke, integracija poslovnih alata |
 
 ### Content Clusters
 
@@ -116,19 +120,21 @@ Copy is recorded here after it goes live. Variants awaiting A/B test results are
 
 ### Homepage
 
-**Title tag**: [exact text]
-**Meta description**: [exact text]
+**Title tag**: `Kontekst.hr — Automatizacija poslovanja i AI za tvrtke` (52 chars)
+**Meta description**: `Poslovne automatizacije, n8n workflow rješenja i AI aplikacije za tvrtke u Hrvatskoj. Automatizirajte procese, uštedite sate rada dnevno.` (138 chars)
 
 **H1**:
-> [Headline text]
+> Automatizacija poslovanja koja zaista radi
 
 **Sub-headline**:
-> [Sub-headline text]
+> Zamjenjujemo ručne, ponavljajuće zadatke pametnim n8n workflowima i AI rješenjima. Vaš tim radi na onome što donosi rast — ostatak prepustite nama.
 
-**Primary CTA**: [CTA text] → [destination URL or route]
-**Secondary CTA**: [CTA text] → [destination]
+**Primary CTA**: Besplatni uvodni razgovor → #kontakt
+**Secondary CTA**: Pogledajte usluge → #usluge
 
-**Social proof block**: [Number of customers / logos / testimonial used]
+**Nav CTA**: Razgovarajmo → #kontakt
+
+**Social proof block**: Tri stat-a: "24/7 Automatizacije rade" / "n8n Stručnjaci za Hrvatsku" / "AI Rješenja po mjeri"
 
 ---
 
@@ -174,11 +180,11 @@ Applied to all pages unless a page-level override exists in the Page Copy Librar
 
 | Schema type | Applied to | Implementation status |
 |-------------|------------|----------------------|
-| Organization | Homepage | [pending / live] |
-| WebSite | Homepage | [pending / live] |
-| Article | Blog posts | [pending / live] |
-| FAQPage | [pages with FAQ sections] | [pending / live] |
-| BreadcrumbList | All pages except homepage | [pending / live] |
+| ProfessionalService | Homepage (`index.html`) | live |
+| WebSite | Homepage (`index.html`) | live |
+| Article | Blog posts | not started (no blog yet) |
+| FAQPage | Homepage (if FAQ section added) | pending |
+| BreadcrumbList | All pages except homepage | not applicable (single-page) |
 
 ### Redirect Map
 
@@ -207,4 +213,5 @@ Applied to all pages unless a page-level override exists in the Page Copy Librar
 
 | Date | Change |
 |------|--------|
-| [YYYY-MM-DD] | Initial content strategy — brand voice and keyword framework defined |
+| 2026-03-25 | Full content + SEO revision of index.html — improved all section copy, added og:image, og:image:alt, twitter:image, twitter:image:alt, meta author/language, upgraded JSON-LD from LocalBusiness to ProfessionalService + WebSite, added hasOfferCatalog. Updated keyword targets and page copy library. |
+| 2026-03-25 | Initial content strategy — brand voice and keyword framework defined |

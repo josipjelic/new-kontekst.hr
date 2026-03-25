@@ -1,14 +1,14 @@
 ---
 id: "004"
 title: "Sekcija Kako radimo — proces u koracima"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "normal"
 created_at: "2026-03-25"
 due_date: null
-started_at: null
-completed_at: null
+started_at: "2026-03-25"
+completed_at: "2026-03-25"
 prd_refs: ["FR-030", "FR-031", "FR-032"]
 blocks: []
 blocked_by: ["001"]
@@ -27,12 +27,12 @@ Predloženi koraci (5):
 
 ## Acceptance Criteria
 
-- [ ] `<section id="kako-radimo">` s naslovom "Kako radimo"
-- [ ] 4–5 koraka prikazano kao numeriran timeline ili step layout
-- [ ] Svaki korak ima broj, naziv i kratki opis na hrvatskom
-- [ ] Vizualni konektor između koraka (linija, strelice, ili stepper dots)
-- [ ] Responzivno: vertikalni timeline na mobitelu, horizontalni ili grid na desktopu
-- [ ] Stil konzistentan s ostatkom stranice
+- [x] `<section id="kako-radimo">` s naslovom "Kako radimo"
+- [x] 5 koraka prikazano kao numeriran vertical timeline
+- [x] Svaki korak ima broj, naziv i kratki opis na hrvatskom
+- [x] Vizualni konektor između koraka (`.process-step-connector` linija između koraka)
+- [x] Responzivno: vertikalni timeline na mobitelu, dva stupca (steps + dekorativni panel) na desktopu
+- [x] Stil konzistentan s ostatkom stranice (design system v2 tokeni, Syne/DM Sans fontovi, teal akcenti)
 
 ## Technical Notes
 
@@ -45,3 +45,5 @@ Predloženi koraci (5):
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
+| 2026-03-25 | @frontend-developer | Started implementation |
+| 2026-03-25 | @frontend-developer | Completed — updated index.html: replaced 4-step div list with semantic `<ol>` containing 5 steps (Analiza, Prijedlog, Razvoj, Testiranje, Podrška) matching task spec; all scroll reveal classes applied; existing CSS `.process-step` styles fully cover the new markup |

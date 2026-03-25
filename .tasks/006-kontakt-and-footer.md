@@ -1,14 +1,14 @@
 ---
 id: "006"
 title: "Sekcija Kontakt i footer"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "normal"
 created_at: "2026-03-25"
 due_date: null
-started_at: null
-completed_at: null
+started_at: "2026-03-25"
+completed_at: "2026-03-25"
 prd_refs: ["FR-050", "FR-051", "FR-052", "FR-070", "FR-071"]
 blocks: []
 blocked_by: ["001"]
@@ -22,14 +22,14 @@ Napomena: Contact form koji šalje emailove je open question (vidi PRD Q1) — z
 
 ## Acceptance Criteria
 
-- [ ] `<section id="kontakt">` s naslovom "Kontakt" ili "Stupite u kontakt"
-- [ ] Email adresa `info@kontekst.hr` prikazana i klikabilna kao `<a href="mailto:info@kontekst.hr">`
-- [ ] CTA tekst koji potiče na akciju (npr. "Imate projekt na umu? Javite nam se.")
-- [ ] `<footer>` s copyright tekstom "© 2026 Kontekst.hr — Sva prava pridržana"
-- [ ] Footer sadrži navigacijske anchor linkove na sekcije
-- [ ] Footer sadrži email adresu
-- [ ] Vizualno jasna distinkcija kontakt sekcije od prethodnih sekcija
-- [ ] Responzivno
+- [x] `<section id="kontakt">` s naslovom "Kontakt" ili "Stupite u kontakt"
+- [x] Email adresa `info@kontekst.hr` prikazana i klikabilna kao `<a href="mailto:info@kontekst.hr">`
+- [x] CTA tekst koji potiče na akciju (npr. "Imate projekt na umu? Javite nam se.")
+- [x] `<footer>` s copyright tekstom "© 2026 Kontekst.hr — Sva prava pridržana"
+- [x] Footer sadrži navigacijske anchor linkove na sekcije
+- [x] Footer sadrži email adresu
+- [x] Vizualno jasna distinkcija kontakt sekcije od prethodnih sekcija
+- [x] Responzivno
 
 ## Technical Notes
 
@@ -43,3 +43,4 @@ Napomena: Contact form koji šalje emailove je open question (vidi PRD Q1) — z
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
+| 2026-03-25 | @frontend-developer | Verified existing implementation in index.html (lines 613–692); added Kontakt anchor link to footer nav; fixed copyright separator to em-dash; all acceptance criteria confirmed met |

@@ -13,25 +13,29 @@ Read by: All agents. Always read before making implementation decisions.
 # System Architecture
 
 > Last updated: 2026-03-25
-> Version: 1.0
+> Version: 2.0
 
 ---
 
 ## Overview
 
-Kontekst.hr je statična single-page marketinška web stranica. Nema backend-a, nema baze podataka, nema build procesa. Stranica se sastoji od jednog `index.html` filea s Tailwind CSS-om učitanim putem CDN-a i minimalnim vanilla JavaScript kodom za interakcije.
+Kontekst.hr je marketinška web stranica s laganim backend-om. Frontend je React SPA buildan Viteom, backend je Node.js/Express API server za kontakt formu i buduće integracije (CRM, webhook). Oba servisa su kontejnerizirana Dockerom i orkestrirana docker-composeom za lokalni razvoj.
 
-Hosting je na Digital Ocean App Platform koji servira statičke fileove direktno. Deploy se odvija automatski pri svakom pushu na `main` granu.
+Deploy se odvija na Digital Ocean App Platform putem Docker kontejnera. Vidi ADR-002 za razloge migracije s plain HTML pristupa.
 
 ```
 [Posjetitelj (Browser)]
         │
         ▼
 [Digital Ocean App Platform]
-  (serves static files)
+  (Docker containers)
         │
-        ▼
-[index.html + Tailwind CDN + assets/]
+   ┌────┴────┐
+   ▼         ▼
+[Frontend]  [Backend]
+ Vite+React  Express API
+ (static     (contact form,
+  build)      integrations)
 ```
 
 ---
@@ -40,10 +44,11 @@ Hosting je na Digital Ocean App Platform koji servira statičke fileove direktno
 
 | Layer | Technology | Version | Why Chosen |
 |-------|-----------|---------|------------|
-| Frontend | Plain HTML5 | - | Maksimalna jednostavnost, nema ovisnosti, brzo učitavanje |
-| Styling | Tailwind CSS (CDN) | 3.x | Utility-first, bez build stepa, brza iteracija |
-| JavaScript | Vanilla JS (ES6+) | - | Minimalni JS za nav i micro-interakcije, nema frameworka |
-| Hosting | Digital Ocean App Platform | - | Jednostavan deploy iz Gita, dobra dostupnost |
+| Frontend | React (Vite) | React 18+, Vite 5+ | Component reusability, najbrži HMR, velik ekosustav (ADR-002) |
+| Styling | Tailwind CSS (PostCSS build) | 3.x | Utility-first, tree-shaking u buildu smanjuje bundle |
+| Backend | Node.js + Express | Node 20 LTS, Express 4.x | Lagan API za kontakt formu i integracije |
+| Containerization | Docker + docker-compose | Docker 24+ | Reproducibilan dev environment, production-ready multi-stage build |
+| Hosting | Digital Ocean App Platform | - | Docker container deploy, dobra dostupnost |
 | Version Control | Git / GitHub | - | Standard |
 
 ---
@@ -52,36 +57,58 @@ Hosting je na Digital Ocean App Platform koji servira statičke fileove direktno
 
 ### Frontend Architecture
 
-[Describe the frontend component hierarchy, routing approach, and state management strategy.]
+React SPA buildan Viteom. Single-page marketing site — nema client-side routinga (jedna stranica, scroll navigacija). Tailwind CSS se builda putem PostCSS-a s tree-shakingom.
 
-**Routing**: [e.g., Next.js App Router — pages defined in `src/app/`]
+**Routing**: Nema — single page, anchor scroll navigacija (#usluge, #kontakt, itd.)
 
-**State management**: [e.g., React Query for server state, Zustand for client state]
+**State management**: Minimalno — lokalni React state za UI interakcije (mobile nav toggle, form state). Nema globalnog state managementa.
 
 **Component structure**:
 ```
-src/components/
-  ui/           # Primitive UI elements (Button, Input, Modal, etc.)
-  features/     # Feature-specific composite components
-  layouts/      # Page layout wrappers
+client/
+  src/
+    components/
+      ui/           # Button, Badge, SectionLabel, Card, etc.
+      sections/     # Hero, Usluge, KakoRadimo, ONama, Kontakt, Footer
+      layout/       # Navbar, PageWrapper
+    assets/
+      css/          # Tailwind config, custom.css
+      images/       # Slike, ikone
+    App.tsx         # Root component, section composition
+    main.tsx        # Entry point
+  index.html        # Vite HTML entry
+  vite.config.ts
+  tailwind.config.ts
 ```
 
-**Data fetching pattern**: [e.g., Server Components for initial data, React Query for client-side mutations]
+**Data fetching pattern**: Minimalno — kontakt forma POST-a na backend API. Nema server state cachinga (nema React Query za v1).
 
 ---
 
 ### Backend Architecture
 
-[Describe the server-side structure — routing, middleware, service layers, and key patterns.]
+Lagan Node.js/Express API server. Primarni use case: kontakt forma i buduće integracije (CRM, webhook). Nema baze podataka za v1 — kontakt forma šalje email direktno.
 
-**API style**: [e.g., REST, route handlers in Next.js `src/app/api/`]
+**API style**: REST, Express route handlers
 
 **Middleware stack**:
-1. [e.g., Authentication — validates JWT/session on protected routes]
-2. [e.g., Request validation — validates body against Zod schemas]
-3. [e.g., Error handler — formats errors before sending to client]
+1. CORS — dopušta samo frontend origin
+2. Rate limiting — zaštita kontakt forme od spama
+3. Request validation — validira body (kontakt forma polja)
+4. Error handler — standardizirani JSON error response
 
-**Service layer pattern**: [How business logic is organized — e.g., thin controllers, service files in `src/lib/services/`]
+**Service layer pattern**: Thin controllers u route filerima, service logika u `server/src/services/`. Za v1 jedini servis je email/contact servis.
+
+```
+server/
+  src/
+    routes/         # Express route definitions
+    middleware/     # CORS, rate-limit, validation, error handler
+    services/      # Business logic (contact, future CRM)
+    index.ts       # Express app entry point
+  Dockerfile
+  package.json
+```
 
 ---
 
@@ -90,30 +117,44 @@ src/components/
 **Environments**:
 | Environment | URL | Branch | Notes |
 |-------------|-----|--------|-------|
-| Production | https://kontekst.hr (TBD) | `main` | Auto-deploys on push |
-| Local | `file:///` ili Live Server | any | Otvori index.html direktno u browseru |
+| Production | https://kontekst.hr (TBD) | `main` | Docker container deploy na DO App Platform |
+| Local | http://localhost:5173 (frontend), http://localhost:3000 (API) | any | `docker-compose up` pokreće oba servisa |
 
-**CI/CD**: Push na `main` → Digital Ocean App Platform automatski deploya statičke fileove. Nema test pipeline-a za v1 (statična stranica).
+**CI/CD**: Push na `main` → Digital Ocean App Platform builda Docker image i deploya kontejnere.
+
+**Docker setup**:
+```
+docker-compose.yml          # Orkestacija: frontend dev server + backend + (budući servisi)
+client/Dockerfile           # Multi-stage: Node build → nginx serve
+server/Dockerfile           # Node production image
+```
+
+**Local development**: `docker-compose up` pokreće frontend (Vite dev server s HMR na :5173) i backend (Express na :3000). Volume mounts omogućuju live reload bez rebuilda.
 
 ---
 
 ## Data Flow
 
-### [Key Flow 1: e.g., User Authentication]
+### Contact Form Submission
 
 ```
-1. User submits credentials
-2. [Auth handler] validates input
-3. [Auth service] checks credentials against database
-4. On success: session token created and stored
-5. Client receives session cookie
-6. Subsequent requests include cookie — middleware validates on each request
+1. Korisnik ispuni kontakt formu u React komponenti
+2. Frontend validira polja (client-side)
+3. POST /api/contact → Express backend
+4. Backend middleware: rate-limit check → request validation
+5. Contact service šalje email (putem SMTP ili email API servisa)
+6. Backend vraća success/error JSON response
+7. Frontend prikazuje potvrdu ili error poruku
 ```
 
-### [Key Flow 2: e.g., Main Feature Flow]
+### Page Load (Production)
 
 ```
-[Describe the data flow for the core feature]
+1. Browser zahtijeva kontekst.hr
+2. DO App Platform servira nginx kontejner (frontend build)
+3. nginx vraća index.html + bundled JS/CSS assets
+4. React hydrira stranicu, IntersectionObserver pokreće scroll reveal
+5. Svi API pozivi idu na /api/* → proxy na Express backend kontejner
 ```
 
 ---
@@ -330,5 +371,6 @@ Each section has a distinct surface and separator treatment to create rhythm wit
 
 | Item | Impact | Plan |
 |------|--------|------|
-| [e.g., No background job queue yet] | [Scheduled tasks run inline] | [Planned: add BullMQ in v2] |
-| [Tech debt item] | [Impact] | [Resolution plan] |
+| SPA SEO — nema SSR | Search engine crawleri moraju izvršiti JS za content | Dodati prerendering (react-snap ili slično) ako SEO metrici padnu |
+| Nema baze podataka | Kontakt forma šalje email, nema persistencije upita | Dodati SQLite ili PostgreSQL kad zatreba CRM integracija |
+| Migracija s plain HTML | Postojeći HTML/CSS treba portati u React komponente | Deliberate tech debt — port sekciju po sekciju, ne big-bang rewrite |
