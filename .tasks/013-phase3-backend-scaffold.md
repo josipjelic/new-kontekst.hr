@@ -1,14 +1,14 @@
 ---
 id: "013"
 title: "Phase 3a — Scaffold Express server with health check endpoint"
-status: "todo"
+status: "done"
 area: "backend"
 agent: "@backend-developer"
 priority: "high"
 created_at: "2026-03-25"
 due_date: null
 started_at: null
-completed_at: null
+completed_at: "2026-03-25"
 prd_refs: []
 blocks: ["012", "014"]
 blocked_by: ["009"]
@@ -23,8 +23,8 @@ The backend serves one primary purpose in v1: handle the contact form submission
 ## Acceptance Criteria
 
 **Project structure**
-- [ ] `/backend` directory created with its own `package.json`
-- [ ] Directory layout:
+- [x] `/backend` directory created with its own `package.json`
+- [x] Directory layout:
   ```
   backend/
     src/
@@ -40,33 +40,33 @@ The backend serves one primary purpose in v1: handle the contact form submission
   ```
 
 **Health check endpoint**
-- [ ] `GET /health` returns `200 OK` with JSON body `{ "status": "ok", "timestamp": "<ISO string>" }`
-- [ ] Response time under 50ms
+- [x] `GET /health` returns `200 OK` with JSON body `{ "status": "ok", "timestamp": "<ISO string>" }`
+- [x] Response time under 50ms
 
 **Express app configuration**
-- [ ] `express.json()` middleware registered
-- [ ] `express.urlencoded({ extended: true })` registered
-- [ ] Request logging middleware (use `morgan` — `dev` format for local, `combined` for production, controlled by `NODE_ENV`)
-- [ ] `/api` prefix applied to all API routes
-- [ ] 404 handler for unmatched routes returns `{ "error": "Not found" }` with status 404
-- [ ] Global error handler middleware returns `{ "error": "<message>" }` with appropriate status code
+- [x] `express.json()` middleware registered
+- [x] `express.urlencoded({ extended: true })` registered
+- [x] Request logging middleware (use `morgan` — `dev` format for local, `combined` for production, controlled by `NODE_ENV`)
+- [x] `/api` prefix applied to all API routes
+- [x] 404 handler for unmatched routes returns `{ "error": "Not found" }` with status 404
+- [x] Global error handler middleware returns `{ "error": "<message>" }` with appropriate status code
 
 **Environment config**
-- [ ] `dotenv` installed and loaded at top of `server.js`
-- [ ] `.env.example` includes: `PORT=3000`, `NODE_ENV=development`, `CORS_ORIGIN=http://localhost:5173`
-- [ ] `.env` excluded from git (`.gitignore` in `/backend`)
-- [ ] `PORT` read from environment, defaults to `3000`
+- [x] `dotenv` installed and loaded at top of `server.js`
+- [x] `.env.example` includes: `PORT=3000`, `NODE_ENV=development`, `CORS_ORIGIN=http://localhost:5173`
+- [x] `.env` excluded from git (`.gitignore` in `/backend`)
+- [x] `PORT` read from environment, defaults to `3000`
 
 **Dev experience**
-- [ ] `nodemon` installed as devDependency
-- [ ] `npm run dev` starts server with nodemon
-- [ ] `npm start` starts server without nodemon (production)
-- [ ] `npm run lint` runs ESLint on `src/`
+- [x] `nodemon` installed as devDependency
+- [x] `npm run dev` starts server with nodemon
+- [x] `npm start` starts server without nodemon (production)
+- [x] `npm run lint` runs ESLint on `src/`
 
 **Tests**
-- [ ] `vitest` or `jest` + `supertest` installed
-- [ ] Test for `GET /health` — asserts 200 status and `status: "ok"` in body
-- [ ] `npm test` passes
+- [x] `vitest` or `jest` + `supertest` installed
+- [x] Test for `GET /health` — asserts 200 status and `status: "ok"` in body
+- [x] `npm test` passes
 
 ## Technical Notes
 
@@ -79,3 +79,4 @@ Do not install TypeScript — plain JavaScript consistent with the frontend appr
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created as part of migration plan |
+| 2026-03-25 | @backend-developer | Scaffold completed: `backend/` Express app, health + contact stub, vitest/supertest, ESLint |

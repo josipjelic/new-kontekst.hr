@@ -1,7 +1,7 @@
 ---
 id: "015"
 title: "Phase 2a — Migrate Nav component from HTML to React"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "high"
@@ -22,20 +22,20 @@ The mobile nav toggle is currently implemented as vanilla JavaScript in `index.h
 
 ## Acceptance Criteria
 
-- [ ] `src/components/layout/Nav.jsx` created
-- [ ] Component renders the `<header>` with the same structure as the current HTML nav:
+- [x] `src/components/layout/Nav.jsx` created
+- [x] Component renders the `<header>` with the same structure as the current HTML nav:
   - Logo (SVG `logo-light.svg` or equivalent import)
   - Desktop nav links: Usluge, Kako radimo, O nama, Kontakt (smooth-scroll anchors)
   - Desktop CTA button "Razgovarajmo" (`.nav-cta` class)
   - Mobile hamburger icon button
   - Mobile menu drawer (conditionally rendered or toggled via CSS class)
-- [ ] Mobile menu open/close controlled by `useState(false)` — no `document.querySelector`
-- [ ] `aria-expanded` attribute on hamburger button reflects open/close state
-- [ ] Close menu on nav link click (UX expectation: tapping a link closes the mobile drawer)
-- [ ] All existing CSS classes preserved: `.nav-link`, `.nav-cta`, `.mobile-nav-link`
-- [ ] Scroll behaviour: header gets a background/shadow class when page is scrolled >50px — implemented via `useEffect` + scroll event listener with cleanup
-- [ ] Keyboard accessible: Escape key closes the mobile menu
-- [ ] Visual output matches the current HTML nav pixel-for-pixel on both desktop and mobile
+- [x] Mobile menu open/close controlled by `useState(false)` — no `document.querySelector`
+- [x] `aria-expanded` attribute on hamburger button reflects open/close state
+- [x] Close menu on nav link click (UX expectation: tapping a link closes the mobile drawer)
+- [x] All existing CSS classes preserved: `.nav-link`, `.nav-cta`, `.mobile-nav-link`
+- [x] Scroll behaviour: header gets a background/shadow class when page is scrolled >50px — implemented via `useEffect` + scroll event listener with cleanup
+- [x] Keyboard accessible: Escape key closes the mobile menu
+- [x] Visual output matches the current HTML nav pixel-for-pixel on both desktop and mobile
 
 ## Technical Notes
 
@@ -50,3 +50,4 @@ The scroll-based header style uses a `useEffect` that attaches a `scroll` event 
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created as part of migration plan |
+| 2026-03-25 | @frontend-developer | Nav.jsx implemented; logo u `public/logo-light.svg` |

@@ -1,6 +1,6 @@
 ---
 id: "006"
-title: "Sekcija Kontakt i footer"
+title: "Contact section and footer"
 status: "done"
 area: "frontend"
 agent: "@frontend-developer"
@@ -16,31 +16,31 @@ blocked_by: ["001"]
 
 ## Description
 
-Implementiraj sekciju Kontakt i `<footer>`. Sekcija Kontakt mora jasno prikazati kako posjetitelji mogu stupiti u kontakt — primarno email adresa info@kontekst.hr s mailto linkom. Footer sadrži copyright, email i navigacijske linkove.
+Implement the Contact section and `<footer>`. Contact must show how to reach the company — primarily `info@kontekst.hr` with a `mailto` link. Footer: copyright, email, section anchors.
 
-Napomena: Contact form koji šalje emailove je open question (vidi PRD Q1) — za v1 je dovoljan mailto link i CTA tekst.
+Note: PRD Q1 discussed server-side email; v1 originally allowed mailto-only. The React migration added a live form + API (see tasks #014, #019).
 
 ## Acceptance Criteria
 
-- [x] `<section id="kontakt">` s naslovom "Kontakt" ili "Stupite u kontakt"
-- [x] Email adresa `info@kontekst.hr` prikazana i klikabilna kao `<a href="mailto:info@kontekst.hr">`
-- [x] CTA tekst koji potiče na akciju (npr. "Imate projekt na umu? Javite nam se.")
-- [x] `<footer>` s copyright tekstom "© 2026 Kontekst.hr — Sva prava pridržana"
-- [x] Footer sadrži navigacijske anchor linkove na sekcije
-- [x] Footer sadrži email adresu
-- [x] Vizualno jasna distinkcija kontakt sekcije od prethodnih sekcija
-- [x] Responzivno
+- [x] `<section id="kontakt">` titled “Kontakt” or “Stupite u kontakt”
+- [x] Email `info@kontekst.hr` visible and clickable `<a href="mailto:info@kontekst.hr">`
+- [x] CTA encouraging action (e.g. Croatian: “Imate projekt na umu? Javite nam se.”)
+- [x] `<footer>` with copyright “© 2026 Kontekst.hr — Sva prava pridržana”
+- [x] Footer includes anchor links to sections
+- [x] Footer includes email
+- [x] Contact section visually distinct from previous sections
+- [x] Responsive layout
 
 ## Technical Notes
 
-- Mailto link: `<a href="mailto:info@kontekst.hr">info@kontekst.hr</a>`
-- Kontakt sekcija može imati veći padding i CTA-heavy layout (veći font, prominentan email)
-- Footer: tamna pozadina (#212529), mali tekst, horizontalni linkovi na desktopu, vertikalni na mobitelu
-- Ako se odlučimo za contact form u budućnosti, razmotriti Formspree (besplatan tier, no backend needed)
+- Mailto: `<a href="mailto:info@kontekst.hr">info@kontekst.hr</a>`
+- Contact section can use generous padding and a CTA-forward layout
+- Footer: dark background, small type; horizontal links on desktop, stacked on mobile
+- Optional third-party form services (e.g. Formspree) if ever needed without a backend
 
 ## History
 
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
-| 2026-03-25 | @frontend-developer | Verified existing implementation in index.html (lines 613–692); added Kontakt anchor link to footer nav; fixed copyright separator to em-dash; all acceptance criteria confirmed met |
+| 2026-03-25 | @frontend-developer | Verified `index.html` implementation; footer kontakt link; copyright em-dash; criteria met |

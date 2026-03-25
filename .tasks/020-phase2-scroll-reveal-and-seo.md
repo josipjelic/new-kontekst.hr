@@ -1,14 +1,14 @@
 ---
 id: "020"
 title: "Phase 2f — Wire scroll reveal animations, SEO meta tags, and JSON-LD in React"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "high"
 created_at: "2026-03-25"
 due_date: null
 started_at: null
-completed_at: null
+completed_at: "2026-03-25"
 prd_refs: []
 blocks: ["022"]
 blocked_by: ["015", "016", "017", "018", "019"]
@@ -68,4 +68,5 @@ The observer should observe all elements matching `.reveal` that exist in the DO
 
 | Date | Agent / Human | Event |
 |------|--------------|-------|
+| 2026-03-25 | — | `useScrollReveal` + `App.jsx`; SEO + JSON-LD u Vite `index.html`; uklonjena hardkodirana `visible` s `.reveal` u sekcijama |
 | 2026-03-25 | human | Task created as part of migration plan |

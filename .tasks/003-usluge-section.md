@@ -1,6 +1,6 @@
 ---
 id: "003"
-title: "Sekcija Usluge — 3 kartice usluga"
+title: "Services (Usluge) section — three service cards"
 status: "done"
 area: "frontend"
 agent: "@frontend-developer"
@@ -16,30 +16,30 @@ blocked_by: ["001"]
 
 ## Description
 
-Implementiraj sekciju "Usluge" koja prikazuje tri core usluge tvrtke. Svaka usluga treba biti vizualno jasna kartica s ikonom, nazivom i kratkim opisom napisanim iz perspektive benefita za klijenta (ne tehničkih detalja).
+Implement the “Usluge” section with three core services. Each service is a clear card with icon, title, and short **Croatian** copy from the client’s benefit perspective (not low-level technical detail).
 
-Tri usluge:
-1. **n8n Workflow Automatizacije** — automatizacija ponavljajućih procesa između alata
-2. **Automatizacija poslovnih procesa** — šire poslovne automatizacije, optimizacija tijekova rada
-3. **AI Aplikacije** — razvoj prilagođenih AI rješenja za specifične poslovne potrebe
+Three services:
+1. **n8n workflow automation** — recurring processes between tools
+2. **Business process automation** — broader automation and workflow optimisation
+3. **AI applications** — tailored AI solutions for specific business needs
 
 ## Acceptance Criteria
 
-- [x] `<section id="usluge">` s naslovom sekcije "Usluge" (ili "Naše usluge")
-- [x] 3 kartice, svaka s: SVG ikonom (ili inline SVG), naslovom usluge, opisom (3–4 rečenice)
-- [x] Opisi fokusirani na korist za klijenta, pisani na hrvatskom
-- [x] Grid layout: 1 stupac na mobitelu, 3 stupca na desktopu
-- [x] Kartice imaju hover efekt (border, background promjena, ili shadow)
-- [x] Vizualni stil konzistentan s Hero sekcijom (tamna paleta)
-- [x] Sekcija ima vizualnu distinkciju od hero-a (drugačija nijansa pozadine)
+- [x] `<section id="usluge">` with section title “Usluge” (or “Naše usluge”)
+- [x] Three cards, each with: SVG (or inline SVG) icon, title, description (3–4 sentences)
+- [x] Descriptions client-benefit focused, in **Croatian**
+- [x] Grid: 1 column mobile, 3 columns desktop
+- [x] Cards have hover treatment (border, background, or shadow)
+- [x] Visual style consistent with Hero (dark palette)
+- [x] Section visually distinct from hero (different surface tone)
 
 ## Technical Notes
 
-- Ikone: Heroicons ili Lucide Icons (inline SVG za no-dependency pristup), ili ASCII/Unicode simboli ako je ikone teško inkorporirati
-- Opis za n8n: "Povežite vaše poslovne alate i automatizirajte tokove podataka bez pisanja koda. n8n workflowovi rade za vas 24/7."
-- Opis za automatizaciju: "Identificiramo i eliminiramo ručne, ponavljajuće zadatke u vašem poslovanju. Više vremena za ono što stvarno donosi vrijednost."
-- Opis za AI: "Razvijamo AI aplikacije prilagođene točno vašim poslovnim procesima — od chatbotova do inteligentnih analitičkih alata."
-- Koristiti `<h2>` za naslov sekcije, `<h3>` za nazive usluga
+- Icons: Heroicons / Lucide inline SVG, or Unicode symbols if SVG is impractical
+- Example n8n blurb (Croatian): “Povežite vaše poslovne alate i automatizirajte tokove podataka bez pisanja koda. n8n workflowovi rade za vas 24/7.”
+- Example automation blurb: “Identificiramo i eliminiramo ručne, ponavljajuće zadatke u vašem poslovanju. Više vremena za ono što stvarno donosi vrijednost.”
+- Example AI blurb: “Razvijamo AI aplikacije prilagođene točno vašim poslovnim procesima — od chatbotova do inteligentnih analitičkih alata.”
+- Use `<h2>` for section title, `<h3>` for service titles
 
 ## History
 

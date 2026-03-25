@@ -1,7 +1,7 @@
 ---
 id: "016"
 title: "Phase 2b — Migrate Hero section to React"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "high"
@@ -20,8 +20,8 @@ Migrate the Hero section from `index.html` to `src/components/sections/Hero.jsx`
 
 ## Acceptance Criteria
 
-- [ ] `src/components/sections/Hero.jsx` created
-- [ ] Renders `<section id="pocetna">` (or the existing ID from `index.html`) with all current content:
+- [x] `src/components/sections/Hero.jsx` created
+- [x] Renders `<section id="pocetna">` (or the existing ID from `index.html`) with all current content:
   - Hero badge (`.hero-badge`) with pulsing dot and text
   - H1 headline with teal accent span
   - Sub-headline/value proposition paragraph
@@ -29,11 +29,11 @@ Migrate the Hero section from `index.html` to `src/components/sections/Hero.jsx`
   - Secondary ghost button (`.btn-ghost`) — smooth scroll to `#usluge`
   - Three ambient orb elements (`.hero-orb-1`, `.hero-orb-2`, `.hero-orb-3`)
   - Dot grid decorative background element
-- [ ] All CSS classes from `custom.css` preserved exactly (`.hero-badge`, `.hero-orb-1/2/3`, etc.)
-- [ ] Scroll reveal class `.reveal` applied to animatable elements
-- [ ] `prefers-reduced-motion` behaviour intact (handled by CSS, no JS change needed)
-- [ ] Visual output matches the current HTML hero section exactly on desktop and mobile
-- [ ] Section is imported and rendered in `src/pages/Home.jsx`
+- [x] All CSS classes from `custom.css` preserved exactly (`.hero-badge`, `.hero-orb-1/2/3`, etc.)
+- [x] Scroll reveal class `.reveal` applied to animatable elements
+- [x] `prefers-reduced-motion` behaviour intact (handled by CSS, no JS change needed)
+- [x] Visual output matches the current HTML hero section exactly on desktop and mobile
+- [x] Section is imported and rendered in `src/pages/Home.jsx`
 
 ## Technical Notes
 
@@ -46,3 +46,4 @@ The `.reveal` + `.visible` scroll reveal system is driven by an IntersectionObse
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created as part of migration plan |
+| 2026-03-25 | @frontend-developer | Hero.jsx; privremeno `reveal visible` na hero elementima do #020 |

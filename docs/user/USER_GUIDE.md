@@ -6,115 +6,55 @@ Update scope: Full document
 Read by: @qa-engineer (to understand expected user behavior and flows)
 -->
 
-# [Project Name] — User Guide
+# Kontekst.hr — User Guide
 
-> Last updated: [YYYY-MM-DD]
-> Version: [x.x.x]
-
----
-
-## Getting Started
-
-### Creating an Account
-
-[Step-by-step instructions for new user registration.]
-
-1. Navigate to [URL]
-2. Click **Sign Up**
-3. Enter your email address and choose a password
-4. Check your email for a verification link and click it
-5. You're in — you'll be taken to the dashboard
-
-**What to expect**: [Describe what the user sees after completing sign-up.]
-
-#### Common Issues
-
-**"Email already in use"**
-An account with this email already exists. Try logging in instead, or use the "Forgot password" link to regain access.
+> Last updated: 2026-03-25
+> Audience: Visitors to the public marketing site
 
 ---
 
-### Logging In
+## What this site is
 
-1. Navigate to [URL]
-2. Enter your email and password
-3. Click **Log In**
-
-**Forgot your password?** Click "Forgot password" on the login page and enter your email. You'll receive a reset link within a few minutes.
+Kontekst.hr is a single-page marketing site. You scroll (or use the navigation) to read about services, how the team works, and how to get in touch. **Site copy is in Croatian**; this guide is in English for internal and tooling use.
 
 ---
 
 ## Navigation
 
-[Describe the main navigation structure — what sections exist and what each one contains.]
+- **Header**: Logo returns you to the top; links jump to sections (Services, How we work, About, Contact).
+- **Mobile**: Use the menu control to open and close navigation links.
+- **Footer**: Repeat links and contact options.
 
 ---
 
-## Features
+## Contacting Kontekst
 
-### [Feature 1: e.g., Dashboard]
+1. Open the **Kontakt** section (from the menu or scroll).
+2. Fill in **name**, **email**, and **message**, then submit.
+3. If submission succeeds, you will see a short confirmation (Croatian).
+4. If something fails (network, rate limit, server error), an error message explains what to do (e.g. wait and retry or email directly).
 
-[One-sentence description of what this feature does and when users would use it.]
-
-#### How to [Main action]
-
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-
-**What to expect**: [Describe the outcome.]
-
-#### Common Issues
-
-**[Problem or error message]**
-[Why it happens and how to resolve it.]
+You can also use the **mailto** link to `info@kontekst.hr` where shown.
 
 ---
 
-### [Feature 2]
+## Accessibility
 
-[Repeat the structure above for each feature.]
-
----
-
-## Account Settings
-
-### Updating Your Profile
-
-[Steps to update profile information.]
-
-### Changing Your Password
-
-[Steps to change password.]
-
-### Notifications
-
-[How to configure notification preferences.]
+- Prefer keyboard navigation through links and form fields in DOM order.
+- Respect system **reduced motion** settings where animations are used.
 
 ---
 
 ## Troubleshooting
 
-### Common Error Messages
-
-| Message | Meaning | What to Do |
-|---------|---------|------------|
-| [Error message] | [Why it appears] | [How to fix it] |
-
-### Getting Help
-
-If you can't find an answer here:
-
-- [e.g., Email support at support@example.com]
-- [e.g., Use the in-app chat (bottom-right corner)]
-- [e.g., Visit our help center at help.example.com]
+| Situation | What to do |
+|-----------|------------|
+| Form says too many attempts | Wait several minutes before sending again (rate limiting). |
+| Form fails repeatedly | Email `info@kontekst.hr` directly from your mail client. |
+| Broken layout | Try a current version of Chrome, Firefox, Safari, or Edge; disable aggressive ad blockers if they strip scripts. |
 
 ---
 
-## FAQ
+## Getting help
 
-**Q: [Frequently asked question?]**
-A: [Clear, direct answer.]
-
-**Q: [Another question?]**
-A: [Answer.]
+For business inquiries, use the contact section or email **info@kontekst.hr**.

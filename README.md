@@ -1,16 +1,16 @@
 # Kontekst.hr
 
-> Marketinška web stranica za Kontekst.hr — tvrtku specijaliziranu za poslovne automatizacije, n8n workflowove i AI aplikacije.
+> Marketing website for Kontekst.hr — a company focused on business automation, n8n workflows, and AI applications.
 
 ---
 
 ## Overview
 
-Kontekst.hr je statična marketinška web stranica koja služi kao digitalna vizitka tvrtke i alat za generiranje potencijalnih klijenata. Stranica prezentira usluge tvrtke (n8n workflow automatizacije, automatizacija poslovnih procesa, razvoj AI aplikacija) vlasnicima tvrtki koji žele optimizirati i automatizirati svoje poslovanje.
+Kontekst.hr is a marketing site that acts as a digital business card and lead-generation channel. It presents the company’s services (n8n workflow automation, business process automation, custom AI apps) to business owners who want to optimize and automate operations.
 
-Stranica je izgrađena kao plain HTML s Tailwind CSS-om — bez backend-a, bez baze podataka, bez build procesa. Hosting je na Digital Ocean App Platform s automatskim deployom iz `main` grane.
+The codebase uses **Vite + React** for the frontend, **Node.js + Express** for a small API (contact form and future integrations), and **Docker** for local and production-style environments. Styling is **Tailwind CSS** (PostCSS build). Deployment target is **Digital Ocean App Platform** (containers).
 
-Dizajn je futuristički s tamnom bazom (grey paleta), responzivan za sve uređaje, i u potpunosti SEO-optimiziran za hrvatsko tržište.
+The public UI copy and SEO metadata are **Croatian** (primary market). **Developer documentation** (`docs/`, this README, `.tasks/`) is **English**.
 
 ---
 
@@ -18,10 +18,11 @@ Dizajn je futuristički s tamnom bazom (grey paleta), responzivan za sve uređaj
 
 | Layer | Technology | Notes |
 |-------|-----------|-------|
-| Frontend | Plain HTML5 | Semantički markup, single-page |
-| Styling | Tailwind CSS (CDN) | Utility-first, bez build stepa |
-| JavaScript | Vanilla JS (ES6+) | Samo za nav toggle i micro-interakcije |
-| Hosting | Digital Ocean App Platform | Auto-deploy iz main grane |
+| Frontend | React 18 + Vite 5 | SPA, sections in `src/components/` |
+| Styling | Tailwind CSS 3 + PostCSS | Built bundle with tree-shaking |
+| Backend | Node.js 20 + Express 4 | API under `/api`, health at `/health` |
+| Containers | Docker + docker-compose | Dev and prod-compose setups |
+| Hosting | Digital Ocean App Platform | Docker-based deploy (see backlog #022) |
 
 ---
 
@@ -29,33 +30,45 @@ Dizajn je futuristički s tamnom bazom (grey paleta), responzivan za sve uređaj
 
 ### Prerequisites
 
-- Web browser (Chrome, Firefox, Safari, Edge)
-- Opcionalno: VS Code s Live Server ekstenzijom za lokalni development
+- Node.js 20+ and npm
+- Docker Desktop (optional, for `docker compose`)
 
-### Running Locally
+### Install and run (local, no Docker)
 
 ```bash
-# Kloniraj repozitorij
 git clone https://github.com/[org]/new-kontekst.hr.git
 cd new-kontekst.hr
 
-# Otvori u browseru
-open index.html
+# Frontend (Vite dev server)
+npm install
+npm run dev
+# → http://localhost:5173
 
-# Ili koristi VS Code Live Server:
-# 1. Otvori projekt u VS Code
-# 2. Desni klik na index.html → "Open with Live Server"
+# Backend (separate terminal)
+cd backend
+npm install
+npm run dev
+# → http://localhost:3000
 ```
 
-### Deployment
+### Run with Docker (frontend + backend)
 
-Stranica se automatski deploya na Digital Ocean App Platform pri svakom pushu na `main` granu.
+From the repository root:
 
 ```bash
-git add .
-git commit -m "feat(section): opis promjene"
-git push origin main
-# Digital Ocean App Platform automatski deploya
+docker compose up
+```
+
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:3000`
+
+Copy environment examples: `.env.example` (root) and `backend/.env.example`.
+
+### Tests
+
+```bash
+npm test                 # frontend (Vitest)
+cd backend && npm test   # backend (Vitest)
 ```
 
 ---
@@ -64,41 +77,38 @@ git push origin main
 
 ```
 new-kontekst.hr/
-├── index.html              # Glavna (i jedina) HTML stranica
-├── assets/
-│   ├── css/
-│   │   └── custom.css      # CSS overrides izvan Tailwinda
-│   ├── js/
-│   │   └── main.js         # Vanilla JS za interakcije
-│   └── images/             # Slike, ikone, ilustracije
-├── logo-light.svg          # Logo tvrtke (bijela verzija)
-├── docs/
-│   ├── user/               # Korisnička dokumentacija
-│   └── technical/          # Arhitektura, odluke
-├── .claude/agents/         # Claude Code specijalistički agenti
-├── .tasks/                 # Detaljni task fileovi
-├── PRD.md                  # Product requirements (source of truth)
-├── TODO.md                 # Projektni backlog
-└── CLAUDE.md               # Claude AI upute
+├── src/                    # React app (Vite entry: index.html)
+├── backend/                # Express API
+├── public/                 # Static assets served by Vite
+├── docs/                   # Technical + user documentation (English)
+├── .tasks/                 # Task specs per TODO item
+├── docker-compose.yml      # Local dev
+├── docker-compose.prod.yml # Production-style stack (nginx + backend)
+├── Dockerfile.frontend     # Multi-stage frontend → nginx
+├── PRD.md                  # Product requirements (read-only for agents)
+├── TODO.md                 # Backlog
+└── CLAUDE.md               # AI / agent instructions
 ```
 
 ---
 
 ## Environment Variables
 
-Nema environment varijabli — statična stranica bez backend-a.
+See `.env.example` and `backend/.env.example`. Important for the contact form:
+
+- **Backend**: `SMTP_*`, `CORS_ORIGIN`, `PORT`, `NODE_ENV`
+- **Compose / frontend proxy**: `API_PROXY_TARGET`, `CORS_ORIGIN`
+
+Never commit real secrets.
 
 ---
 
 ## Deployment
 
-Stranica se deploya na Digital Ocean App Platform.
-
-- **Production**: https://kontekst.hr (TBD)
-- Auto-deploy: Svaki push na `main` granu
+Production deployment is tracked in the backlog (GitHub Actions + Digital Ocean — see `TODO.md` / task #022).
 
 ---
 
 ## License
 
-Proprietary — Kontekst.hr, sva prava pridržana.
+Proprietary — Kontekst.hr, all rights reserved.

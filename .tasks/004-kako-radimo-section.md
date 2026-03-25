@@ -1,6 +1,6 @@
 ---
 id: "004"
-title: "Sekcija Kako radimo — proces u koracima"
+title: "How we work (Kako radimo) — step-by-step process"
 status: "done"
 area: "frontend"
 agent: "@frontend-developer"
@@ -16,29 +16,29 @@ blocked_by: ["001"]
 
 ## Description
 
-Implementiraj sekciju "Kako radimo" koja objašnjava metodologiju rada Kontekst.hr u numeriranim koracima. Cilj je izgraditi povjerenje potencijalnih klijenata prikazujući strukturiran i profesionalan pristup. Vizualni prikaz treba biti timeline ili numbered steps layout.
+Implement “Kako radimo” explaining Kontekst.hr’s methodology in numbered steps. Goal: build trust with a structured, professional approach. Layout: timeline or numbered steps.
 
-Predloženi koraci (5):
-1. **Analiza** — Razgovor o vašim procesima i identifikacija mjesta za automatizaciju
-2. **Prijedlog** — Izrađujemo konkretni plan s procjenom uštede vremena i troškova
-3. **Razvoj** — Implementiramo rješenje uz redovite provjere s vama
-4. **Testiranje** — Temeljito testiramo svaki workflow prije puštanja u produkciju
-5. **Podrška** — Pratimo rad rješenja i prilagođavamo ga po potrebi
+Suggested five steps (titles and copy in **Croatian** on the live site):
+1. **Analiza** — Discuss your processes and find automation opportunities
+2. **Prijedlog** — Concrete plan with time/cost estimate
+3. **Razvoj** — Build the solution with regular check-ins
+4. **Testiranje** — Thoroughly test each workflow before go-live
+5. **Podrška** — Monitor and adjust as needed
 
 ## Acceptance Criteria
 
-- [x] `<section id="kako-radimo">` s naslovom "Kako radimo"
-- [x] 5 koraka prikazano kao numeriran vertical timeline
-- [x] Svaki korak ima broj, naziv i kratki opis na hrvatskom
-- [x] Vizualni konektor između koraka (`.process-step-connector` linija između koraka)
-- [x] Responzivno: vertikalni timeline na mobitelu, dva stupca (steps + dekorativni panel) na desktopu
-- [x] Stil konzistentan s ostatkom stranice (design system v2 tokeni, Syne/DM Sans fontovi, teal akcenti)
+- [x] `<section id="kako-radimo">` titled “Kako radimo”
+- [x] Five steps as a vertical numbered timeline
+- [x] Each step: number, title, short **Croatian** description
+- [x] Visual connector between steps (e.g. `.process-step-connector`)
+- [x] Responsive: vertical timeline on mobile; optional two-column layout on desktop
+- [x] Style aligned with design system v2 (Syne/DM Sans, teal accents)
 
 ## Technical Notes
 
-- Koristiti `<ol>` ili divovi s `counter-reset`/`counter-increment` CSS counter-ima za numeraciju
-- Vizualni stil: numeracija u kružnicama, tanke connecting linije
-- `<h2>` za naslov sekcije, `<h3>` ili `<strong>` za nazive koraka
+- Prefer semantic `<ol>` or CSS counters for numbering
+- Visual style: numbers in circles, thin connecting lines
+- `<h2>` for section title; `<h3>` or `<strong>` for step titles
 
 ## History
 
@@ -46,4 +46,4 @@ Predloženi koraci (5):
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
 | 2026-03-25 | @frontend-developer | Started implementation |
-| 2026-03-25 | @frontend-developer | Completed — updated index.html: replaced 4-step div list with semantic `<ol>` containing 5 steps (Analiza, Prijedlog, Razvoj, Testiranje, Podrška) matching task spec; all scroll reveal classes applied; existing CSS `.process-step` styles fully cover the new markup |
+| 2026-03-25 | @frontend-developer | Completed — `index.html`: semantic `<ol>` with 5 steps (Analiza, Prijedlog, Razvoj, Testiranje, Podrška); scroll reveal; `.process-step` styles |

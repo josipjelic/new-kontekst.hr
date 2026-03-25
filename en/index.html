@@ -622,7 +622,7 @@
 
       <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="contact-card reveal">
+        <div class="contact-card reveal text-left">
 
           <!-- Icon -->
           <div class="flex justify-center mb-8" aria-hidden="true">
@@ -633,30 +633,85 @@
             </div>
           </div>
 
-          <p class="section-label justify-center">Contact</p>
+          <p class="section-label justify-center text-center">Contact</p>
 
-          <h2 id="kontakt-heading" class="font-display text-3xl sm:text-4xl font-bold mt-3 mb-4" style="font-family: 'Syne', sans-serif; letter-spacing: -0.02em;">
+          <h2 id="kontakt-heading" class="font-display text-3xl sm:text-4xl font-bold mt-3 mb-4 text-center tracking-[-0.02em]" style="font-family: 'Syne', sans-serif;">
             Let's start the automation conversation
           </h2>
 
-          <p class="text-base lg:text-lg leading-relaxed mb-10 mx-auto" style="color: var(--color-text-secondary); max-width: 440px;">
+          <p class="text-base lg:text-lg leading-relaxed mb-8 mx-auto max-w-[440px] text-center" style="color: var(--color-text-secondary);">
             Have an idea, a question, or a specific project? Describe the challenge — no commitment required. We respond within one business day.
           </p>
 
-          <!-- Email link -->
-          <a
-            href="mailto:info@kontekst.hr"
-            class="contact-email-link"
-            aria-label="Send an email to info@kontekst.hr — contact for business automation"
-          >
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
-            </svg>
-            info@kontekst.hr
-          </a>
+          <form id="en-contact-form" class="space-y-5 mb-8 text-left max-w-md mx-auto" novalidate>
+            <div>
+              <label for="en-kontakt-name" class="block text-sm font-medium mb-1.5" style="color: var(--color-text-secondary);">Full name</label>
+              <input
+                id="en-kontakt-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                class="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0"
+                style="border-color: var(--color-surface-border); background: var(--color-surface-raised); color: var(--color-text-primary);"
+                placeholder="Your name"
+                aria-invalid="false"
+              />
+              <p id="en-kontakt-name-error" class="mt-1.5 text-sm text-red-400 hidden" role="alert"></p>
+            </div>
+            <div>
+              <label for="en-kontakt-email" class="block text-sm font-medium mb-1.5" style="color: var(--color-text-secondary);">Email</label>
+              <input
+                id="en-kontakt-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                class="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0"
+                style="border-color: var(--color-surface-border); background: var(--color-surface-raised); color: var(--color-text-primary);"
+                placeholder="you@company.com"
+                aria-invalid="false"
+              />
+              <p id="en-kontakt-email-error" class="mt-1.5 text-sm text-red-400 hidden" role="alert"></p>
+            </div>
+            <div>
+              <label for="en-kontakt-message" class="block text-sm font-medium mb-1.5" style="color: var(--color-text-secondary);">Message</label>
+              <textarea
+                id="en-kontakt-message"
+                name="message"
+                rows="5"
+                class="w-full rounded-lg border px-4 py-3 text-sm resize-y min-h-[120px] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0"
+                style="border-color: var(--color-surface-border); background: var(--color-surface-raised); color: var(--color-text-primary);"
+                placeholder="Briefly describe what you want to achieve…"
+                aria-invalid="false"
+              ></textarea>
+              <p id="en-kontakt-message-error" class="mt-1.5 text-sm text-red-400 hidden" role="alert"></p>
+            </div>
+            <p id="en-contact-form-error" class="text-sm text-red-400 hidden" role="alert"></p>
+            <p id="en-contact-form-success" class="text-sm hidden" style="color: var(--color-accent);" role="alert"></p>
+            <div class="flex justify-center pt-2">
+              <button type="submit" id="en-contact-submit" class="btn-primary disabled:opacity-60 disabled:pointer-events-none">
+                Send message
+              </button>
+            </div>
+          </form>
 
-          <!-- Reassurance note -->
-          <p class="mt-6 text-sm" style="color: var(--color-text-muted);">
+          <p class="text-center text-sm mb-4" style="color: var(--color-text-secondary);">
+            Or contact us directly:
+          </p>
+
+          <div class="flex justify-center">
+            <a
+              href="mailto:info@kontekst.hr"
+              class="contact-email-link"
+              aria-label="Send an email to info@kontekst.hr — contact for business automation"
+            >
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+              </svg>
+              info@kontekst.hr
+            </a>
+          </div>
+
+          <p class="mt-6 text-sm text-center" style="color: var(--color-text-muted);">
             No automated replies. Every inquiry is read and answered by a real person.
           </p>
 

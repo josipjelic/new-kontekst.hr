@@ -4,8 +4,8 @@ description: Every completed task must have a corresponding GitHub Pull Request 
 type: feedback
 ---
 
-Za svaki task napraviti PR prije nego se task označi kao završen.
+Open a Pull Request for each task before marking the task complete.
 
-**Why:** Josip želi PR-ove za svaki task kako bi mogao reviewati i mergati promjene.
+**Why:** The product owner wants PRs per task so changes can be reviewed and merged deliberately.
 
-**How to apply:** Nakon što je implementacija taska gotova, kreiraj feature branch, commutaj promjene i otvori PR na GitHub. Ne markiraj task kao "completed" u TODO.md dok PR nije kreiran.
+**How to apply:** When implementation is done, create a feature branch, commit changes, and open a PR on GitHub. Do not mark the task as completed in `TODO.md` until the PR exists.

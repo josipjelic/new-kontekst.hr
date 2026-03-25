@@ -3,16 +3,18 @@
 > **Owner**: @copywriter-seo
 > **Personas**: Defined in `PRD.md` — always read before writing copy
 > **Last updated**: 2026-03-25
+>
+> **Language**: This document is written in **English**. Quoted **live site** strings are **Croatian** (primary market).
 
 ---
 
 ## Overview
 
-Kontekst.hr je specijalizirana agencija za automatizaciju poslovanja i AI rješenja namijenjena vlasnicima tvrtki u Hrvatskoj koji žele eliminirati ručni rad i ubrzati rast. Nudimo n8n workflow automatizacije, automatizaciju poslovnih procesa i AI aplikacije po mjeri. Osnovna obećanje branda: vaš tim oslobođen od ponavljajućih zadataka, uz tehnologiju koja radi 24/7 umjesto vas.
+Kontekst.hr is a specialized agency for business automation and AI solutions, aimed at business owners in Croatia who want to remove manual work and accelerate growth. We offer n8n workflow automation, business process automation, and bespoke AI applications. Core brand promise: your team freed from repetitive tasks, with technology working 24/7 on your behalf.
 
-**Primary value proposition**: Zamjenjujemo sate ručnog rada pametnim automatizacijama — vaš tim fokusiran na rast, ostatak prepustite nama.
+**Primary value proposition**: We replace hours of manual work with smart automations — your team focuses on growth; we handle the rest.
 
-**Canonical brand statement**: "Automatizacija poslovanja koja zaista radi."
+**Canonical brand statement (Croatian, live site)**: "Automatizacija poslovanja koja zaista radi."
 
 ---
 
@@ -84,7 +86,7 @@ Kontekst.hr je specijalizirana agencija za automatizaciju poslovanja i AI rješe
 
 ### Primary Keyword Targets
 
-| Keyword | Intent | Mapped Page | Monthly Volume | Difficulty | Status | Date Added |
+| Keyword (HR) | Intent | Mapped Page | Monthly Volume | Difficulty | Status | Date Added |
 |---------|--------|-------------|---------------|------------|--------|------------|
 | automatizacija poslovanja | commercial | / | verify | med | targeting | 2026-03-25 |
 | n8n Hrvatska | commercial | / | verify | low | targeting | 2026-03-25 |
@@ -94,7 +96,7 @@ Kontekst.hr je specijalizirana agencija za automatizaciju poslovanja i AI rješe
 
 ### Secondary Keywords (supporting, per page)
 
-| Page | Secondary Keywords |
+| Page | Secondary Keywords (HR) |
 |------|--------------------|
 | / | workflow automatizacija, n8n workflow, AI rješenja za tvrtke, integracija poslovnih alata |
 
@@ -118,7 +120,7 @@ Copy is recorded here after it goes live. Variants awaiting A/B test results are
 
 ---
 
-### Homepage
+### Homepage (live strings are Croatian)
 
 **Title tag**: `Kontekst.hr — Automatizacija poslovanja i AI za tvrtke` (52 chars)
 **Meta description**: `Poslovne automatizacije, n8n workflow rješenja i AI aplikacije za tvrtke u Hrvatskoj. Automatizirajte procese, uštedite sate rada dnevno.` (138 chars)
@@ -134,7 +136,7 @@ Copy is recorded here after it goes live. Variants awaiting A/B test results are
 
 **Nav CTA**: Razgovarajmo → #kontakt
 
-**Social proof block**: Tri stat-a: "24/7 Automatizacije rade" / "n8n Stručnjaci za Hrvatsku" / "AI Rješenja po mjeri"
+**Social proof block**: Three stats: "24/7 Automatizacije rade" / "n8n Stručnjaci za Hrvatsku" / "AI Rješenja po mjeri"
 
 ---
 
@@ -213,5 +215,6 @@ Applied to all pages unless a page-level override exists in the Page Copy Librar
 
 | Date | Change |
 |------|--------|
+| 2026-03-25 | Documentation language: strategy doc in English; live Croatian copy retained in Page Copy Library. |
 | 2026-03-25 | Full content + SEO revision of index.html — improved all section copy, added og:image, og:image:alt, twitter:image, twitter:image:alt, meta author/language, upgraded JSON-LD from LocalBusiness to ProfessionalService + WebSite, added hasOfferCatalog. Updated keyword targets and page copy library. |
 | 2026-03-25 | Initial content strategy — brand voice and keyword framework defined |

@@ -1,7 +1,7 @@
 ---
 id: "018"
 title: "Phase 2d — Migrate Footer to React"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "normal"
@@ -20,16 +20,16 @@ Migrate the `<footer>` from `index.html` to `src/components/layout/Footer.jsx`. 
 
 ## Acceptance Criteria
 
-- [ ] `src/components/layout/Footer.jsx` created
-- [ ] Renders `<footer>` with:
+- [x] `src/components/layout/Footer.jsx` created
+- [x] Renders `<footer>` with:
   - Logo or text brand mark
   - Navigation anchor links to all sections (Usluge, Kako radimo, O nama, Kontakt)
   - Email: `info@kontekst.hr` as `<a href="mailto:info@kontekst.hr">`
   - Copyright line: "© 2026 Kontekst.hr — Sva prava pridržana"
-- [ ] Surface: `--color-surface-raised` with `--color-surface-border` top separator (per ARCHITECTURE.md section visual language)
-- [ ] Responsive: horizontal layout on desktop, stacked on mobile
-- [ ] Visual output matches the current HTML footer exactly
-- [ ] Imported and rendered in `src/App.jsx` (or `src/pages/Home.jsx`) after all sections
+- [x] Surface: `--color-surface-raised` with `--color-surface-border` top separator (per ARCHITECTURE.md section visual language)
+- [x] Responsive: horizontal layout on desktop, stacked on mobile
+- [x] Visual output matches the current HTML footer exactly
+- [x] Imported and rendered in `src/App.jsx` (or `src/pages/Home.jsx`) after all sections
 
 ## Technical Notes
 
@@ -49,3 +49,4 @@ The footer sits outside the `<main>` element. In `App.jsx`, the structure should
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created as part of migration plan |
+| 2026-03-25 | @frontend-developer | Footer.jsx; dynamic year; Nav / main / Footer structure in App.jsx |

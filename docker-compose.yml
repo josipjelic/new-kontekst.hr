@@ -1,0 +1,41 @@
+# Lokalni razvoj: Vite HMR + Express (nodemon), anonimni volumeni za node_modules
+services:
+  backend:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: ${PORT:-3000}
+      NODE_ENV: ${NODE_ENV:-development}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
+    command: sh -c "npm ci && npm run dev"
+    ports:
+      - '${BACKEND_PUBLISH_PORT:-3000}:3000'
+    restart: unless-stopped
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - frontend_node_modules:/app/node_modules
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      API_PROXY_TARGET: ${API_PROXY_TARGET:-http://backend:3000}
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    ports:
+      - '${FRONTEND_PUBLISH_PORT:-5173}:5173'
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend_node_modules:
+  frontend_node_modules:

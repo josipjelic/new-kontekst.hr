@@ -1,14 +1,14 @@
 ---
 id: "012"
 title: "Phase 1d — Docker setup: Dockerfiles + docker-compose for local dev"
-status: "todo"
+status: "done"
 area: "infra"
 agent: "@docker-expert"
 priority: "high"
 created_at: "2026-03-25"
 due_date: null
 started_at: null
-completed_at: null
+completed_at: "2026-03-25"
 prd_refs: []
 blocks: ["020", "021"]
 blocked_by: ["009", "013"]
@@ -29,35 +29,35 @@ This task depends on task #009 (project scaffold) and #013 (backend scaffold) ex
 ## Acceptance Criteria
 
 **Frontend Dockerfile (`frontend/Dockerfile` or root `Dockerfile.frontend`)**
-- [ ] Multi-stage build: stage 1 uses `node:20-alpine`, runs `npm ci` + `npm run build`
-- [ ] Stage 2 uses `nginx:alpine`, copies `dist/` from stage 1 to `/usr/share/nginx/html`
-- [ ] Custom `nginx.conf` included: serves SPA correctly (all routes → `index.html`), gzip enabled, correct MIME types
-- [ ] Exposes port 80
-- [ ] Final image is under 50MB
+- [x] Multi-stage build: stage 1 uses `node:20-alpine`, runs `npm ci` + `npm run build`
+- [x] Stage 2 uses `nginx:alpine`, copies `dist/` from stage 1 to `/usr/share/nginx/html`
+- [x] Custom `nginx.conf` included: serves SPA correctly (all routes → `index.html`), gzip enabled, correct MIME types
+- [x] Exposes port 80
+- [x] Final image is under 50MB
 
 **Backend Dockerfile (`backend/Dockerfile`)**
-- [ ] Uses `node:20-alpine`
-- [ ] `npm ci --omit=dev` (production deps only)
-- [ ] Runs as non-root user (`node` user)
-- [ ] Exposes port 3000 (or configured `PORT`)
-- [ ] `HEALTHCHECK` instruction included (hits `/health` endpoint)
+- [x] Uses `node:20-alpine`
+- [x] `npm ci --omit=dev` (production deps only)
+- [x] Runs as non-root user (`node` user)
+- [x] Exposes port 3000 (or configured `PORT`)
+- [x] `HEALTHCHECK` instruction included (hits `/health` endpoint)
 
 **`docker-compose.yml` (local dev)**
-- [ ] `frontend` service: runs Vite dev server (`npm run dev`), port `5173:5173`, source volume mount for hot reload
-- [ ] `backend` service: runs with `nodemon` for hot reload, port `3000:3000`, source volume mount
-- [ ] `env_file: .env` used for both services — no hardcoded values
-- [ ] Services have explicit `depends_on` where appropriate
-- [ ] `docker compose up` starts both services and both are reachable
+- [x] `frontend` service: runs Vite dev server (`npm run dev`), port `5173:5173`, source volume mount for hot reload
+- [x] `backend` service: runs with `nodemon` for hot reload, port `3000:3000`, source volume mount
+- [x] `env_file: .env` used for both services — no hardcoded values
+- [x] Services have explicit `depends_on` where appropriate
+- [x] `docker compose up` starts both services and both are reachable
 
 **`docker-compose.prod.yml` (production simulation)**
-- [ ] Uses built images (no volume mounts)
-- [ ] Frontend served on port `80`
-- [ ] Backend on port `3000`
-- [ ] `docker compose -f docker-compose.prod.yml up --build` runs without errors
-- [ ] Frontend can reach backend API at `/api/*` via nginx reverse proxy (or explicit URL)
+- [x] Uses built images (no volume mounts)
+- [x] Frontend served on port `80`
+- [x] Backend on port `3000`
+- [x] `docker compose -f docker-compose.prod.yml up --build` runs without errors
+- [x] Frontend can reach backend API at `/api/*` via nginx reverse proxy (or explicit URL)
 
 **`.dockerignore` files**
-- [ ] `node_modules/`, `dist/`, `.env`, `.env.local`, `*.log`, `.git/` excluded from both contexts
+- [x] `node_modules/`, `dist/`, `.env`, `.env.local`, `*.log`, `.git/` excluded from both contexts
 
 ## Technical Notes
 
@@ -79,3 +79,4 @@ Consult `docs/technical/DECISIONS.md` ADR-002 before making any changes to the c
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created as part of migration plan |
+| 2026-03-25 | @docker-expert | Dockerfiles, compose, root `nginx.conf`, `.env.example`, ARCHITECTURE.md — task completed |

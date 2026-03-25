@@ -1,0 +1,27 @@
+# Produkcijska simulacija: buildani imagei, bez volume mountova za izvorni kod
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: ${PORT:-3000}
+      NODE_ENV: production
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost}
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - '80:80'
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

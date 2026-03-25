@@ -1,6 +1,6 @@
 ---
 id: "001"
-title: "HTML boilerplate, Tailwind setup, i navigacijski header"
+title: "HTML boilerplate, Tailwind setup, and navigation header"
 status: "todo"
 area: "frontend"
 agent: "@frontend-developer"
@@ -16,31 +16,31 @@ blocked_by: []
 
 ## Description
 
-Postavi temeljnu HTML strukturu za cijelu stranicu. Ovo je task #0 za implementaciju — sve ostale sekcije dependaju na ovom. Uključuje: HTML5 boilerplate s ispravnim meta tagovima, Tailwind CSS CDN integraciju, strukturu foldera za assets, i navigacijski header koji je fiksan pri scrollu.
+Establish the base HTML structure for the whole page. This was the foundation task for the original plain-HTML implementation — later sections depended on it. It included: HTML5 boilerplate with correct meta tags, Tailwind CDN, asset folders, and a sticky navigation header.
 
-Navigacija mora biti responzivna — desktop prikazuje horizontalne anchor linkove, mobilni prikazuje hamburger ikonu koja otvara vertikalni izbornik.
+Navigation had to be responsive — desktop shows horizontal anchor links; mobile shows a hamburger that opens a vertical menu.
 
 ## Acceptance Criteria
 
-- [ ] `index.html` postoji s ispravnim HTML5 doctype i `<html lang="hr">` atributom
-- [ ] Tailwind CSS učitan via CDN u `<head>`
-- [ ] Semantička struktura: `<header>`, `<main>`, `<footer>` elementi postoje
-- [ ] Sve sekcije imaju placeholder `<section id="...">` blokove (hero, usluge, kako-radimo, o-nama, kontakt)
-- [ ] Fiksni `<header>` s logotipom (`logo-light.svg`) i nav linkovima
-- [ ] Nav linkovi su anchor linkovi na sekcije (`#usluge`, `#kako-radimo`, `#o-nama`, `#kontakt`)
-- [ ] Hamburger menu radi na mobilnim uređajima (toggle via vanilla JS)
-- [ ] Glatki scroll (CSS `scroll-behavior: smooth` ili JS)
-- [ ] Temeljni color scheme primijenjen: tamna pozadina (#212529), bijeli tekst
-- [ ] `assets/css/custom.css` i `assets/js/main.js` fileovi kreirani i linkani
-- [ ] Stranica se ispravno prikazuje na 320px, 768px i 1280px
+- [ ] `index.html` exists with valid HTML5 doctype and `<html lang="hr">`
+- [ ] Tailwind CSS loaded via CDN in `<head>`
+- [ ] Semantic shell: `<header>`, `<main>`, `<footer>`
+- [ ] All sections have placeholder `<section id="...">` blocks (hero, services, how-we-work, about, contact)
+- [ ] Sticky `<header>` with logo (`logo-light.svg`) and nav links
+- [ ] Nav links are anchors to sections (`#usluge`, `#kako-radimo`, `#o-nama`, `#kontakt`)
+- [ ] Hamburger menu works on mobile (vanilla JS toggle)
+- [ ] Smooth scroll (CSS `scroll-behavior: smooth` or JS)
+- [ ] Base colour scheme: dark background (#212529), light text
+- [ ] `assets/css/custom.css` and `assets/js/main.js` created and linked
+- [ ] Page renders correctly at 320px, 768px, and 1280px
 
 ## Technical Notes
 
 - Tailwind CDN: `<script src="https://cdn.tailwindcss.com"></script>`
-- Tailwind config blok u `<script>` za custom boje iz palete (F8F9FA → 212529)
-- `assets/js/main.js` treba samo: hamburger toggle, smooth scroll, sticky header klasa pri scrollu
-- Logo: `<img src="logo-light.svg" alt="Kontekst.hr logo">` — ne `<img src="logo-light.svg" alt="">`
-- Jedan `<h1>` cijele stranice — bit će u Hero sekciji, ne u nav-u
+- Optional Tailwind config block in `<script>` for palette customisation
+- `assets/js/main.js`: hamburger toggle, smooth scroll, optional sticky-header class on scroll
+- Logo: `<img src="logo-light.svg" alt="Kontekst.hr logo">`
+- Single `<h1>` for the page — belongs in the Hero section, not the nav
 
 ## History
 

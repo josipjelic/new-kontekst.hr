@@ -1,16 +1,16 @@
 ---
 id: "014"
 title: "Phase 3b — Implement POST /api/contact with email sending, CORS, rate limiting, validation"
-status: "todo"
+status: "done"
 area: "backend"
 agent: "@backend-developer"
 priority: "high"
 created_at: "2026-03-25"
 due_date: null
 started_at: null
-completed_at: null
+completed_at: "2026-03-25"
 prd_refs: []
-blocks: ["019"]
+blocks: []
 blocked_by: ["013"]
 ---
 
@@ -29,10 +29,10 @@ This task unblocks task #019 (Kontakt section React migration), which needs to c
 
 **POST /api/contact endpoint**
 - [ ] Accepts JSON body: `{ name: string, email: string, message: string }`
-- [ ] Returns `201` on success with `{ "message": "Poruka je poslana." }`
+- [ ] Returns `201` on success with `{ "message": "Poruka je poslana." }` (Croatian: “Message sent.”)
 - [ ] Returns `422` with field-level errors on validation failure: `{ "errors": [{ "field": "email", "message": "..." }] }`
 - [ ] Sends email to `info@kontekst.hr` with sender name, reply-to set to the submitted email address
-- [ ] Email subject: `"Nova poruka s kontekst.hr — <name>"`
+- [ ] Email subject: `"Nova poruka s kontekst.hr — <name>"` (Croatian subject line for inbox)
 - [ ] Email body includes: name, submitted email, and message content
 
 **CORS middleware**
@@ -44,7 +44,7 @@ This task unblocks task #019 (Kontakt section React migration), which needs to c
 **Rate limiting**
 - [ ] `express-rate-limit` installed
 - [ ] Contact endpoint limited to **5 requests per IP per 15 minutes**
-- [ ] Rate limit response: `429` with `{ "error": "Previše zahtjeva. Pokušajte ponovo za nekoliko minuta." }`
+- [ ] Rate limit response: `429` with `{ "error": "Previše zahtjeva. Pokušajte ponovo za nekoliko minuta." }` (localized Croatian body)
 - [ ] General API rate limit: 100 requests per IP per 15 minutes applied globally
 
 **Input validation**
@@ -59,7 +59,7 @@ This task unblocks task #019 (Kontakt section React migration), which needs to c
 - [ ] SMTP credentials read from env vars: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`
 - [ ] `.env.example` updated with all new SMTP vars
 - [ ] If `NODE_ENV=test`, email sending is mocked/skipped (no real sends during tests)
-- [ ] Email sending failure returns `500` with `{ "error": "Greška pri slanju poruke. Pokušajte ponovo." }` — does not leak SMTP error details
+- [ ] Email sending failure returns `500` with `{ "error": "Greška pri slanju poruke. Pokušajte ponovo." }` (localized) — does not leak SMTP error details
 
 **Tests**
 - [ ] Test: valid submission returns 201
@@ -81,4 +81,5 @@ This task unblocks task #019 (Kontakt section React migration), which needs to c
 
 | Date | Agent / Human | Event |
 |------|--------------|-------|
+| 2026-03-25 | — | Implemented: express-validator, dual rate limits, nodemailer + SMTP env, CORS default; tests in `backend/tests/contact.test.js` |
 | 2026-03-25 | human | Task created as part of migration plan |

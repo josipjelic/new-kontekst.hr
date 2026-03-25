@@ -20,12 +20,12 @@ Read by: All agents. Check this file before proposing changes that may conflict 
 
 | ID | Title | Status | Date |
 |----|-------|--------|------|
-| ADR-001 | Plain HTML + Tailwind CDN umjesto JS frameworka | Superseded by ADR-002 | 2026-03-25 |
-| ADR-002 | Migracija na Vite + React, Node.js/Express backend, Docker | Accepted | 2026-03-25 |
+| ADR-001 | Plain HTML + Tailwind CDN instead of a JS framework | Superseded by ADR-002 | 2026-03-25 |
+| ADR-002 | Migration to Vite + React, Node.js/Express backend, Docker | Accepted | 2026-03-25 |
 
 ---
 
-## ADR-001: Plain HTML + Tailwind CDN umjesto JS frameworka
+## ADR-001: Plain HTML + Tailwind CDN instead of a JS framework
 
 **Date**: 2026-03-25
 **Status**: Superseded by ADR-002
@@ -33,27 +33,27 @@ Read by: All agents. Check this file before proposing changes that may conflict 
 
 ### Context
 
-Kontekst.hr je marketinška stranica bez dinamičkog sadržaja, korisničkih računa ili baze podataka. Jedine interakcije su navigation toggle na mobitelu i smooth scroll — ništa što zahtijeva reaktivni UI framework. Projekt treba biti što brže isporučen i što lakše maintainabilan bez DevOps overhead-a.
+Kontekst.hr was a marketing site with no dynamic content, user accounts, or database. The only interactions were a mobile navigation toggle and smooth scroll — nothing that required a reactive UI framework. The project needed to ship quickly and stay easy to maintain without DevOps overhead.
 
 ### Options Considered
 
-1. **Plain HTML + Tailwind CDN**: Bez build stepa, otvori index.html u browseru. Pros: nulta kompleksnost, brz deploy, maximalni performance. Cons: nema component reusability, nema hot reload bez alata.
-2. **Next.js (React)**: SSR/SSG, TypeScript, bogat ekosustav. Pros: skalabilno, TypeScript, lako dodati dinamičke feature-e later. Cons: overkill za marketing stranicu, Node dependency, build pipeline, deployment kompleksniji.
-3. **Astro**: Static site generator dizajniran za content-heavy stranice. Pros: odlična SEO podrška, partial hydration, islands architecture. Cons: još jedan alat za učiti, build step neophodan, nepotrebna kompleksnost za jednostavnu marketing stranicu.
+1. **Plain HTML + Tailwind CDN**: No build step; open `index.html` in the browser. Pros: zero complexity, fast deploy, maximum performance. Cons: no component reusability, no hot reload without extra tooling.
+2. **Next.js (React)**: SSR/SSG, TypeScript, large ecosystem. Pros: scalable, TypeScript, easy to add dynamic features later. Cons: overkill for a marketing page, Node dependency, build pipeline, more complex deployment.
+3. **Astro**: Static site generator aimed at content-heavy sites. Pros: strong SEO support, partial hydration, islands architecture. Cons: another tool to learn, build step required, unnecessary complexity for a simple marketing site.
 
 ### Decision
 
-Odabrano: **Plain HTML + Tailwind CSS via CDN**. Za marketing stranicu s 5–6 sekcija i nultom dinamičnošću, svaki JS framework donosi više overhead-a nego benefita. Tailwind CDN omogućuje brzu stilizaciju bez build koraka.
+**Plain HTML + Tailwind CSS via CDN** was chosen. For a marketing page with 5–6 sections and no real interactivity, any JS framework added more overhead than benefit. Tailwind CDN enabled fast styling without a build step.
 
 ### Consequences
 
-- **Positive**: Nulta build kompleksnost, deploy je trivijalan (push → DO App Platform), maksimalna brzina stranice, lako za maintainati
-- **Negative**: Nema component reusability — HTML se ponavlja za slične UI blokove; ako stranica naraste, migacija na framework bit će potrebna
-- **Neutral**: Tailwind via CDN uključuje cijeli CSS bundle (~3MB) bez tree-shakinga — prihvatljivo za marketing stranicu, može se optimizirati u v2
+- **Positive**: Zero build complexity, trivial deploy (push → DO App Platform), maximum page speed, easy to maintain
+- **Negative**: No component reusability — HTML repeats for similar UI blocks; if the site grows, a framework migration may be needed
+- **Neutral**: Tailwind via CDN ships the full CSS bundle (~3MB) without tree-shaking — acceptable for a marketing site; can be optimized in v2
 
 ---
 
-## ADR-002: Migracija na Vite + React, Node.js/Express backend, Docker
+## ADR-002: Migration to Vite + React, Node.js/Express backend, Docker
 
 **Date**: 2026-03-25
 **Status**: Accepted
@@ -61,37 +61,37 @@ Odabrano: **Plain HTML + Tailwind CSS via CDN**. Za marketing stranicu s 5–6 s
 
 ### Context
 
-Kontekst.hr prerasta okvire statične marketing stranice. Nadolazeći zahtjevi uključuju kontakt formu s backend obradom, potencijalnu CRM integraciju, te potrebu za konzistentnim lokalnim razvojnim okruženjem. Trenutni plain HTML pristup (ADR-001) nema component reusability, nema backend, i otežava kolaboraciju jer nema standardiziranog dev environmenta.
+Kontekst.hr outgrew a static marketing-only setup. Upcoming needs include a contact form with server-side handling, potential CRM integration, and a consistent local development environment. The previous plain HTML approach (ADR-001) lacked component reusability, had no backend, and made collaboration harder without a standardized dev environment.
 
-Ključna ograničenja:
-- Stranica je i dalje primarno marketinška — nema korisničkih računa ni složenog stanja
-- Tim treba brz dev feedback loop (HMR)
-- Backend zahtjevi su lagani (kontakt forma, eventualne webhook integracije) — ne treba teški framework
-- Lokalni dev mora biti reproducibilan bez "works on my machine" problema
+Key constraints:
+- The site remains primarily marketing — no user accounts or complex client state
+- The team needs a fast dev feedback loop (HMR)
+- Backend needs are light (contact form, possible webhooks) — no heavy framework required
+- Local development must be reproducible without “works on my machine” issues
 
 ### Options Considered
 
-1. **Next.js (React, SSR/SSG)**: Full-stack React framework s ugrađenim API routes. Pros: SSR za SEO, file-based routing, API routes bez zasebnog servera, velik ekosustav. Cons: overkill za marketing stranicu s jednom stranom i laganim API-jem; vendor lock-in u Vercel ekosustav za optimalan DX; složeniji deployment na Digital Ocean; SSR dodaje runtime kompleksnost koja nije potrebna.
+1. **Next.js (React, SSR/SSG)**: Full-stack React with built-in API routes. Pros: SSR for SEO, file-based routing, API routes without a separate server, large ecosystem. Cons: overkill for a single-page marketing site with a light API; vendor alignment with Vercel for best DX; harder deployment on Digital Ocean; SSR adds runtime complexity that is not needed here.
 
-2. **Vite + React (SPA) + Node.js/Express (zasebni backend) + Docker**: React SPA buildan Viteom, Express API server, sve orkestrirano docker-composeom. Pros: najbrži HMR u ekosustavu (Vite), čista separacija frontend/backend, Express je minimalan i fleksibilan za lagane API potrebe, Docker osigurava identičan environment za sve developere, lako dodati nove servise (Redis, DB) kad zatreba. Cons: dva procesa za maintain (frontend + backend), SPA zahtijeva klijentski routing, SEO zahtijeva dodatnu pažnju (prerendering ili meta tag management).
+2. **Vite + React (SPA) + Node.js/Express (separate backend) + Docker**: React SPA built with Vite, Express API, orchestrated with docker-compose. Pros: among the fastest HMR in the ecosystem (Vite), clear frontend/backend split, Express is minimal and flexible for light APIs, Docker gives everyone the same environment, easy to add services (Redis, DB) later. Cons: two processes to maintain (frontend + backend), SPA implies client-side routing concerns, SEO needs extra care (prerendering or meta tag management).
 
-3. **Astro + Node.js backend + Docker**: Astro za statički frontend s islands hydration, zasebni Node backend. Pros: odličan SEO iz kutije, parcijalna hidratacija smanjuje JS bundle, content-first pristup. Cons: manji ekosustav od Reacta, tim nema iskustva s Astrom, islands architecture dodaje konceptualnu kompleksnost za jednostavan marketing site, teže naći developere.
+3. **Astro + Node.js backend + Docker**: Astro for static frontend with islands hydration, separate Node backend. Pros: strong SEO defaults, partial hydration reduces JS bundle, content-first. Cons: smaller ecosystem than React, team lacks Astro experience, islands add conceptual complexity for a simple marketing site, harder hiring.
 
 ### Decision
 
-Odabrano: **Vite + React (SPA) + Node.js/Express + Docker**. Ova kombinacija daje najbolji omjer jednostavnosti i fleksibilnosti za trenutne potrebe:
+**Vite + React (SPA) + Node.js/Express + Docker** was chosen as the best balance of simplicity and flexibility:
 
-- **Vite + React** za frontend: Vite ima najbrži HMR, React komponente rješavaju problem ponovljivosti HTML-a iz ADR-001, ekosustav je ogroman i poznat timu. SPA je dovoljan jer je stranica single-page — SEO se rješava prerenderingom ili react-helmet-async za meta tagove.
-- **Node.js/Express** za backend: Minimalan server za kontakt formu i buduće integracije. Express je dovoljan — ne treba NestJS ni sličan teški framework za lagane API potrebe.
-- **Docker + docker-compose** za infrastrukturu: Lokalni dev identičan za sve developere, lako dodati servise, production-ready Dockerfile s multi-stage buildom.
+- **Vite + React** for the frontend: Vite has very fast HMR; React components address HTML repetition from ADR-001; the ecosystem is large and familiar. An SPA is enough because the site is single-page — SEO is handled via prerendering or meta tag tooling (e.g. `react-helmet-async`).
+- **Node.js/Express** for the backend: Minimal server for the contact form and future integrations. Express is sufficient — no NestJS or similar for these API needs.
+- **Docker + docker-compose** for infrastructure: Same local dev for all developers, easy to add services, production-ready multi-stage Dockerfiles.
 
-Next.js je odbačen jer SSR nije potreban za single-page marketing site, a framework donosi kompleksnost (middleware, server components, caching) koja ne služi ovom projektu. Astro je odbačen zbog manjeg ekosustava i nedostatka timskog iskustva.
+Next.js was rejected because SSR is not required for this single-page marketing site, and the framework adds complexity (middleware, server components, caching) that does not serve this project. Astro was rejected due to a smaller ecosystem and lack of team experience.
 
 ### Consequences
 
-- **Positive**: Component reusability (React), brz dev feedback (Vite HMR), backend spreman za kontakt formu i integracije, reproducibilan dev environment (Docker), Tailwind se sada može buildati s tree-shakingom (riješava CDN bundle problem iz ADR-001)
-- **Negative**: Build step je sada obavezan (Vite build), dva procesa za maintain (frontend + backend), Docker dodaje inicijalnu kompleksnost za developere koji ga ne poznaju, SPA zahtijeva dodatni rad za SEO (prerendering/meta management)
-- **Neutral**: Hosting se mijenja s čistog static servinga na containerized deployment — Digital Ocean App Platform podržava Docker, ali konfiguracija je složenija nego push-to-deploy za statičke fileove
+- **Positive**: Component reusability (React), fast dev feedback (Vite HMR), backend ready for contact and integrations, reproducible dev environment (Docker), Tailwind can be built with tree-shaking (addresses the CDN bundle issue from ADR-001)
+- **Negative**: Build step is now mandatory (Vite build), two processes to maintain (frontend + backend), Docker adds onboarding cost for developers unfamiliar with it, SPA needs extra work for SEO (prerendering / meta management)
+- **Neutral**: Hosting moves from pure static files to containerized deployment — Digital Ocean App Platform supports Docker, but configuration is more involved than push-to-deploy for static files
 
 ---
 

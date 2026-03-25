@@ -1,13 +1,20 @@
 # Kontekst.hr — Claude Instructions
 
-> Stack: Plain HTML · Tailwind CSS (CDN) · Digital Ocean App Platform
+> Stack: Vite + React · Tailwind CSS (PostCSS) · Node.js/Express · Docker · Digital Ocean App Platform
 > Last updated: 2026-03-25
 
 ## Project Context
 
-Kontekst.hr je stranica tvrtke koja se bavi poslovnim automatizacijama, n8n workflowima i razvojem AI aplikacija. Ciljna skupina su vlasnici tvrtki koji žele optimizirati i automatizirati svoje poslovanje. Stranica je marketinška prezentacija usluga tvrtke, optimizirana za SEO na hrvatskom jeziku.
+Kontekst.hr is the company website for a business focused on automation, n8n workflows, and AI applications. The audience is business owners who want to optimize and automate operations. The site is a marketing presentation of services, SEO-oriented for the **Croatian** market.
 
-**Tech stack summary**: Plain HTML · Tailwind CSS via CDN · No backend · No database · Digital Ocean App Platform
+**Tech stack summary**: Vite + React SPA · Tailwind (build) · Express API · Docker · Digital Ocean App Platform
+
+---
+
+## Documentation language
+
+- **All Markdown documentation** (`docs/**`, `README.md`, `.tasks/*.md`, and backlog lines in `TODO.md`) MUST be written in **English**.
+- **End-user website copy** (headings, body text, form labels, user-visible API messages) remains **Croatian** unless explicitly requested otherwise.
 
 ---
 
@@ -19,7 +26,7 @@ Kontekst.hr je stranica tvrtke koja se bavi poslovnim automatizacijama, n8n work
 |-------|------|----------------|
 | `project-manager` | Backlog & coordination | "What's next?", sprint planning, breaking down features, reprioritizing |
 | `systems-architect` | Architecture & ADRs | New feature design, tech decisions, system integration |
-| `frontend-developer` | UI implementation | HTML structure, Tailwind styling, sections, animations |
+| `frontend-developer` | UI implementation | React components, Tailwind styling, sections, animations |
 | `backend-developer` | API & business logic | Endpoints, auth, background jobs, integrations |
 | `ui-ux-designer` | UX & design system | Layout, visual hierarchy, futuristic design elements, accessibility |
 | `database-expert` | Schema & queries | Migrations, schema design, query optimization |
@@ -38,12 +45,12 @@ These apply to all agents at all times. No exceptions without explicit human ins
 1. **PRD.md is read-only.** Never modify it. Read it to understand requirements.
 2. **TODO.md is the living backlog.** Agents may add items, mark items complete, and move items to "Completed". Preserve section order and existing item priority — do not reorder items within a section unless explicitly asked to reprioritize.
 3. **All commits use Conventional Commits format** (see Git Conventions below).
-4. **Update the relevant `docs/` file** after every significant change before marking a task complete.
+4. **Update the relevant `docs/` file** after every significant change before marking a task complete (in **English**).
 5. **Run tests before marking any implementation task complete.**
 6. **Never hardcode secrets, credentials, or environment-specific values** in source code.
 7. **Consult `docs/technical/DECISIONS.md`** before proposing changes that may conflict with prior architectural decisions.
-8. **All content is in Croatian** unless explicitly instructed otherwise.
-9. **All HTML must be SEO-optimized** — meta tags, structured data, alt text, semantic elements.
+8. **All user-visible marketing copy is in Croatian** unless explicitly instructed otherwise.
+9. **All pages must be SEO-optimized** — meta tags, structured data, alt text, semantic elements (Croatian where shown to users).
 10. **Always delegate to the right specialist.** If a task touches frontend, backend, database, UX/design, QA, documentation, CI/CD, Docker, or copy/SEO — invoke the appropriate agent immediately. Do not implement it yourself. The delegation table above is binding, not advisory.
 
 ---
@@ -51,19 +58,19 @@ These apply to all agents at all times. No exceptions without explicit human ins
 ## Project Structure
 
 ```
-kontekst.hr/
-  index.html              # Main (and only) HTML page
-  assets/
-    css/                  # Custom CSS overrides (if needed beyond Tailwind)
-    js/                   # Custom JavaScript (minimal, for interactions)
-    images/               # Images, icons, illustrations
-  logo-light.svg          # Company logo (white version)
+new-kontekst.hr/
+  index.html              # Vite HTML entry
+  src/
+    components/           # layout/, sections/, ui/
+    pages/, hooks/, assets/
+  backend/src/            # Express app (routes, middleware)
+  public/                 # Static assets
 docs/
   user/USER_GUIDE.md
-  technical/              # Architecture, decisions
-  content/                # Content strategy, brand voice, keyword targets (owned by @copywriter-seo)
+  technical/              # Architecture, decisions, API
+  content/                # Content strategy (English docs; live copy may be Croatian)
 .claude/agents/           # Specialist agent definitions
-.tasks/                   # Detailed task files — one per TODO item (owned by @project-manager)
+.tasks/                   # Detailed task files — one per TODO item
 ```
 
 ---
@@ -107,42 +114,41 @@ refactor/<description>
 
 ## Code Style
 
-- **Language**: HTML5 + vanilla JavaScript (ES6+) where needed
-- **Styling**: Tailwind CSS via CDN — utility-first, no custom build step
-- **Custom CSS**: Only when Tailwind utilities are insufficient — in `assets/css/custom.css`
-- **JavaScript**: Minimal — only for mobile nav toggle, scroll behaviour, and micro-interactions
+- **Frontend**: React function components, ES modules, Tailwind utilities + `src/assets/css/custom.css` for tokens/overrides
+- **Backend**: ESM Node, Express route modules
 - **No `console.log`** in production code
 - **No commented-out code** committed
-- **Semantic HTML**: Use appropriate elements (`<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`)
-- **Accessibility**: All images need `alt` attributes, all interactive elements need labels
+- **Semantic HTML** in React: `<nav>`, `<main>`, `<section>`, `<footer>`, etc.
+- **Accessibility**: images need `alt`; interactive elements need labels
 
 ---
 
 ## Design Guidelines
 
-- **Palette**: Based on provided greyscale scheme — dark backgrounds (#212529, #343a40) with light text (#f8f9fa, #e9ecef)
-- **Feel**: Futuristic, clean, technical — geometric shapes, subtle grid patterns, gradient accents
-- **Typography**: System font stack or Google Fonts (Inter or similar sans-serif)
-- **Language**: Croatian throughout
+- **Palette**: Dark base (`#07090D` region) with teal accent — see `docs/technical/ARCHITECTURE.md` Design System
+- **Feel**: Futuristic, clean, technical — geometry, subtle grids, gradient accents on cards
+- **Typography**: Syne + DM Sans (Google Fonts) — see Architecture doc
+- **Public copy language**: Croatian
 - **Sections**: Hero, Usluge, Kako radimo, O nama, Kontakt
 
 ---
 
 ## SEO Requirements
 
-- Croatian-language title tags and meta descriptions
+- Croatian title tags and meta descriptions for the live site
 - Open Graph tags for social sharing
 - JSON-LD structured data for the business
-- Target keywords: "automatizacija poslovanja", "n8n Hrvatska", "AI aplikacije za poslovanje", "poslovne automatizacije"
-- Semantic HTML headings hierarchy (one `<h1>` per page)
+- Target keywords (Croatian): "automatizacija poslovanja", "n8n Hrvatska", "AI aplikacije za poslovanje", "poslovne automatizacije"
+- Semantic heading hierarchy (one `<h1>` per page)
 
 ---
 
 ## Environment & Commands
 
-- **No build step** — plain HTML with Tailwind CDN
-- **Local dev**: Open `index.html` directly in browser, or use VS Code Live Server extension
-- **Deploy**: Push to `main` branch → Digital Ocean App Platform auto-deploys
+- **Frontend**: `npm run dev` · `npm run build` · `npm test` · `npm run lint`
+- **Backend**: `cd backend && npm run dev` · `npm test`
+- **Docker**: `docker compose up` from repo root
+- **Deploy**: Digital Ocean App Platform (see backlog / CI tasks)
 
 ---
 

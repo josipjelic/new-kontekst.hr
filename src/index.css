@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design intent beyond Tailwind Preflight: smooth scrolling (reduced-motion override lives in custom.css). */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}

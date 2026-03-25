@@ -1,6 +1,6 @@
 ---
 id: "002"
-title: "Hero sekcija s futurističkim dizajnom i CTA"
+title: "Hero section with futuristic design and CTA"
 status: "done"
 area: "frontend"
 agent: "@frontend-developer"
@@ -16,28 +16,28 @@ blocked_by: ["001"]
 
 ## Description
 
-Implementiraj Hero sekciju — prva stvar koju posjetitelj vidi. Mora odmah komunicirati što Kontekst.hr radi i pozvati posjetitelja na akciju. Vizualni stil mora biti futuristički: tamna pozadina, geometrijski pattern ili grid u pozadini, gradient accenti, čista tipografija.
+Implement the Hero section — the first thing visitors see. It must immediately explain what Kontekst.hr does and invite action. Visual style: futuristic — dark background, geometric or grid pattern, gradient accents, clean typography.
 
-Sadržaj: naziv tvrtke, tagline "Poslovne automatizacije", kratka value proposition (1–2 rečenice o benefitima), i CTA gumb koji vodi na #kontakt sekciju.
+Content: company name, tagline “Poslovne automatizacije”, short value proposition (1–2 benefit-focused sentences in **Croatian**), and a CTA button scrolling to `#kontakt`.
 
 ## Acceptance Criteria
 
-- [x] `<h1>` sadrži "Kontekst.hr" ili ekvivalentni brand headline
-- [x] Tagline "Poslovne automatizacije" jasno vidljiv
-- [x] Value proposition (1–2 rečenice) na hrvatskom, fokusirana na benefit za klijenta
-- [x] CTA gumb s tekstom poput "Razgovarajmo" ili "Kontaktirajte nas" koji scrolla na #kontakt
-- [x] Futuristički vizualni stil: tamna pozadina, geometrijski/grid pattern ili CSS efekti
-- [x] Sekcija je full-height ili najmanje 80vh
-- [x] Responzivna na svim breakpointima (320px – 1920px)
-- [x] Tipografija je čitljiva s dovoljnim kontrastom (WCAG 4.5:1)
+- [x] `<h1>` contains “Kontekst.hr” or equivalent brand headline
+- [x] Tagline “Poslovne automatizacije” clearly visible
+- [x] Value proposition (1–2 sentences) in **Croatian**, client-benefit focused
+- [x] CTA (e.g. “Razgovarajmo” / “Kontaktirajte nas”) scrolls to `#kontakt`
+- [x] Futuristic look: dark background, grid/geometric pattern or CSS effects
+- [x] Section full-height or at least 80vh
+- [x] Responsive from 320px to 1920px
+- [x] Typography readable with sufficient contrast (WCAG 4.5:1)
 
 ## Technical Notes
 
-- Futuristički feel može se postići CSS-om: `background-image` s repeating grid patternom, ili subtle radial gradient
-- Animacija: opcionalno fade-in na load (CSS `@keyframes` ili Tailwind `animate-fade`)
-- CTA gumb: hover state s promjenom boje, cursor pointer
-- Value proposition prijedlog: "Automatiziramo procese koji vam oduzimaju vrijeme. Vi se fokusirate na rast poslovanja."
-- `<section id="hero">` — anchor za nav link "Početna" ako se doda
+- Futuristic feel via CSS: `background-image` with repeating grid, or subtle radial gradients
+- Optional load animation: CSS `@keyframes` or Tailwind `animate-*`
+- CTA: hover state, pointer cursor
+- Example value proposition (Croatian): “Automatiziramo procese koji vam oduzimaju vrijeme. Vi se fokusirate na rast poslovanja.”
+- `<section id="hero">` — optional anchor for a “Početna” nav link
 
 ## History
 

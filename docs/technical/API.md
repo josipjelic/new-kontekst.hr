@@ -9,10 +9,12 @@ Read by: @frontend-developer (to know what endpoints to call and their contracts
 
 # API Reference
 
-> **Base URL**: `[https://api.example.com/v1]` (production) · `[http://localhost:3000/api]` (local)
-> **Authentication**: Bearer token in `Authorization` header, or session cookie
-> **Content-Type**: `application/json` for all requests and responses
-> **Last updated**: [YYYY-MM-DD]
+> **Base URL (Kontekst backend)**: `http://localhost:3000` (local API root; JSON routes under `/api` where noted)
+> **Authentication**: Public endpoints for v1 marketing contact flow — no auth until explicitly added per PRD
+> **Content-Type**: `application/json` for JSON bodies
+> **Last updated**: 2026-03-25
+>
+> **Note**: User-facing JSON messages from the live API are in **Croatian** (site locale). This document describes behaviour in English and shows the actual response bodies where relevant.
 
 ---
 
@@ -67,15 +69,72 @@ All error responses follow this structure:
 
 ## Rate Limiting
 
-- **Limit**: [100 requests per minute per IP / user]
-- **Headers returned**:
-  - `X-RateLimit-Limit` — requests allowed per window
-  - `X-RateLimit-Remaining` — requests remaining in current window
-  - `X-RateLimit-Reset` — Unix timestamp when window resets
+- **Global (`/api/*`)**: 100 requests per IP per 15-minute window (`express-rate-limit`, standard `RateLimit-*` headers).
+- **`POST /api/contact`**: additionally 5 requests per IP per 15-minute window (counts every POST to contact, including failed validation).
+- **429 response** (contact endpoint): body is localized — `{ "error": "Previše zahtjeva. Pokušajte ponovo za nekoliko minuta." }` (“Too many requests. Try again in a few minutes.”)
 
 ---
 
 ## Endpoints
+
+### Kontekst.hr — health & contact (scaffold)
+
+#### GET /health
+
+**Auth required**: No  
+**Description**: Health/liveness probe (Docker `HEALTHCHECK`, DigitalOcean App Platform).
+
+**Response 200**:
+```json
+{
+  "status": "ok",
+  "timestamp": "string — ISO 8601"
+}
+```
+
+---
+
+#### POST /api/contact
+
+**Auth required**: No  
+**Description**: Contact form — accepts JSON, validates fields, sends email to `info@kontekst.hr` via SMTP (nodemailer). In `NODE_ENV=test`, email sending is skipped; response is still `201`.
+
+**CORS**: allowed origin from `CORS_ORIGIN` (default: `http://localhost:5173`).
+
+**Request body**:
+```json
+{
+  "name": "string — 2–100 characters after trim",
+  "email": "string — valid email, max 254 characters",
+  "message": "string — 10–2000 characters after trim"
+}
+```
+
+**Response 201** (message is Croatian on the live API):
+```json
+{
+  "message": "Poruka je poslana."
+}
+```
+*(Translation: “Message sent.”)*
+
+**Response 422** (validation):
+```json
+{
+  "errors": [
+    { "field": "name", "message": "…" },
+    { "field": "email", "message": "…" },
+    { "field": "message", "message": "…" }
+  ]
+}
+```
+Validation `message` values are Croatian (e.g. “Ime je obavezno.”).
+
+**Response 429**: contact rate limit exceeded — see Rate Limiting.
+
+**Response 500**: SMTP failure or missing SMTP variables in production — `{ "error": "Greška pri slanju poruke. Pokušajte ponovo." }` (localized; no provider details leaked).
+
+**Note**: Unknown routes return `404` with body `{ "error": "Not found" }`. The global error handler returns `{ "error": "<message>" }` with the appropriate status code.
 
 ---
 
@@ -220,4 +279,6 @@ All error responses follow this structure:
 
 | Date | Change |
 |------|--------|
+| 2026-03-25 | `POST /api/contact`: implementation (validation, rate limit, SMTP, tests) |
+| 2026-03-25 | Backend scaffold: documented `GET /health`, stub `POST /api/contact` |
 | [YYYY-MM-DD] | Initial API definition — auth endpoints |

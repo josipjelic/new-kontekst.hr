@@ -1,6 +1,6 @@
 ---
 id: "008"
-title: "Digital Ocean App Platform deployment konfiguracija"
+title: "Digital Ocean App Platform deployment configuration"
 status: "todo"
 area: "infra"
 agent: "@cicd-engineer"
@@ -16,24 +16,20 @@ blocked_by: ["001"]
 
 ## Description
 
-Konfiguriraj Digital Ocean App Platform za automatski deploy statičke HTML stranice pri svakom pushu na `main` granu. Stranica nema build step — DO treba servirati statičke fileove direktno iz root direktorija.
+Configure Digital Ocean App Platform for automated deployment. **Note:** ADR-002 moved the project to **Docker + Vite/React + Express**. This task was originally written for a **static HTML** site without a build step — it is **superseded in spirit** by container-based CI/CD (see `TODO.md` #022). Update acceptance criteria when implementing: use a **Web Service** / container workflow, not `static_site` only, unless you intentionally split static hosting from the API.
 
 ## Acceptance Criteria
 
-- [ ] `/.do/app.yaml` (ili ekvivalentna DO konfiguracija) kreiran i committan
-- [ ] DO App Platform konfiguriran za static site deployment (ne web service)
-- [ ] Auto-deploy konfiguriran za `main` granu
-- [ ] Custom domena `kontekst.hr` konfigurirana (ili instrukcije za konfiguraciju)
-- [ ] HTTPS automatski konfiguriran (DO to radi automatski za custom domene)
-- [ ] `www.kontekst.hr` redirect na `kontekst.hr` (ili obratno — odabir je konzistentan s canonical URL-om)
+- [ ] `/.do/app.yaml` (or equivalent DO config) created and committed — **aligned with Docker images**, not only static files
+- [ ] DO App Platform configured for the chosen deployment model (containers per ADR-002)
+- [ ] Auto-deploy from `main` (or agreed branch)
+- [ ] Custom domain `kontekst.hr` configured (or documented steps)
+- [ ] HTTPS enabled (default on DO for custom domains)
+- [ ] `www` vs non-`www` redirect consistent with canonical URL in `CONTENT_STRATEGY.md`
 
 ## Technical Notes
 
-Digital Ocean App Platform za statičke stranice:
-- Type: `static_site`
-- Output dir: `/` (root)
-- Build command: prazan (nema build stepa)
-- `/.do/app.yaml` primjer:
+**Legacy static-site example** (pre–ADR-002 only):
 
 ```yaml
 name: kontekst-hr
@@ -48,10 +44,11 @@ static_sites:
   - path: /
 ```
 
-- Alternativno: konfiguracija direktno u DO konzoli bez app.yaml filea
+For the current stack, prefer DO **App Platform** services that build/run `Dockerfile.frontend` and `backend/Dockerfile` (or a single compose-based flow), matching `docker-compose.prod.yml` behaviour. Console-only configuration is acceptable if no `app.yaml` is used.
 
 ## History
 
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
+| 2026-03-25 | docs | Translated to English; noted ADR-002 / Docker supersession |

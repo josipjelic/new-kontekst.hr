@@ -1,6 +1,6 @@
 ---
 id: "005"
-title: "Sekcija O nama"
+title: "About (O nama) section"
 status: "done"
 area: "frontend"
 agent: "@frontend-developer"
@@ -16,30 +16,30 @@ blocked_by: ["001"]
 
 ## Description
 
-Implementiraj sekciju "O nama" koja opisuje misiju, vrijednosti i stručnost Kontekst.hr. Cilj je humanizirati brand i izgraditi povjerenje. Sadržaj treba biti autentičan i specifičan — ne generički corporate tekst.
+Implement “O nama” describing mission, values, and expertise. Goal: humanise the brand and build trust. Copy must be authentic and specific — not generic corporate filler.
 
-Kontekst.hr je tvrtka koja kombinira tehničku ekspertizu (n8n, AI) s razumijevanjem poslovnih procesa. Fokus je na praktičnim rješenjima koja donose mjerljive rezultate.
+Kontekst.hr combines technical depth (n8n, AI) with understanding of business processes, focusing on practical, measurable outcomes.
 
 ## Acceptance Criteria
 
-- [ ] `<section id="o-nama">` s naslovom "O nama"
-- [ ] Paragraf(i) koji opisuju misiju tvrtke i što ih razlikuje
-- [ ] Ključne vrijednosti ili differentiatori (3–4 stavke) jasno istaknuti
-- [ ] Ton je profesionalan ali pristupačan — ne korporativan
-- [ ] Sadržaj na hrvatskom
-- [ ] Vizualni element koji razbija blok teksta (ikone, stat brojevi, ili quote block)
-- [ ] Responzivno
+- [ ] `<section id="o-nama">` titled “O nama”
+- [ ] Paragraph(s) on mission and differentiation
+- [ ] Key values or differentiators (3–4 items) clearly highlighted
+- [ ] Tone professional but approachable — not stiff corporate
+- [ ] **Croatian** copy
+- [ ] Visual break in long text (icons, stats, or quote block)
+- [ ] Responsive layout
 
 ## Technical Notes
 
-- Prijedlog misije: "Kontekst.hr nastao je iz uvjerenja da svaka tvrtka zaslužuje pristup alatima koji su nekad bili dostupni samo velikim korporacijama. Automatizacijom i AI-em demokratiziramo efikasnost."
-- Differentiatori: Specijalizacija za n8n, hands-on pristup, mjerljivi rezultati, podrška nakon implementacije
-- Ako postoje statistike (broj klijenata, projekata, uštedenih sati) — super za social proof; inače može biti placeholder "[TBD]"
-- `<h2>` za naslov sekcije
+- Example mission (Croatian): “Kontekst.hr nastao je iz uvjerenja da svaka tvrtka zaslužuje pristup alatima koji su nekad bili dostupni samo velikim korporacijama. Automatizacijom i AI-em demokratiziramo efikasnost.”
+- Differentiators: n8n specialisation, hands-on approach, measurable results, post-launch support
+- If real stats exist (clients, projects, hours saved), use them; else placeholder `[TBD]`
+- `<h2>` for section title
 
 ## History
 
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
-| 2026-03-25 | @frontend-developer | Implemented: mission copy, 4 differentiator cards, stats row (20+/50+/1000+), quote block; follows design system tokens and scroll-reveal pattern |
+| 2026-03-25 | @frontend-developer | Implemented: mission copy, 4 differentiator cards, stats row, quote block; design tokens + scroll reveal |
