@@ -20,10 +20,14 @@ Kontekst.hr je stranica tvrtke koja se bavi poslovnim automatizacijama, n8n work
 | `project-manager` | Backlog & coordination | "What's next?", sprint planning, breaking down features, reprioritizing |
 | `systems-architect` | Architecture & ADRs | New feature design, tech decisions, system integration |
 | `frontend-developer` | UI implementation | HTML structure, Tailwind styling, sections, animations |
+| `backend-developer` | API & business logic | Endpoints, auth, background jobs, integrations |
 | `ui-ux-designer` | UX & design system | Layout, visual hierarchy, futuristic design elements, accessibility |
+| `database-expert` | Schema & queries | Migrations, schema design, query optimization |
 | `qa-engineer` | Testing | Cross-browser testing, responsiveness checks, accessibility audit |
 | `documentation-writer` | Living docs | User guide updates, post-feature documentation |
-| `cicd-engineer` | CI/CD & deployment | Digital Ocean App Platform config, GitHub Actions |
+| `cicd-engineer` | CI/CD & GitHub Actions | Digital Ocean App Platform config, GitHub Actions, release automation |
+| `docker-expert` | Containerization | Dockerfiles, docker-compose, image optimization, container networking |
+| `copywriter-seo` | Copy & SEO | Landing page copy, marketing content, meta tags, keyword strategy, structured data specs, brand voice |
 
 ---
 
@@ -35,11 +39,12 @@ These apply to all agents at all times. No exceptions without explicit human ins
 2. **TODO.md is the living backlog.** Agents may add items, mark items complete, and move items to "Completed". Preserve section order and existing item priority — do not reorder items within a section unless explicitly asked to reprioritize.
 3. **All commits use Conventional Commits format** (see Git Conventions below).
 4. **Update the relevant `docs/` file** after every significant change before marking a task complete.
-5. **Never hardcode secrets, credentials, or environment-specific values** in source code.
-6. **Consult `docs/technical/DECISIONS.md`** before proposing changes that may conflict with prior architectural decisions.
-7. **All content is in Croatian** unless explicitly instructed otherwise.
-8. **All HTML must be SEO-optimized** — meta tags, structured data, alt text, semantic elements.
-9. **Always delegate to the right specialist.** If a task touches frontend, backend, database, UX/design, QA, documentation, CI/CD, or Docker — invoke the appropriate agent immediately. Do not implement it yourself. The delegation table above is binding, not advisory.
+5. **Run tests before marking any implementation task complete.**
+6. **Never hardcode secrets, credentials, or environment-specific values** in source code.
+7. **Consult `docs/technical/DECISIONS.md`** before proposing changes that may conflict with prior architectural decisions.
+8. **All content is in Croatian** unless explicitly instructed otherwise.
+9. **All HTML must be SEO-optimized** — meta tags, structured data, alt text, semantic elements.
+10. **Always delegate to the right specialist.** If a task touches frontend, backend, database, UX/design, QA, documentation, CI/CD, Docker, or copy/SEO — invoke the appropriate agent immediately. Do not implement it yourself. The delegation table above is binding, not advisory.
 
 ---
 
@@ -56,8 +61,9 @@ kontekst.hr/
 docs/
   user/USER_GUIDE.md
   technical/              # Architecture, decisions
+  content/                # Content strategy, brand voice, keyword targets (owned by @copywriter-seo)
 .claude/agents/           # Specialist agent definitions
-.tasks/                   # Detailed task files
+.tasks/                   # Detailed task files — one per TODO item (owned by @project-manager)
 ```
 
 ---
@@ -87,11 +93,13 @@ feature/<ticket-id>-short-description
 fix/<ticket-id>-short-description
 chore/<description>
 docs/<description>
+refactor/<description>
 ```
 
 ### PR Requirements
 - PR title follows Conventional Commits format
-- Fill out `.github/PULL_REQUEST_TEMPLATE.md` completely
+- Fill out `.github/PULL_REQUEST_TEMPLATE.md` completely — do not delete sections
+- Link to the related issue/ticket (`Closes #XXX`)
 - At least one reviewer required before merge
 - All CI checks must pass
 
