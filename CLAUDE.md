@@ -13,7 +13,7 @@ Kontekst.hr je stranica tvrtke koja se bavi poslovnim automatizacijama, n8n work
 
 ## Agents Available
 
-Delegate to specialist agents for focused work. Claude selects them automatically based on context.
+**Mandatory delegation — this is not optional.** Every task that falls within a specialist's domain MUST be routed to that agent. Do not implement code, design schemas, write docs, or configure pipelines yourself — delegate. Only handle directly: project-level questions, routing decisions, and tasks explicitly outside all specialist domains.
 
 | Agent | Role | Invoke when... |
 |-------|------|----------------|
@@ -39,6 +39,7 @@ These apply to all agents at all times. No exceptions without explicit human ins
 6. **Consult `docs/technical/DECISIONS.md`** before proposing changes that may conflict with prior architectural decisions.
 7. **All content is in Croatian** unless explicitly instructed otherwise.
 8. **All HTML must be SEO-optimized** — meta tags, structured data, alt text, semantic elements.
+9. **Always delegate to the right specialist.** If a task touches frontend, backend, database, UX/design, QA, documentation, CI/CD, or Docker — invoke the appropriate agent immediately. Do not implement it yourself. The delegation table above is binding, not advisory.
 
 ---
 

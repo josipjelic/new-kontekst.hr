@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>Kontekst.hr — Poslovne automatizacije, n8n i AI aplikacije za Hrvatsku</title>
+  <meta name="description" content="Kontekst.hr nudi poslovne automatizacije, n8n workflow rješenja i razvoj AI aplikacija za tvrtke u Hrvatskoj. Optimizirajte i automatizirajte svoje poslovne procese.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="automatizacija poslovanja, n8n Hrvatska, AI aplikacije za poslovanje, poslovne automatizacije, workflow automatizacija">
+  <link rel="canonical" href="https://kontekst.hr/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kontekst.hr/">
+  <meta property="og:title" content="Kontekst.hr — Poslovne automatizacije, n8n i AI aplikacije">
+  <meta property="og:description" content="Automatiziramo vaše poslovne procese pomoću n8n workflowa i prilagođenih AI aplikacija. Uštedjeli ste vrijeme, mi radimo ostatak.">
+  <meta property="og:locale" content="hr_HR">
+  <meta property="og:site_name" content="Kontekst.hr">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kontekst.hr — Poslovne automatizacije, n8n i AI aplikacije">
+  <meta name="twitter:description" content="Automatiziramo vaše poslovne procese pomoću n8n workflowa i prilagođenih AI aplikacija.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand': {
+              50:  '#f8f9fa',
+              100: '#e9ecef',
+              200: '#dee2e6',
+              300: '#ced4da',
+              400: '#adb5bd',
+              500: '#6c757d',
+              600: '#495057',
+              700: '#343a40',
+              800: '#212529',
+              900: '#16191d',
+            },
+            'accent': {
+              DEFAULT: '#00D4AA',
+              dim:     '#00A886',
+            }
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body:    ['DM Sans', 'sans-serif'],
+            sans:    ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Kontekst.hr",
+    "description": "Poslovne automatizacije, n8n workflow rješenja i razvoj AI aplikacija za tvrtke u Hrvatskoj.",
+    "url": "https://kontekst.hr",
+    "email": "info@kontekst.hr",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "HR"
+    },
+    "areaServed": "HR",
+    "serviceType": ["Automatizacija poslovanja", "n8n workflow automatizacije", "AI aplikacije za poslovanje"]
+  }
+  </script>
+</head>
+<body class="antialiased" style="background-color: var(--color-surface-base); color: var(--color-text-primary); font-family: 'DM Sans', sans-serif;">
+
+  <!-- ============================================================
+       FIXED NAVIGATION HEADER
+       ============================================================ -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Glavna navigacija">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+
+        <!-- Logo -->
+        <a href="#" class="flex-shrink-0" aria-label="Kontekst.hr — na vrh stranice">
+          <img src="logo-light.svg" alt="Kontekst.hr logotip" class="h-7 lg:h-8 w-auto">
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <ul class="hidden md:flex items-center gap-8" role="list">
+          <li><a href="#usluge" class="nav-link text-sm font-medium">Usluge</a></li>
+          <li><a href="#kako-radimo" class="nav-link text-sm font-medium">Kako radimo</a></li>
+          <li><a href="#o-nama" class="nav-link text-sm font-medium">O nama</a></li>
+          <li>
+            <a href="#kontakt" class="nav-cta">
+              Razgovarajmo
+            </a>
+          </li>
+        </ul>
+
+        <!-- Hamburger Button (Mobile) -->
+        <button
+          id="hamburger"
+          type="button"
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200"
+          style="color: var(--color-text-secondary);"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          aria-label="Otvori navigacijski izbornik"
+        >
+          <span class="sr-only">Otvori izbornik</span>
+          <svg id="icon-open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden mobile-menu-panel" role="navigation" aria-label="Mobilna navigacija">
+        <ul class="py-4 space-y-1 px-2" role="list">
+          <li><a href="#usluge" class="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg">Usluge</a></li>
+          <li><a href="#kako-radimo" class="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg">Kako radimo</a></li>
+          <li><a href="#o-nama" class="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg">O nama</a></li>
+          <li>
+            <a href="#kontakt" class="block mx-4 mt-2 mb-2 py-3 text-center rounded-lg font-semibold text-sm" style="background: var(--color-accent); color: #07090D;">
+              Razgovarajmo
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main>
+
+    <!-- ============================================================
+         HERO SECTION
+         ============================================================ -->
+    <section id="hero" class="hero-section min-h-screen flex items-center justify-center relative" style="padding-top: 80px;" aria-labelledby="hero-heading">
+
+      <!-- Ambient background elements -->
+      <div class="hero-dot-grid" aria-hidden="true"></div>
+      <div class="hero-orb-1" aria-hidden="true"></div>
+      <div class="hero-orb-2" aria-hidden="true"></div>
+      <div class="hero-orb-3" aria-hidden="true"></div>
+
+      <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
+
+        <!-- Status badge -->
+        <div class="hero-animate hero-animate-delay-1 flex justify-center" aria-hidden="true">
+          <span class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Dostupni za projekte
+          </span>
+        </div>
+
+        <!-- Main heading -->
+        <h1 id="hero-heading" class="hero-animate hero-animate-delay-2 font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6" style="letter-spacing: -0.02em; font-family: 'Syne', sans-serif;">
+          Vaše poslovanje<br>
+          na <span class="text-gradient">autopilotu</span>
+        </h1>
+
+        <!-- Value proposition -->
+        <p class="hero-animate hero-animate-delay-3 text-lg sm:text-xl leading-relaxed mx-auto mb-10" style="color: var(--color-text-secondary); max-width: 560px;">
+          Automatiziramo ručne procese, spajamo poslovne alate i gradimo AI rješenja koja rade dok vi ne morate.
+          Više vremena za ono što zaista donosi vrijednost.
+        </p>
+
+        <!-- CTA buttons -->
+        <div class="hero-animate hero-animate-delay-4 flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+          <a href="#kontakt" class="btn-primary">
+            Dogovorimo razgovor
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="#usluge" class="btn-ghost">
+            Pogledajte usluge
+          </a>
+        </div>
+
+        <!-- Social proof stats -->
+        <div class="hero-animate hero-animate-delay-4 flex items-center justify-center gap-8 sm:gap-12 flex-wrap" style="opacity: 0.7;" aria-label="Statistike">
+          <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Automatizacije rade</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number">n8n</span>
+            <span class="stat-label">Certificirani partneri</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <span class="stat-number">AI</span>
+            <span class="stat-label">Prilagođena rješenja</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" aria-hidden="true">
+        <span class="text-xs font-medium tracking-widest uppercase" style="color: var(--color-text-muted);">Scroll</span>
+        <div class="w-px h-10" style="background: linear-gradient(180deg, var(--color-accent), transparent);"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         USLUGE — SERVICES
+         ============================================================ -->
+    <section id="usluge" class="services-section py-24 lg:py-32" aria-labelledby="usluge-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section header -->
+        <div class="mb-16 lg:mb-20">
+          <p class="section-label reveal">Usluge</p>
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <h2 id="usluge-heading" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold reveal reveal-delay-1" style="font-family: 'Syne', sans-serif; letter-spacing: -0.02em; max-width: 520px; line-height: 1.1;">
+              Sve što treba vašem poslovanju
+            </h2>
+            <p class="text-base lg:text-lg reveal reveal-delay-2" style="color: var(--color-text-secondary); max-width: 380px; line-height: 1.7;">
+              Od prvog workflowa do složenih AI sustava — gradimo rješenja koja se skaliraju s vašim rastom.
+            </p>
+          </div>
+        </div>
+
+        <!-- Service cards grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+
+          <!-- n8n Workflow Automatizacije -->
+          <article class="service-card reveal">
+            <div class="service-icon" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/>
+              </svg>
+            </div>
+            <h3 class="service-card-title">n8n Workflow Automatizacije</h3>
+            <p class="service-card-body">
+              Povežite vaše poslovne alate bez pisanja koda. n8n workflowovi rade za vas 24/7 — od CRM-a i računovodstva do e-maila i upravljanja projektima.
+            </p>
+            <a href="#kontakt" class="service-card-link" aria-label="Saznajte više o n8n workflow automatizacijama">
+              Saznajte više
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </article>
+
+          <!-- Automatizacija poslovnih procesa -->
+          <article class="service-card reveal reveal-delay-1">
+            <div class="service-icon" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
+              </svg>
+            </div>
+            <h3 class="service-card-title">Automatizacija poslovnih procesa</h3>
+            <p class="service-card-body">
+              Identificiramo gdje vaš tim troši vrijeme na ponavljajuće zadatke i zamjenjujemo ih pametnim automatizacijama. Rezultat: manje grešaka, brži procesi, zadovoljniji tim.
+            </p>
+            <a href="#kontakt" class="service-card-link" aria-label="Saznajte više o automatizaciji poslovnih procesa">
+              Saznajte više
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </article>
+
+          <!-- AI Aplikacije -->
+          <article class="service-card reveal reveal-delay-2">
+            <div class="service-icon" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z"/>
+              </svg>
+            </div>
+            <h3 class="service-card-title">AI Aplikacije po mjeri</h3>
+            <p class="service-card-body">
+              Razvijamo AI rješenja prilagođena vašim procesima — od chatbotova za korisničku podršku do inteligentnih alata za analizu podataka koji donose konkretne poslovne odluke.
+            </p>
+            <a href="#kontakt" class="service-card-link" aria-label="Saznajte više o AI aplikacijama po mjeri">
+              Saznajte više
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         KAKO RADIMO — PROCESS
+         ============================================================ -->
+    <section id="kako-radimo" class="process-section py-24 lg:py-32" aria-labelledby="kako-radimo-heading">
+      <div class="process-section-bg" aria-hidden="true"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section header -->
+        <div class="mb-16 lg:mb-20">
+          <p class="section-label reveal">Proces</p>
+          <h2 id="kako-radimo-heading" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold reveal reveal-delay-1" style="font-family: 'Syne', sans-serif; letter-spacing: -0.02em; max-width: 480px; line-height: 1.1;">
+            Kako radimo zajedno
+          </h2>
+          <p class="mt-4 text-base lg:text-lg reveal reveal-delay-2" style="color: var(--color-text-secondary); max-width: 440px; line-height: 1.7;">
+            Strukturirani pristup koji osigurava da svaki projekt donosi mjerljive rezultate — bez iznenađenja.
+          </p>
+        </div>
+
+        <!-- Two-column layout: steps left, visual right -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+          <!-- Steps -->
+          <div>
+            <!-- Step 1 -->
+            <div class="process-step reveal">
+              <div>
+                <div class="process-step-number">01</div>
+                <div class="process-step-connector" aria-hidden="true"></div>
+              </div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Razgovor i analiza</h3>
+                <p class="process-step-body">
+                  Upoznajemo se s vašim poslovanjem i procesima. Postavljamo prava pitanja da bismo razumjeli gdje automatizacija donosi najveću vrijednost — bez tehničkog žargona.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="process-step reveal reveal-delay-1">
+              <div>
+                <div class="process-step-number">02</div>
+                <div class="process-step-connector" aria-hidden="true"></div>
+              </div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Prijedlog rješenja</h3>
+                <p class="process-step-body">
+                  Na temelju analize predlažemo konkretno rješenje s jasno definiranim opsegom, rokovima i troškovima. Nikad paušalnih ponuda — samo precizni plan.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="process-step reveal reveal-delay-2">
+              <div>
+                <div class="process-step-number">03</div>
+                <div class="process-step-connector" aria-hidden="true"></div>
+              </div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Razvoj i testiranje</h3>
+                <p class="process-step-body">
+                  Gradimo rješenje iterativno uz redovita ažuriranja. Svaki workflow testiramo s realnim podacima prije puštanja u produkciju — greške hvatamo mi, ne vi.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="process-step reveal reveal-delay-3">
+              <div>
+                <div class="process-step-number">04</div>
+              </div>
+              <div class="process-step-content">
+                <h3 class="process-step-title">Pokretanje i podrška</h3>
+                <p class="process-step-body">
+                  Puštamo rješenje u rad i educiramo vaš tim. Ostajemo dostupni za podršku, nadogradnje i prilagodbe kako vaše poslovanje raste i mijenja se.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual panel — decorative process diagram -->
+          <div class="lg:sticky lg:top-32 reveal reveal-delay-2">
+            <div class="relative rounded-2xl overflow-hidden" style="background: var(--color-surface-overlay); border: 1px solid var(--color-surface-border); padding: 32px;">
+              <!-- Decorative terminal-style header -->
+              <div class="flex items-center gap-2 mb-6 pb-4" style="border-bottom: 1px solid var(--color-surface-border);">
+                <span class="w-3 h-3 rounded-full" style="background: #FF5F56;" aria-hidden="true"></span>
+                <span class="w-3 h-3 rounded-full" style="background: #FFBD2E;" aria-hidden="true"></span>
+                <span class="w-3 h-3 rounded-full" style="background: #27C93F;" aria-hidden="true"></span>
+                <span class="ml-3 text-xs font-mono" style="color: var(--color-text-muted);">workflow.json</span>
+              </div>
+              <!-- Fake workflow lines -->
+              <div class="space-y-3 font-mono text-xs" aria-label="Ilustracija automatiziranog workflowa">
+                <div style="color: var(--color-accent);">&#x2B22; Trigger: Novi upit primljen</div>
+                <div class="pl-4" style="color: var(--color-text-muted);">&#x2192; Čitanje podataka iz CRM-a</div>
+                <div class="pl-4" style="color: var(--color-text-muted);">&#x2192; AI analiza upita</div>
+                <div class="pl-4" style="color: var(--color-accent); opacity: 0.7;">&#x2192; Prioritizacija: <span style="color: #00D4AA;">VISOK</span></div>
+                <div class="pl-4" style="color: var(--color-text-muted);">&#x2192; Slanje obavijesti prodajnom timu</div>
+                <div class="pl-4" style="color: var(--color-text-muted);">&#x2192; Automatski odgovor klijentu</div>
+                <div class="pl-4" style="color: var(--color-text-muted);">&#x2192; Kreiranje zadatka u Asana</div>
+                <div class="mt-4 pt-4" style="border-top: 1px solid var(--color-surface-border); color: var(--color-accent);">
+                  &#x2713; Workflow izvršen: <span style="color: var(--color-text-secondary);">1.4s</span>
+                </div>
+                <div class="text-xs" style="color: var(--color-text-muted);">Ušteđeno ručnog rada: <span style="color: var(--color-text-secondary);">~12 min/upitu</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         O NAMA — ABOUT
+         ============================================================ -->
+    <section id="o-nama" class="about-section py-24 lg:py-32" aria-labelledby="o-nama-heading">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section header -->
+        <div class="mb-16">
+          <p class="section-label reveal">O nama</p>
+          <h2 id="o-nama-heading" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold reveal reveal-delay-1" style="font-family: 'Syne', sans-serif; letter-spacing: -0.02em; max-width: 560px; line-height: 1.1;">
+            Automatizacija s razumijevanjem konteksta
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+          <!-- Text content -->
+          <div class="space-y-6 reveal">
+            <p class="text-base lg:text-lg leading-relaxed" style="color: var(--color-text-secondary);">
+              Kontekst.hr je specijalizirana agencija za poslovne automatizacije i AI rješenja. Vjerujemo da svaka tvrtka — bez obzira na veličinu — zaslužuje pristup tehnologiji koja joj oduzima teret ponavljajućih zadataka i omogućuje fokus na ono što je zaista važno.
+            </p>
+            <p class="text-base leading-relaxed" style="color: var(--color-text-secondary);">
+              Naš pristup uvijek počinje s razumijevanjem vašeg poslovanja — ne s tehnologijom. Tek kad razumijemo vaše procese, biramo alate. Najčešće to bude n8n, ali ponekad je to prilagođena AI aplikacija ili kombinacija obojeg.
+            </p>
+
+            <!-- Quote -->
+            <div class="about-quote mt-8">
+              <p class="text-base leading-relaxed" style="color: var(--color-text-secondary);">
+                "Automatizacija nije cilj — cilj je vaše slobodno vrijeme i rast. Automatizacija je samo put do tamo."
+              </p>
+            </div>
+          </div>
+
+          <!-- Highlight cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <div class="about-highlight-card reveal">
+              <div class="about-highlight-icon" aria-hidden="true">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold mb-2" style="font-family: 'Syne', sans-serif; color: var(--color-text-primary);">Prilagođeno vama</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-muted);">Nema gotovih rješenja. Svaki workflow gradimo za specifične potrebe vaše tvrtke.</p>
+            </div>
+
+            <div class="about-highlight-card reveal reveal-delay-1">
+              <div class="about-highlight-icon" aria-hidden="true">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold mb-2" style="font-family: 'Syne', sans-serif; color: var(--color-text-primary);">Brza implementacija</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-muted);">Od ideje do produkcije u tjednima, ne mjesecima. Vidite rezultate odmah.</p>
+            </div>
+
+            <div class="about-highlight-card reveal reveal-delay-2">
+              <div class="about-highlight-icon" aria-hidden="true">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold mb-2" style="font-family: 'Syne', sans-serif; color: var(--color-text-primary);">Sigurnost i pouzdanost</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-muted);">Vaši podaci ostaju vaši. Koristimo sigurne, provjerene tehnologije s dugim track rekordom.</p>
+            </div>
+
+            <div class="about-highlight-card reveal reveal-delay-3">
+              <div class="about-highlight-icon" aria-hidden="true">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-sm font-semibold mb-2" style="font-family: 'Syne', sans-serif; color: var(--color-text-primary);">Dugoročni partner</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--color-text-muted);">Nismo dobavljači — postajemo dio vašeg tima. Rastemo i prilagođavamo se s vama.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         KONTAKT — CONTACT
+         ============================================================ -->
+    <section id="kontakt" class="contact-section py-24 lg:py-32" aria-labelledby="kontakt-heading">
+      <div class="contact-glow" aria-hidden="true"></div>
+
+      <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="contact-card reveal">
+
+          <!-- Icon -->
+          <div class="flex justify-center mb-8" aria-hidden="true">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background: var(--color-accent-subtle); border: 1px solid rgba(0,212,170,0.2);">
+              <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="color: var(--color-accent);">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+              </svg>
+            </div>
+          </div>
+
+          <p class="section-label justify-center">Kontakt</p>
+
+          <h2 id="kontakt-heading" class="font-display text-3xl sm:text-4xl font-bold mt-3 mb-4" style="font-family: 'Syne', sans-serif; letter-spacing: -0.02em;">
+            Pokrenimo razgovor
+          </h2>
+
+          <p class="text-base lg:text-lg leading-relaxed mb-10 mx-auto" style="color: var(--color-text-secondary); max-width: 420px;">
+            Imate pitanje, ideju ili konkretan projekt? Javite nam se — bez obveza. Odgovorimo unutar jednog radnog dana.
+          </p>
+
+          <!-- Email link -->
+          <a
+            href="mailto:info@kontekst.hr"
+            class="contact-email-link"
+            aria-label="Pošaljite email na info@kontekst.hr"
+          >
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+            </svg>
+            info@kontekst.hr
+          </a>
+
+          <!-- Reassurance note -->
+          <p class="mt-6 text-sm" style="color: var(--color-text-muted);">
+            Bez automatiziranih odgovora. Čovjek čita i odgovara na svaki upit.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="site-footer py-10" role="contentinfo">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+        <!-- Logo + copyright -->
+        <div class="flex flex-col items-center md:items-start gap-2">
+          <img src="logo-light.svg" alt="Kontekst.hr logotip" class="h-6 w-auto opacity-60">
+          <p class="text-xs" style="color: var(--color-text-muted);">&copy; <span id="footer-year"></span> Kontekst.hr. Sva prava pridržana.</p>
+        </div>
+
+        <!-- Footer nav -->
+        <nav aria-label="Footer navigacija">
+          <ul class="flex flex-wrap gap-6 justify-center md:justify-end" role="list">
+            <li><a href="#usluge" class="footer-link">Usluge</a></li>
+            <li><a href="#kako-radimo" class="footer-link">Kako radimo</a></li>
+            <li><a href="#o-nama" class="footer-link">O nama</a></li>
+            <li>
+              <a href="mailto:info@kontekst.hr" class="footer-link flex items-center gap-1.5">
+                <span class="footer-accent-dot" aria-hidden="true"></span>
+                info@kontekst.hr
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom JS -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Scroll reveal observer -->
+  <script>
+    (function () {
+      var elements = document.querySelectorAll('.reveal');
+      if (!elements.length) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      elements.forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>

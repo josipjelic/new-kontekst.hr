@@ -13,9 +13,7 @@ _(nothing in progress)_
 
 ## Up Next (prioritized)
 
-- [ ] #001 — HTML boilerplate, Tailwind setup, i navigacijski header [area: frontend] → [.tasks/001-html-boilerplate-and-nav.md](.tasks/001-html-boilerplate-and-nav.md)
-- [ ] #002 — Hero sekcija s futurističkim dizajnom i CTA [area: frontend] → [.tasks/002-hero-section.md](.tasks/002-hero-section.md)
-- [ ] #003 — Sekcija Usluge — 3 kartice usluga [area: frontend] → [.tasks/003-usluge-section.md](.tasks/003-usluge-section.md)
+_(nothing up next — see Backlog)_
 
 ---
 
@@ -31,6 +29,9 @@ _(nothing in progress)_
 
 ## Completed
 
+- [x] #003 — Sekcija Usluge — 3 kartice usluga [area: frontend] → [.tasks/003-usluge-section.md](.tasks/003-usluge-section.md)
+- [x] #002 — Hero sekcija s futurističkim dizajnom i CTA [area: frontend] → [.tasks/002-hero-section.md](.tasks/002-hero-section.md)
+- [x] #001 — HTML boilerplate, Tailwind setup, i navigacijski header [area: frontend] → [.tasks/001-html-boilerplate-and-nav.md](.tasks/001-html-boilerplate-and-nav.md)
 - [x] #000 — Initial project setup and template configuration → [.tasks/000-initial-project-setup.md](.tasks/000-initial-project-setup.md)
 
 ---

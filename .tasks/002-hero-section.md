@@ -1,14 +1,14 @@
 ---
 id: "002"
 title: "Hero sekcija s futurističkim dizajnom i CTA"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "high"
 created_at: "2026-03-25"
 due_date: null
-started_at: null
-completed_at: null
+started_at: "2026-03-25"
+completed_at: "2026-03-25"
 prd_refs: ["FR-010", "FR-011", "FR-012", "FR-013"]
 blocks: []
 blocked_by: ["001"]
@@ -22,14 +22,14 @@ Sadržaj: naziv tvrtke, tagline "Poslovne automatizacije", kratka value proposit
 
 ## Acceptance Criteria
 
-- [ ] `<h1>` sadrži "Kontekst.hr" ili ekvivalentni brand headline
-- [ ] Tagline "Poslovne automatizacije" jasno vidljiv
-- [ ] Value proposition (1–2 rečenice) na hrvatskom, fokusirana na benefit za klijenta
-- [ ] CTA gumb s tekstom poput "Razgovarajmo" ili "Kontaktirajte nas" koji scrolla na #kontakt
-- [ ] Futuristički vizualni stil: tamna pozadina, geometrijski/grid pattern ili CSS efekti
-- [ ] Sekcija je full-height ili najmanje 80vh
-- [ ] Responzivna na svim breakpointima (320px – 1920px)
-- [ ] Tipografija je čitljiva s dovoljnim kontrastom (WCAG 4.5:1)
+- [x] `<h1>` sadrži "Kontekst.hr" ili ekvivalentni brand headline
+- [x] Tagline "Poslovne automatizacije" jasno vidljiv
+- [x] Value proposition (1–2 rečenice) na hrvatskom, fokusirana na benefit za klijenta
+- [x] CTA gumb s tekstom poput "Razgovarajmo" ili "Kontaktirajte nas" koji scrolla na #kontakt
+- [x] Futuristički vizualni stil: tamna pozadina, geometrijski/grid pattern ili CSS efekti
+- [x] Sekcija je full-height ili najmanje 80vh
+- [x] Responzivna na svim breakpointima (320px – 1920px)
+- [x] Tipografija je čitljiva s dovoljnim kontrastom (WCAG 4.5:1)
 
 ## Technical Notes
 
@@ -44,3 +44,4 @@ Sadržaj: naziv tvrtke, tagline "Poslovne automatizacije", kratka value proposit
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
+| 2026-03-25 | @frontend-developer | Implemented: grid background, radial glow, h1, tagline, value proposition, CTA, fadeInUp animation |
