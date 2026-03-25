@@ -1,14 +1,14 @@
 ---
 id: "005"
 title: "Sekcija O nama"
-status: "todo"
+status: "done"
 area: "frontend"
 agent: "@frontend-developer"
 priority: "normal"
 created_at: "2026-03-25"
 due_date: null
 started_at: null
-completed_at: null
+completed_at: "2026-03-25"
 prd_refs: ["FR-040", "FR-041", "FR-042"]
 blocks: []
 blocked_by: ["001"]
@@ -42,3 +42,4 @@ Kontekst.hr je tvrtka koja kombinira tehničku ekspertizu (n8n, AI) s razumijeva
 | Date | Agent / Human | Event |
 |------|--------------|-------|
 | 2026-03-25 | human | Task created |
+| 2026-03-25 | @frontend-developer | Implemented: mission copy, 4 differentiator cards, stats row (20+/50+/1000+), quote block; follows design system tokens and scroll-reveal pattern |
