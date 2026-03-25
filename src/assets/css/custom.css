@@ -196,13 +196,15 @@ body.menu-open {
   -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
 }
 
-/* Subtle pointer parallax on grid (fine pointer + motion OK only) */
-@media (prefers-reduced-motion: no-preference) and (pointer: fine) and (hover: hover) {
+/* Pointer parallax on grid — JS sets --pointer-*; only gate on reduced motion (not hover/pointer primary) */
+@media (prefers-reduced-motion: no-preference) {
   .hero-dot-grid-parallax {
-    transform: translate(
-      calc(var(--pointer-nx, 0) * 10px),
-      calc(var(--pointer-ny, 0) * 8px)
+    transform: translate3d(
+      calc(var(--pointer-nx, 0) * 20px),
+      calc(var(--pointer-ny, 0) * 16px),
+      0
     );
+    will-change: transform;
   }
 }
 
@@ -213,14 +215,14 @@ body.menu-open {
   z-index: 1;
   pointer-events: none;
   background: radial-gradient(
-    ellipse 95% 85% at calc(50% + var(--pointer-nx, 0) * 5%) calc(42% + var(--pointer-ny, 0) * 4%),
-    rgba(0, 212, 170, 0.05) 0%,
-    transparent 58%
+    ellipse 100% 90% at calc(50% + var(--pointer-nx, 0) * 9%) calc(42% + var(--pointer-ny, 0) * 7%),
+    rgba(0, 212, 170, 0.09) 0%,
+    transparent 55%
   );
-  opacity: 0.85;
+  opacity: 0.95;
 }
 
-@media (prefers-reduced-motion: reduce), (pointer: coarse), (hover: none) {
+@media (prefers-reduced-motion: reduce) {
   .hero-spotlight {
     background: radial-gradient(
       ellipse 95% 85% at 50% 42%,
@@ -258,26 +260,32 @@ body.menu-open {
   right: 15%;
 }
 
-@media (prefers-reduced-motion: no-preference) and (pointer: fine) and (hover: hover) {
+@media (prefers-reduced-motion: no-preference) {
   .hero-orb-wrap-1 {
-    transform: translate(
-      calc(var(--pointer-nx, 0) * 24px),
-      calc(var(--pointer-ny, 0) * 18px)
+    transform: translate3d(
+      calc(var(--pointer-nx, 0) * 42px),
+      calc(var(--pointer-ny, 0) * 32px),
+      0
     );
+    will-change: transform;
   }
 
   .hero-orb-wrap-2 {
-    transform: translate(
-      calc(var(--pointer-nx, 0) * -14px),
-      calc(var(--pointer-ny, 0) * -12px)
+    transform: translate3d(
+      calc(var(--pointer-nx, 0) * -26px),
+      calc(var(--pointer-ny, 0) * -22px),
+      0
     );
+    will-change: transform;
   }
 
   .hero-orb-wrap-3 {
-    transform: translate(
-      calc(var(--pointer-nx, 0) * 16px),
-      calc(var(--pointer-ny, 0) * 22px)
+    transform: translate3d(
+      calc(var(--pointer-nx, 0) * 28px),
+      calc(var(--pointer-ny, 0) * 36px),
+      0
     );
+    will-change: transform;
   }
 }
 
@@ -584,7 +592,7 @@ body.menu-open {
 .service-card {
   position: relative;
   border-radius: 16px;
-  padding: 32px;
+  padding: 0;
   background: var(--color-surface-overlay);
   border: 1px solid var(--color-surface-border);
   transition:
@@ -592,6 +600,13 @@ body.menu-open {
     transform var(--duration-mid) var(--ease-out-expo),
     box-shadow var(--duration-mid) var(--ease-in-out);
   overflow: hidden;
+}
+
+/* Scroll reveal lives here so .reveal.visible transform never overrides article hover tilt */
+.service-card-reveal {
+  position: relative;
+  z-index: 1;
+  padding: 32px;
 }
 
 /* Gradient border via pseudo-element — glass effect */
@@ -641,13 +656,12 @@ body.menu-open {
     0 0 0 1px rgba(0, 212, 170, 0.1);
 }
 
-/* Transform on article beats .reveal.visible (two classes) so lift works after scroll reveal */
 article.service-card:hover {
   transform: translateY(-4px);
 }
 
-/* Hover tilt + gradient hotspot (fine pointer; --tilt-* from useServiceCardTilt.js) */
-@media (prefers-reduced-motion: no-preference) and (pointer: fine) and (hover: hover) {
+/* Hover tilt + gradient hotspot (--tilt-* from useServiceCardTilt.js; JS gates fine pointer) */
+@media (prefers-reduced-motion: no-preference) {
   article.service-card:hover {
     transform: translateY(-4px) perspective(900px)
       rotateX(clamp(-3deg, calc(var(--tilt-x, 0) * 1deg), 3deg))
@@ -1070,7 +1084,7 @@ article.service-card:hover {
     padding: 14px 20px;
   }
 
-  .service-card {
+  .service-card-reveal {
     padding: 24px;
   }
 

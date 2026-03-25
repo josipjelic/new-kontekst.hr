@@ -3,7 +3,10 @@ import { useEffect } from 'react';
 /**
  * Normalized pointer in [-1, 1] on :root as --pointer-nx / --pointer-ny.
  * Updates via one rAF loop + lerp; no React state per frame.
- * Off when prefers-reduced-motion or when (pointer: coarse) or (hover: none).
+ *
+ * Enabled when: not prefers-reduced-motion AND (any-pointer: fine) — so a mouse/trackpad
+ * exists even if the *primary* pointer is coarse (common on touchscreen laptops).
+ * We intentionally do not require (hover: hover); that blocked many desktops.
  */
 const LERP = 0.11;
 const IDLE_MS = 1600;
@@ -18,14 +21,13 @@ function neutralPointerVars(root) {
   setPointerVars(root, 0, 0);
 }
 
-function pointerMotionAllowed() {
+export function pointerMotionAllowed() {
   if (typeof window === 'undefined') {
     return false;
   }
   return (
     !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
-    window.matchMedia('(pointer: fine)').matches &&
-    window.matchMedia('(hover: hover)').matches
+    window.matchMedia('(any-pointer: fine)').matches
   );
 }
 
@@ -33,19 +35,22 @@ export function usePointerMotion() {
   useEffect(() => {
     const root = document.documentElement;
     const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const mqFine = window.matchMedia('(pointer: fine)');
-    const mqHover = window.matchMedia('(hover: hover)');
+    const mqAnyFine = window.matchMedia('(any-pointer: fine)');
 
     let remove = () => {};
 
     function attach() {
       remove();
       neutralPointerVars(root);
+      root.removeAttribute('data-pointer-motion');
 
       if (!pointerMotionAllowed()) {
+        root.setAttribute('data-pointer-motion', 'off');
         remove = () => {};
         return;
       }
+
+      root.setAttribute('data-pointer-motion', 'on');
 
       const target = { x: 0, y: 0 };
       const smoothed = { x: 0, y: 0 };
@@ -101,16 +106,13 @@ export function usePointerMotion() {
 
     attach();
     mqReduce.addEventListener('change', onMq);
-    mqFine.addEventListener('change', onMq);
-    mqHover.addEventListener('change', onMq);
+    mqAnyFine.addEventListener('change', onMq);
 
     return () => {
       mqReduce.removeEventListener('change', onMq);
-      mqFine.removeEventListener('change', onMq);
-      mqHover.removeEventListener('change', onMq);
+      mqAnyFine.removeEventListener('change', onMq);
+      root.removeAttribute('data-pointer-motion');
       remove();
     };
   }, []);
 }
-
-export { pointerMotionAllowed };

@@ -17,15 +17,12 @@ export function useServiceCardTilt() {
     };
     sync();
     const mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const mqFine = window.matchMedia('(pointer: fine)');
-    const mqHover = window.matchMedia('(hover: hover)');
+    const mqAnyFine = window.matchMedia('(any-pointer: fine)');
     mqReduce.addEventListener('change', sync);
-    mqFine.addEventListener('change', sync);
-    mqHover.addEventListener('change', sync);
+    mqAnyFine.addEventListener('change', sync);
     return () => {
       mqReduce.removeEventListener('change', sync);
-      mqFine.removeEventListener('change', sync);
-      mqHover.removeEventListener('change', sync);
+      mqAnyFine.removeEventListener('change', sync);
     };
   }, []);
 

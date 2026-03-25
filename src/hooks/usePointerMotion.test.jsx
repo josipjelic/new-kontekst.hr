@@ -28,30 +28,27 @@ describe('usePointerMotion', () => {
   it('does not attach pointermove when prefers-reduced-motion is reduce', () => {
     window.matchMedia = stubMatchMedia({
       '(prefers-reduced-motion: reduce)': true,
-      '(pointer: fine)': true,
-      '(hover: hover)': true,
+      '(any-pointer: fine)': true,
     });
     const add = vi.spyOn(document, 'addEventListener');
     render(<MotionHost />);
     expect(add).not.toHaveBeenCalledWith('pointermove', expect.any(Function), { passive: true });
   });
 
-  it('does not attach pointermove when pointer is coarse', () => {
+  it('does not attach pointermove when no fine pointer is available', () => {
     window.matchMedia = stubMatchMedia({
       '(prefers-reduced-motion: reduce)': false,
-      '(pointer: fine)': false,
-      '(hover: hover)': true,
+      '(any-pointer: fine)': false,
     });
     const add = vi.spyOn(document, 'addEventListener');
     render(<MotionHost />);
     expect(add).not.toHaveBeenCalledWith('pointermove', expect.any(Function), { passive: true });
   });
 
-  it('attaches pointermove when fine pointer, hover, and motion allowed', () => {
+  it('attaches pointermove when any fine pointer exists and motion allowed', () => {
     window.matchMedia = stubMatchMedia({
       '(prefers-reduced-motion: reduce)': false,
-      '(pointer: fine)': true,
-      '(hover: hover)': true,
+      '(any-pointer: fine)': true,
     });
     const add = vi.spyOn(document, 'addEventListener');
     render(<MotionHost />);

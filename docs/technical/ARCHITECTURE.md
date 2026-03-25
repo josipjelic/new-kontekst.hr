@@ -91,7 +91,7 @@ client/
 
 **Data fetching pattern**: Minimal — contact form POSTs to the backend API. No server-state caching (no React Query for v1).
 
-**Pointer-driven motion**: `usePointerMotion` (`src/hooks/usePointerMotion.js`) mounted in `App.jsx` — `pointermove` → refs → one `requestAnimationFrame` loop with lerp; writes `--pointer-nx` / `--pointer-ny` on `:root`. Hero uses parallax wrappers + `.hero-spotlight`; the services section (`Services.jsx`) uses `useServiceCardTilt` for hover-scoped `--tilt-*` on `article.service-card`. Disabled for `prefers-reduced-motion`, coarse pointer, or `hover: none`. Spec and backlog for P3–P6: [`docs/technical/POINTER_MOTION_HANDOVER.md`](POINTER_MOTION_HANDOVER.md).
+**Pointer-driven motion**: `usePointerMotion` (`src/hooks/usePointerMotion.js`) mounted in `App.jsx` — `pointermove` → refs → one `requestAnimationFrame` loop with lerp; writes `--pointer-nx` / `--pointer-ny` on `:root` and `data-pointer-motion="on"|"off"` on `<html>`. Hero uses parallax wrappers + `.hero-spotlight`; services (`Services.jsx`) use `useServiceCardTilt` on `article.service-card`. Enabled when **not** `prefers-reduced-motion: reduce` and **`(any-pointer: fine)`** (so a mouse/trackpad counts even if the primary pointer is coarse, e.g. touchscreen laptops). Pure touch devices with no fine pointer get no listeners. Spec: [`docs/technical/POINTER_MOTION_HANDOVER.md`](POINTER_MOTION_HANDOVER.md).
 
 **Locale layout (hr / en)**: Croatian UI lives under `src/components/hr/` (Nav, Footer, Hero, Services, HowWeWork, AboutUs, Contact) and is composed by `src/pages/hr/Home.jsx`. English mirrors the same filenames under `src/components/en/` and `src/pages/en/Home.jsx` (Helmet + `lang="en"` meta on the EN page). Shared hooks and assets stay outside these folders. `App.jsx` wires `react-router-dom` routes `/` and `/en` to the respective shells.
 
@@ -327,6 +327,8 @@ Legacy reference: original patterns lived in `index.html` + `assets/css/custom.c
 **Scroll reveal:**
 - Pattern: `.reveal` class (opacity 0, translateY 24px) + IntersectionObserver adds `.visible` (opacity 1, translateY 0)
 - Threshold: 12% element visibility + 40px rootMargin bottom offset
+- After paint, a double-`requestAnimationFrame` flush plus `window` `load` re-checks elements already in view (covers browser scroll restoration on refresh mid-page)
+- Hook re-runs when `location.pathname` changes so locale switches (`/` ↔ `/en`) attach observers to the new page’s `.reveal` nodes
 - Staggered children use `.reveal-delay-1/2/3` (100/200/300ms delay)
 - Fully disabled under `prefers-reduced-motion` — elements appear immediately without animation
 

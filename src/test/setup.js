@@ -28,6 +28,9 @@ globalThis.IntersectionObserver = class IntersectionObserver {
   observe() {}
   unobserve() {}
   disconnect() {}
+  takeRecords() {
+    return [];
+  }
 };
 
 afterEach(() => {
