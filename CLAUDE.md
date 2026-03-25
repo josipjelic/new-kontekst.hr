@@ -59,8 +59,8 @@ These apply to all agents at all times. No exceptions without explicit human ins
 
 ```
 new-kontekst.hr/
-  index.html              # Vite HTML entry
   src/
+    index.html            # Vite HTML entry (Vite root = src)
     components/           # layout/, sections/, ui/
     pages/, hooks/, assets/
   backend/src/            # Express app (routes, middleware)

@@ -12,7 +12,8 @@ USER node
 EXPOSE 3000
 ENV NODE_ENV=production
 
+# Literal port: $$ in HEALTHCHECK is not collapsed like in RUN, breaking ${PORT:-3000} at runtime.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD sh -c 'wget -qO- "http://127.0.0.1:$${PORT:-3000}/health" > /dev/null || exit 1'
+  CMD wget -qO- http://127.0.0.1:3000/health > /dev/null || exit 1
 
 CMD ["node", "src/server.js"]

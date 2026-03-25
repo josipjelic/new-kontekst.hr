@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { LOGO_LIGHT_URL } from '../../constants/assets.js';
 
 const SCROLL_THRESHOLD_PX = 50;
@@ -43,41 +44,41 @@ export default function Nav() {
       id="header"
       className={`fixed top-0 left-0 right-0 z-50${scrolled ? ' scrolled' : ''}`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Glavna navigacija">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#" className="flex-shrink-0" aria-label="Kontekst.hr — na vrh stranice">
-            <img src={LOGO_LIGHT_URL} alt="Kontekst.hr logotip" className="h-7 lg:h-8 w-auto" />
+          <a href="#hero" className="flex-shrink-0" aria-label="Kontekst.hr — top of page">
+            <img src={LOGO_LIGHT_URL} alt="Kontekst.hr logo" className="h-7 lg:h-8 w-auto" />
           </a>
 
           <ul className="hidden md:flex items-center gap-8" role="list">
             <li>
               <a href="#usluge" className="nav-link text-sm font-medium">
-                Usluge
+                Services
               </a>
             </li>
             <li>
               <a href="#kako-radimo" className="nav-link text-sm font-medium">
-                Kako radimo
+                How We Work
               </a>
             </li>
             <li>
               <a href="#o-nama" className="nav-link text-sm font-medium">
-                O nama
+                About
               </a>
             </li>
             <li>
-              <a
-                href="/en/"
+              <Link
+                to="/"
                 className="text-xs font-medium transition-opacity opacity-60 hover:opacity-100"
                 style={{ color: 'var(--color-text-secondary)' }}
-                aria-label="Switch to English version"
+                aria-label="Switch to Croatian version"
               >
-                EN
-              </a>
+                HR
+              </Link>
             </li>
             <li>
               <a href="#kontakt" className="nav-cta">
-                Razgovarajmo
+                Let&apos;s Talk
               </a>
             </li>
           </ul>
@@ -86,12 +87,12 @@ export default function Nav() {
             type="button"
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200"
             style={{ color: 'var(--color-text-secondary)' }}
-            aria-controls="mobile-menu"
+            aria-controls="mobile-menu-en"
             aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? 'Zatvori navigacijski izbornik' : 'Otvori navigacijski izbornik'}
+            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             onClick={() => setMobileOpen((o) => !o)}
           >
-            <span className="sr-only">{mobileOpen ? 'Zatvori izbornik' : 'Otvori izbornik'}</span>
+            <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
             <svg
               className={`h-6 w-6${mobileOpen ? ' hidden' : ' block'}`}
               fill="none"
@@ -116,10 +117,10 @@ export default function Nav() {
         </div>
 
         <div
-          id="mobile-menu"
+          id="mobile-menu-en"
           className={`${mobileOpen ? '' : 'hidden '}md:hidden mobile-menu-panel`}
           role="navigation"
-          aria-label="Mobilna navigacija"
+          aria-label="Mobile navigation"
         >
           <ul className="py-4 space-y-1 px-2" role="list">
             <li>
@@ -128,7 +129,7 @@ export default function Nav() {
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
                 onClick={closeMobileMenu}
               >
-                Usluge
+                Services
               </a>
             </li>
             <li>
@@ -137,7 +138,7 @@ export default function Nav() {
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
                 onClick={closeMobileMenu}
               >
-                Kako radimo
+                How We Work
               </a>
             </li>
             <li>
@@ -146,18 +147,18 @@ export default function Nav() {
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
                 onClick={closeMobileMenu}
               >
-                O nama
+                About
               </a>
             </li>
             <li>
-              <a
-                href="/en/"
+              <Link
+                to="/"
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg opacity-60"
-                aria-label="Switch to English version"
+                aria-label="Switch to Croatian version"
                 onClick={closeMobileMenu}
               >
-                EN — English
-              </a>
+                HR — Hrvatski
+              </Link>
             </li>
             <li>
               <a
@@ -166,7 +167,7 @@ export default function Nav() {
                 style={{ background: 'var(--color-accent)', color: '#07090D' }}
                 onClick={closeMobileMenu}
               >
-                Razgovarajmo
+                Let&apos;s Talk
               </a>
             </li>
           </ul>

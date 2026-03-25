@@ -77,7 +77,7 @@ cd backend && npm test   # backend (Vitest)
 
 ```
 new-kontekst.hr/
-├── src/                    # React app (Vite entry: index.html)
+├── src/                    # React app + Vite entry (`src/index.html`)
 ├── backend/                # Express API
 ├── public/                 # Static assets served by Vite
 ├── docs/                   # Technical + user documentation (English)

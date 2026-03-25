@@ -63,7 +63,7 @@ React SPA built with Vite. Single-page marketing site — no client-side router 
 
 **State management**: Minimal — local React state for UI (mobile nav toggle, form state). No global state library.
 
-**Implemented components (phase 2)**: `layout/Nav.jsx`, `layout/Footer.jsx`, `sections/Hero.jsx`, `sections/Usluge.jsx`, `sections/KakoRadimo.jsx`, `sections/ONama.jsx`, `sections/Kontakt.jsx` (form → `POST ${VITE_API_URL}/api/contact`, default `http://localhost:3000`). App shell: `Nav` → `<main>` → sections (`Home`) → `Footer`. Scroll reveal: `hooks/useScrollReveal.js` (IntersectionObserver + `prefers-reduced-motion`) toggles `.visible` on `.reveal`. SEO meta + JSON-LD in root `index.html`. Frontend tests: `npm test` (Vitest, `src/**/*.test.jsx`).
+**Implemented components (phase 2)**: `layout/Nav.jsx`, `layout/Footer.jsx`, `sections/Hero.jsx`, `sections/Usluge.jsx`, `sections/KakoRadimo.jsx`, `sections/ONama.jsx`, `sections/Kontakt.jsx` (form → `POST ${VITE_API_URL}/api/contact`, default `http://localhost:3000`). App shell: `Nav` → `<main>` → sections (`Home`) → `Footer`. Scroll reveal: `hooks/useScrollReveal.js` (IntersectionObserver + `prefers-reduced-motion`) toggles `.visible` on `.reveal`. SEO meta + JSON-LD in `src/index.html` (Vite root). Frontend tests: `npm test` (Vitest, `src/**/*.test.jsx`).
 
 **Component structure**:
 ```
@@ -78,12 +78,12 @@ client/
       images/       # Images, icons
     App.tsx         # Root component, section composition
     main.tsx        # Entry point
-  index.html        # Vite HTML entry
+  index.html        # Vite HTML entry (under src/ in this repo)
   vite.config.ts
   tailwind.config.ts
 ```
 
-**Current repo layout (phase 1a, #009)**: Frontend is Vite + React at the **repository root** (`index.html` as Vite entry, `src/` for source). Production build outputs to `dist/` (`npm run build`). Legacy marketing HTML may remain in `index.html.bak` during migration. (The diagram above using `client/` describes a possible multi-container layout after Docker/CI hardening.)
+**Current repo layout (phase 1a, #009)**: Frontend is Vite + React with **`vite.config.js` `root: src`** — Vite entry is **`src/index.html`**, source under `src/`; repo **`public/`** is still the static asset dir (see `publicDir` in Vite config). Production build outputs to **`dist/`** at the repository root (`npm run build`). (The diagram above using `client/` describes a possible multi-container layout after Docker/CI hardening.)
 
 **Tailwind build (#010)**: `tailwind.config.js` at repo root, `postcss.config.js` with `tailwindcss` + `autoprefixer`. Entry CSS: `src/index.css` (`@tailwind` directives + small `@layer base` tweaks). Component styling from the former `assets/css/custom.css` lives in **`src/assets/css/custom.css`**, imported from `src/main.jsx` after Tailwind layers (order: `index.css` → `custom.css`).
 
@@ -92,6 +92,8 @@ client/
 **Data fetching pattern**: Minimal — contact form POSTs to the backend API. No server-state caching (no React Query for v1).
 
 **Pointer-driven motion**: `usePointerMotion` (`src/hooks/usePointerMotion.js`) mounted in `App.jsx` — `pointermove` → refs → one `requestAnimationFrame` loop with lerp; writes `--pointer-nx` / `--pointer-ny` on `:root`. Hero uses parallax wrappers + `.hero-spotlight`; Usluge uses `useServiceCardTilt` for hover-scoped `--tilt-*` on `article.service-card`. Disabled for `prefers-reduced-motion`, coarse pointer, or `hover: none`. Spec and backlog for P3–P6: [`docs/technical/POINTER_MOTION_HANDOVER.md`](POINTER_MOTION_HANDOVER.md).
+
+**Locale layout (hr / en)**: Croatian UI lives under `src/components/hr/` (Nav, Footer, Hero, Usluge, KakoRadimo, ONama, Kontakt) and is composed by `src/pages/hr/Home.jsx`. English mirrors the same filenames under `src/components/en/` and `src/pages/en/Home.jsx` (Helmet + `lang="en"` meta on the EN page). Shared hooks and assets stay outside these folders. `App.jsx` wires `react-router-dom` routes `/` and `/en` to the respective shells.
 
 ---
 
@@ -150,7 +152,7 @@ nginx.conf                  # SPA try_files, gzip, proxy /api and /health → ba
 - **Run (dev)**: from repo root: `docker compose up`. Services: `backend` (Express + nodemon, port **3000**) and `frontend` (Vite with `--host 0.0.0.0`, port **5173**). `depends_on`: frontend waits for backend.
 - **Volumes**: source is bind-mounted from the host; **`node_modules`** for both services use **anonymous volumes** so the host does not overwrite them.
 - **Variables**: `env_file` may point to an optional root `.env` (copy from `.env.example`). Important: **`API_PROXY_TARGET=http://backend:3000`** so the Vite dev proxy inside the container targets the backend service by name; **`CORS_ORIGIN=http://localhost:5173`** so the browser on the host may call the API when using Vite outside nginx.
-- **Production simulation**: `docker compose -f docker-compose.prod.yml up --build` — static files via nginx on **80**, API on **3000**; nginx forwards `/api` to `backend`. For `http://localhost` testing, set e.g. **`CORS_ORIGIN=http://localhost`**.
+- **Production simulation**: `docker compose -f docker-compose.prod.yml up --build` — static files via nginx on **80**, API on **3000**; nginx forwards `/api` to `backend`. For `http://localhost` testing, set e.g. **`CORS_ORIGIN=http://localhost`**. The frontend service waits until the backend is **healthy**: `backend/Dockerfile` `HEALTHCHECK` must hit the same port the process listens on (**3000** by default); a broken check leaves the nginx container stopped so nothing serves the Vite build on port 80.
 
 ---
 

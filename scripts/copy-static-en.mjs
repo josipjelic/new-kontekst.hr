@@ -1,15 +1,6 @@
-import { copyFile, mkdir } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const scriptDir = dirname(fileURLToPath(import.meta.url));
-const root = join(scriptDir, '..');
-const dist = join(root, 'dist');
-
-await mkdir(join(dist, 'en'), { recursive: true });
-await mkdir(join(dist, 'assets', 'js'), { recursive: true });
-await mkdir(join(dist, 'assets', 'css'), { recursive: true });
-
-await copyFile(join(root, 'en', 'index.html'), join(dist, 'en', 'index.html'));
-await copyFile(join(root, 'assets', 'js', 'main.js'), join(dist, 'assets', 'js', 'main.js'));
-await copyFile(join(root, 'assets', 'css', 'custom.css'), join(dist, 'assets', 'css', 'custom.css'));
+/**
+ * Post-build hook: previously copied legacy static `en/index.html` and root `assets/*`
+ * into `dist/`. The site is now a single Vite SPA; `/` and `/en` are handled by
+ * react-router. `vite build` already emits the full app under `dist/`.
+ */
+// Intentionally empty — kept so `npm run build` can chain this step without changing CI.
