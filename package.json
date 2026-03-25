@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/copy-static-en.mjs",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src/",
     "test": "vitest run",
