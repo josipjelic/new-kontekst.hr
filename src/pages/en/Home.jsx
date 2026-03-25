@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import Hero from '../../components/en/Hero.jsx';
-import Usluge from '../../components/en/Usluge.jsx';
-import KakoRadimo from '../../components/en/KakoRadimo.jsx';
-import ONama from '../../components/en/ONama.jsx';
-import Kontakt from '../../components/en/Kontakt.jsx';
+import Services from '../../components/en/Services.jsx';
+import HowWeWork from '../../components/en/HowWeWork.jsx';
+import AboutUs from '../../components/en/AboutUs.jsx';
+import Contact from '../../components/en/Contact.jsx';
 
 export default function Home() {
   return (
@@ -19,10 +19,10 @@ export default function Home() {
         <link rel="alternate" hrefLang="en" href="https://kontekst.hr/en/" />
       </Helmet>
       <Hero />
-      <Usluge />
-      <KakoRadimo />
-      <ONama />
-      <Kontakt />
+      <Services />
+      <HowWeWork />
+      <AboutUs />
+      <Contact />
     </>
   );
 }

@@ -57,7 +57,7 @@
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // --- English contact form (en/index.html) — mirrors React Kontakt.jsx + /api/contact ---
+  // --- English contact form (en/index.html) — mirrors React Contact.jsx + /api/contact ---
   const contactForm = document.getElementById('en-contact-form');
   if (contactForm) {
     const nameInput = document.getElementById('en-kontakt-name');

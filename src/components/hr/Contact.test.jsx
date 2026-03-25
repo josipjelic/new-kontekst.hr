@@ -1,22 +1,22 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import Kontakt from './Kontakt.jsx';
+import Contact from './Contact.jsx';
 
-describe('Kontakt', () => {
+describe('Contact', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', vi.fn());
   });
 
   it('renderira sekciju i naslov', () => {
-    const { container } = render(<Kontakt />);
+    const { container } = render(<Contact />);
     expect(container.querySelector('#kontakt')).toBeTruthy();
     expect(screen.getByRole('heading', { name: /Pokrenimo razgovor o automatizaciji/i })).toBeInTheDocument();
   });
 
   it('prazan submit prikazuje validacijske poruke i ne zove fetch', async () => {
     const user = userEvent.setup();
-    render(<Kontakt />);
+    render(<Contact />);
     const form = screen.getByTestId('kontakt-form');
 
     await user.click(within(form).getByRole('button', { name: /Pošalji upit/i }));
@@ -35,7 +35,7 @@ describe('Kontakt', () => {
       json: async () => ({}),
     });
 
-    render(<Kontakt />);
+    render(<Contact />);
     const form = screen.getByTestId('kontakt-form');
 
     await user.type(within(form).getByLabelText(/Ime i prezime/i), 'Ivo Horvat');
@@ -66,7 +66,7 @@ describe('Kontakt', () => {
       json: async () => ({}),
     });
 
-    render(<Kontakt />);
+    render(<Contact />);
     const form = screen.getByTestId('kontakt-form');
 
     await user.type(within(form).getByLabelText(/Ime i prezime/i), 'Ana Anić');

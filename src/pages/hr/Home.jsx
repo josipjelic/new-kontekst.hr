@@ -1,17 +1,17 @@
 import Hero from '../../components/hr/Hero.jsx';
-import Usluge from '../../components/hr/Usluge.jsx';
-import KakoRadimo from '../../components/hr/KakoRadimo.jsx';
-import ONama from '../../components/hr/ONama.jsx';
-import Kontakt from '../../components/hr/Kontakt.jsx';
+import Services from '../../components/hr/Services.jsx';
+import HowWeWork from '../../components/hr/HowWeWork.jsx';
+import AboutUs from '../../components/hr/AboutUs.jsx';
+import Contact from '../../components/hr/Contact.jsx';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Usluge />
-      <KakoRadimo />
-      <ONama />
-      <Kontakt />
+      <Services />
+      <HowWeWork />
+      <AboutUs />
+      <Contact />
     </>
   );
 }

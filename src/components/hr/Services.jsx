@@ -1,23 +1,23 @@
 import { useServiceCardTilt } from '../../hooks/useServiceCardTilt.js';
 
-export default function Usluge() {
+export default function Services() {
   const cardTilt = useServiceCardTilt();
 
   return (
     <section id="usluge" className="services-section py-24 lg:py-32" aria-labelledby="usluge-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 lg:mb-20">
-          <p className="section-label reveal">Services</p>
+          <p className="section-label reveal">Usluge</p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2
               id="usluge-heading"
               className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold reveal reveal-delay-1 max-w-[520px] leading-[1.1] tracking-[-0.02em]"
             >
-              Three ways to accelerate your business
+              Tri načina kako vaše poslovanje ubrzati
             </h2>
             <p className="text-base lg:text-lg reveal reveal-delay-2 max-w-[380px] leading-[1.7] text-[color:var(--color-text-secondary)]">
-              From your first n8n workflow to complex AI applications — we build business automations that scale with
-              your growth.
+              Od prvog n8n workflowa do složenih AI aplikacija — gradimo poslovne automatizacije koje se skaliraju s
+              vašim rastom.
             </p>
           </div>
         </div>
@@ -33,13 +33,17 @@ export default function Usluge() {
                 />
               </svg>
             </div>
-            <h3 className="service-card-title">n8n Workflow Automation</h3>
+            <h3 className="service-card-title">n8n Workflow Automatizacije</h3>
             <p className="service-card-body">
-              Connect all your business tools without writing code. n8n workflows automate tasks 24/7 — CRM,
-              accounting, email, project tools, and hundreds of integrations.
+              Povežite sve svoje poslovne alate bez pisanja koda. n8n workflowovi automatiziraju zadatke 24/7 — CRM,
+              računovodstvo, e-mail, projektni alati i stotine integracija.
             </p>
-            <a href="#kontakt" className="service-card-link" aria-label="Learn more about n8n workflow automation">
-              Learn more
+            <a
+              href="#kontakt"
+              className="service-card-link"
+              aria-label="Saznajte više o n8n workflow automatizacijama za Hrvatsku"
+            >
+              Saznajte više
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -56,13 +60,17 @@ export default function Usluge() {
                 />
               </svg>
             </div>
-            <h3 className="service-card-title">Business Process Automation</h3>
+            <h3 className="service-card-title">Automatizacija poslovnih procesa</h3>
             <p className="service-card-body">
-              We map where your team loses hours on manual work and replace it with smart automations. Fewer errors,
-              faster processes — your people do what truly matters.
+              Mapiramo gdje vaš tim gubi sate na ručni rad i zamjenjujemo to pametnim automatizacama. Manje grešaka, brži
+              procesi, a vaši ljudi rade ono što im je zaista vrijedno.
             </p>
-            <a href="#kontakt" className="service-card-link" aria-label="Learn more about business process automation">
-              Learn more
+            <a
+              href="#kontakt"
+              className="service-card-link"
+              aria-label="Saznajte više o automatizaciji poslovnih procesa u Hrvatskoj"
+            >
+              Saznajte više
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -79,13 +87,17 @@ export default function Usluge() {
                 />
               </svg>
             </div>
-            <h3 className="service-card-title">Custom AI Applications</h3>
+            <h3 className="service-card-title">AI Aplikacije po mjeri</h3>
             <p className="service-card-body">
-              We build AI applications tailored to your processes — customer support chatbots, data analysis tools,
-              decision automation. Real value, not a tech experiment.
+              Gradimo AI aplikacije prilagođene vašim procesima — chatbotovi za korisničku podršku, alati za analizu
+              podataka, automatiziranje odluka. Konkretna korist, ne tehnološki eksperiment.
             </p>
-            <a href="#kontakt" className="service-card-link" aria-label="Learn more about custom AI applications for business">
-              Learn more
+            <a
+              href="#kontakt"
+              className="service-card-link"
+              aria-label="Saznajte više o AI aplikacijama za poslovanje po mjeri"
+            >
+              Saznajte više
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

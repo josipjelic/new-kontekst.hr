@@ -1,4 +1,4 @@
-export default function KakoRadimo() {
+export default function HowWeWork() {
   return (
     <section id="kako-radimo" className="process-section py-24 lg:py-32" aria-labelledby="kako-radimo-heading">
       <div className="process-section-bg" aria-hidden="true" />

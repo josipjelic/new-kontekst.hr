@@ -7,22 +7,22 @@ function validateFields(name, email, message) {
   const errors = { name: '', email: '', message: '' };
   const trimmedName = name.trim();
   if (trimmedName.length < 2) {
-    errors.name = 'Name must be at least 2 characters.';
+    errors.name = 'Ime mora imati najmanje 2 znaka.';
   }
   const emailTrim = email.trim();
   if (!emailTrim) {
-    errors.email = 'Email is required.';
+    errors.email = 'E-mail je obavezan.';
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailTrim)) {
-    errors.email = 'Please enter a valid email address.';
+    errors.email = 'Unesite valjanu e-mail adresu.';
   }
   const msgTrim = message.trim();
   if (msgTrim.length < 10) {
-    errors.message = 'Message must be at least 10 characters.';
+    errors.message = 'Poruka mora imati najmanje 10 znakova.';
   }
   return errors;
 }
 
-export default function Kontakt() {
+export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -55,7 +55,7 @@ export default function Kontakt() {
       });
 
       if (res.status === 201) {
-        setFormSuccess('Thank you! We will get back to you soon.');
+        setFormSuccess('Hvala! Javit ćemo vam se uskoro.');
         setName('');
         setEmail('');
         setMessage('');
@@ -64,20 +64,20 @@ export default function Kontakt() {
       }
 
       if (res.status === 429) {
-        setFormError('Too many attempts. Please wait a few minutes.');
+        setFormError('Previše pokušaja. Pričekajte nekoliko minuta.');
         return;
       }
 
-      setFormError('Something went wrong. Please try again or email us directly.');
+      setFormError('Greška pri slanju. Pokušajte ponovo ili nam pišite direktno.');
     } catch {
-      setFormError('Something went wrong. Please try again or email us directly.');
+      setFormError('Greška pri slanju. Pokušajte ponovo ili nam pišite direktno.');
     } finally {
       setSubmitting(false);
     }
   }
 
   return (
-    <section id="kontakt" className="contact-section py-24 lg:py-32" aria-labelledby="kontakt-heading-en">
+    <section id="kontakt" className="contact-section py-24 lg:py-32" aria-labelledby="kontakt-heading">
       <div className="contact-glow" aria-hidden="true" />
 
       <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -101,89 +101,89 @@ export default function Kontakt() {
             </div>
           </div>
 
-          <p className="section-label justify-center text-center">Contact</p>
+          <p className="section-label justify-center text-center">Kontakt</p>
 
           <h2
-            id="kontakt-heading-en"
+            id="kontakt-heading"
             className="font-display text-3xl sm:text-4xl font-bold mt-3 mb-4 text-center tracking-[-0.02em]"
           >
-            Let&apos;s start the automation conversation
+            Pokrenimo razgovor o automatizaciji
           </h2>
 
           <p className="text-base lg:text-lg leading-relaxed mb-8 mx-auto max-w-[440px] text-center text-[color:var(--color-text-secondary)]">
-            Have an idea, a question, or a specific project? Describe the challenge — no commitment required. We respond
-            within one business day.
+            Imate ideju, pitanje ili konkretan projekt? Opišite nam izazov — bez obveza. Odgovaramo unutar jednog radnog
+            dana.
           </p>
 
           <form
-            data-testid="kontakt-form-en"
+            data-testid="kontakt-form"
             className="space-y-5 mb-8 text-left max-w-md mx-auto"
             onSubmit={handleSubmit}
             noValidate
           >
             <div>
-              <label htmlFor="en-kontakt-name" className="block text-sm font-medium mb-1.5 text-[color:var(--color-text-secondary)]">
-                Full name
+              <label htmlFor="kontakt-name" className="block text-sm font-medium mb-1.5 text-[color:var(--color-text-secondary)]">
+                Ime i prezime
               </label>
               <input
-                id="en-kontakt-name"
+                id="kontakt-name"
                 name="name"
                 type="text"
                 autoComplete="name"
                 value={name}
                 onChange={(ev) => setName(ev.target.value)}
                 className="w-full rounded-lg border border-[var(--color-surface-border)] bg-[var(--color-surface-raised)] px-4 py-3 text-sm text-[color:var(--color-text-primary)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0"
-                placeholder="Your name"
+                placeholder="Vaše ime"
                 aria-invalid={Boolean(fieldErrors.name)}
-                aria-describedby={fieldErrors.name ? 'en-kontakt-name-error' : undefined}
+                aria-describedby={fieldErrors.name ? 'kontakt-name-error' : undefined}
               />
               {fieldErrors.name ? (
-                <p id="en-kontakt-name-error" className="mt-1.5 text-sm text-red-400" role="alert">
+                <p id="kontakt-name-error" className="mt-1.5 text-sm text-red-400" role="alert">
                   {fieldErrors.name}
                 </p>
               ) : null}
             </div>
 
             <div>
-              <label htmlFor="en-kontakt-email" className="block text-sm font-medium mb-1.5 text-[color:var(--color-text-secondary)]">
-                Email
+              <label htmlFor="kontakt-email" className="block text-sm font-medium mb-1.5 text-[color:var(--color-text-secondary)]">
+                E-mail
               </label>
               <input
-                id="en-kontakt-email"
+                id="kontakt-email"
                 name="email"
                 type="email"
                 autoComplete="email"
                 value={email}
                 onChange={(ev) => setEmail(ev.target.value)}
                 className="w-full rounded-lg border border-[var(--color-surface-border)] bg-[var(--color-surface-raised)] px-4 py-3 text-sm text-[color:var(--color-text-primary)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0"
-                placeholder="you@company.com"
+                placeholder="vas@tvrtka.hr"
                 aria-invalid={Boolean(fieldErrors.email)}
-                aria-describedby={fieldErrors.email ? 'en-kontakt-email-error' : undefined}
+                aria-describedby={fieldErrors.email ? 'kontakt-email-error' : undefined}
               />
               {fieldErrors.email ? (
-                <p id="en-kontakt-email-error" className="mt-1.5 text-sm text-red-400" role="alert">
+                <p id="kontakt-email-error" className="mt-1.5 text-sm text-red-400" role="alert">
                   {fieldErrors.email}
                 </p>
               ) : null}
             </div>
 
             <div>
-              <label htmlFor="en-kontakt-message" className="block text-sm font-medium mb-1.5 text-[color:var(--color-text-secondary)]">
-                Message
+              <label htmlFor="kontakt-message" className="block text-sm font-medium mb-1.5 text-[color:var(--color-text-secondary)]">
+                Poruka
               </label>
               <textarea
-                id="en-kontakt-message"
+                id="kontakt-message"
                 name="message"
                 rows={5}
                 value={message}
                 onChange={(ev) => setMessage(ev.target.value)}
                 className="w-full rounded-lg border border-[var(--color-surface-border)] bg-[var(--color-surface-raised)] px-4 py-3 text-sm text-[color:var(--color-text-primary)] placeholder:text-[color:var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-0 resize-y min-h-[120px]"
-                placeholder="Briefly describe what you want to achieve…"
+                placeholder="Ukratko opišite što želite postići…"
                 aria-invalid={Boolean(fieldErrors.message)}
-                aria-describedby={fieldErrors.message ? 'en-kontakt-message-error' : undefined}
+                aria-describedby={fieldErrors.message ? 'kontakt-message-error' : undefined}
               />
               {fieldErrors.message ? (
-                <p id="en-kontakt-message-error" className="mt-1.5 text-sm text-red-400" role="alert">
+                <p id="kontakt-message-error" className="mt-1.5 text-sm text-red-400" role="alert">
                   {fieldErrors.message}
                 </p>
               ) : null}
@@ -202,20 +202,20 @@ export default function Kontakt() {
 
             <div className="flex justify-center pt-2">
               <button type="submit" className="btn-primary disabled:opacity-60 disabled:pointer-events-none" disabled={submitting}>
-                {submitting ? 'Sending...' : 'Send message'}
+                {submitting ? 'Slanje...' : 'Pošalji upit'}
               </button>
             </div>
           </form>
 
           <p className="text-center text-sm text-[color:var(--color-text-secondary)] mb-4">
-            Or contact us directly:
+            Ili nas kontaktirajte izravno:
           </p>
 
           <div className="flex justify-center">
             <a
               href="mailto:info@kontekst.hr"
               className="contact-email-link"
-              aria-label="Email info@kontekst.hr"
+              aria-label="Pošaljite e-mail na info@kontekst.hr — kontakt za automatizaciju poslovanja"
             >
               <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <path
@@ -229,7 +229,7 @@ export default function Kontakt() {
           </div>
 
           <p className="mt-6 text-sm text-center text-[color:var(--color-text-muted)]">
-            No automated replies. A human reads every message and responds personally.
+            Bez automatiziranih odgovora. Svaki upit čita i na njega odgovara čovjek.
           </p>
         </div>
       </div>

@@ -6,10 +6,10 @@ Update trigger: When pointer motion is implemented, revised, or removed.
 # Pointer-driven motion — implementation plan & handover
 
 > **Audience**: `@frontend-developer`  
-> **Status**: **P0–P2 implemented** (global pointer vars + Hero parallax/spotlight + Usluge card tilt). P3–P6 remain optional.  
+> **Status**: **P0–P2 implemented** (global pointer vars + Hero parallax/spotlight + Services card tilt). P3–P6 remain optional.  
 > **Related**: Design tokens and interaction baseline in `docs/technical/ARCHITECTURE.md` (Design System, Interaction Patterns)
 
-**Implemented files**: `src/hooks/usePointerMotion.js`, `src/hooks/useServiceCardTilt.js`, `src/hooks/usePointerMotion.test.jsx`, `src/App.jsx`, `src/components/sections/Hero.jsx`, `src/components/sections/Usluge.jsx`, `src/assets/css/custom.css`.
+**Implemented files**: `src/hooks/usePointerMotion.js`, `src/hooks/useServiceCardTilt.js`, `src/hooks/usePointerMotion.test.jsx`, `src/App.jsx`, `src/components/hr/Hero.jsx`, `src/components/hr/Services.jsx`, `src/assets/css/custom.css`.
 
 ## 1. Goal
 
@@ -67,10 +67,10 @@ Add **subtle, modern** motion that **reacts to pointer position** on desktop fin
 |-------|--------|------------|
 | **P0** | Hook + rAF + lerp + CSS vars on `:root`; `prefers-reduced-motion`, `visibilitychange`, coarse-pointer **off** switch | No React per-frame updates; vars stable at rest; motion off when reduced motion or coarse pointer |
 | **P1** | Wire **Hero** decorative layers (orbs/grid) to `--pointer-nx/y` with small multipliers | Lighthouse CLS/INP not regressed; Safari/orientation reset OK |
-| **P2** | **Usluge** `.service-card`: hover-scoped tilt + optional gradient-border highlight | Keyboard: focus uses ring/shadow, not dependent on pointer-only state |
-| **P3** | **KakoRadimo** timeline accent (section-relative) + optional step badge glow on hover | Subtle; no continuous chase on body text |
-| **P4** | **ONama** highlight / quote decoration (hover-scoped sheen or weak glow) | Text block does not move |
-| **P5** | **Kontakt** `.contact-card` edge glow; **reduce** global/local effect when focus is inside `<form>` | Typing stable |
+| **P2** | **Services** `.service-card`: hover-scoped tilt + optional gradient-border highlight | Keyboard: focus uses ring/shadow, not dependent on pointer-only state |
+| **P3** | **HowWeWork** timeline accent (section-relative) + optional step badge glow on hover | Subtle; no continuous chase on body text |
+| **P4** | **AboutUs** highlight / quote decoration (hover-scoped sheen or weak glow) | Text block does not move |
+| **P5** | **Contact** `.contact-card` edge glow; **reduce** global/local effect when focus is inside `<form>` | Typing stable |
 | **P6** | **Nav** (desktop): optional ≤5% bar sheen; **Footer** optional single accent line | Mobile: no pointer tracking |
 
 Phases P2–P6 can be split across PRs; **P0–P1** should merge first as the foundation.
@@ -83,10 +83,10 @@ Phases P2–P6 can be split across PRs; **P0–P1** should merge first as the fo
 | `src/App.jsx` | Call hook once at root |
 | `src/assets/css/custom.css` | Consumers of `--pointer-*`, spotlight, card tilt, reduced-motion overrides |
 | `src/components/sections/Hero.jsx` | Wrapper classes / structure for parallax layers if needed |
-| `src/components/sections/Usluge.jsx` | Card hover + local vars or data attributes |
-| `src/components/sections/KakoRadimo.jsx` | Timeline / step accents |
-| `src/components/sections/ONama.jsx` | Highlight / quote wrappers |
-| `src/components/sections/Kontakt.jsx` | Card + form focus detection |
+| `src/components/hr/Services.jsx` | Card hover + local vars or data attributes |
+| `src/components/hr/HowWeWork.jsx` | Timeline / step accents |
+| `src/components/hr/AboutUs.jsx` | Highlight / quote wrappers |
+| `src/components/hr/Contact.jsx` | Card + form focus detection |
 | `src/components/layout/Nav.jsx` / `Footer.jsx` | Optional sheen elements |
 | Tests | Unit test hook behavior: reduced motion → no listeners or neutral vars; optional smoke test |
 

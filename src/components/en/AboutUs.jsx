@@ -1,48 +1,49 @@
-export default function ONama() {
+export default function AboutUs() {
   return (
     <section id="o-nama" className="about-section py-24 lg:py-32" aria-labelledby="o-nama-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
-          <p className="section-label reveal">O nama</p>
+          <p className="section-label reveal">About</p>
           <h2
             id="o-nama-heading"
             className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold reveal reveal-delay-1 max-w-[600px] leading-[1.1] tracking-[-0.02em]"
           >
-            Automatizacija koja razumije vaš kontekst
+            Automation that understands your context
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           <div className="space-y-6 reveal">
             <p className="text-base lg:text-lg leading-relaxed text-[color:var(--color-text-secondary)]">
-              Kontekst.hr nastao je iz uvjerenja da svaka tvrtka zaslužuje pristup alatima koji su nekad bili dostupni
-              samo velikim korporacijama. Automatizacijom i AI-em demokratiziramo efikasnost.
+              Kontekst.hr was founded on the belief that every company deserves access to tools that were once only
+              available to large corporations. With automation and AI, we democratise efficiency.
             </p>
             <p className="text-base leading-relaxed text-[color:var(--color-text-secondary)]">
-              Naš pristup uvijek počinje s razumijevanjem vašeg poslovanja — ne s tehnologijom. Tek kad razumijemo vaše
-              procese i ciljeve, biramo pravo rješenje.
+              Our approach always starts with understanding your business — not with technology. Only once we understand
+              your processes and goals do we choose the right solution.
             </p>
 
             <div className="about-quote mt-8" role="blockquote">
               <p className="text-base leading-relaxed text-[color:var(--color-text-secondary)]">
-                “Svaka tvrtka zaslužuje efikasnost koja je nekad bila privilegija velikih. Mi smo tu da to promijenimo.”
+                &ldquo;Every company deserves the efficiency that was once the privilege of the few. We&apos;re here to
+                change that.&rdquo;
               </p>
             </div>
 
-            <div className="flex items-center gap-8 pt-4" aria-label="Ključne statistike">
+            <div className="flex items-center gap-8 pt-4" aria-label="Key statistics">
               <div className="stat-item">
                 <span className="stat-number text-gradient-accent">20+</span>
-                <span className="stat-label">klijenata</span>
+                <span className="stat-label">clients</span>
               </div>
               <div className="stat-divider" aria-hidden="true" />
               <div className="stat-item">
                 <span className="stat-number text-gradient-accent">50+</span>
-                <span className="stat-label">automatiziranih procesa</span>
+                <span className="stat-label">automated processes</span>
               </div>
               <div className="stat-divider" aria-hidden="true" />
               <div className="stat-item">
                 <span className="stat-number text-gradient-accent">1000+</span>
-                <span className="stat-label">uštedenih sati tjedno</span>
+                <span className="stat-label">hours saved per week</span>
               </div>
             </div>
           </div>
@@ -59,10 +60,10 @@ export default function ONama() {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold mb-2 font-display text-[color:var(--color-text-primary)]">
-                Specijalizacija za n8n
+                n8n Specialisation
               </h3>
               <p className="text-sm leading-relaxed text-[color:var(--color-text-muted)]">
-                Duboka tehnička ekspertiza u vodećem open-source automation alatu — ne surface-level poznavanje.
+                Deep technical expertise in the leading open-source automation tool — not surface-level familiarity.
               </p>
             </div>
 
@@ -77,10 +78,10 @@ export default function ONama() {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold mb-2 font-display text-[color:var(--color-text-primary)]">
-                Hands-on pristup
+                Hands-on approach
               </h3>
               <p className="text-sm leading-relaxed text-[color:var(--color-text-muted)]">
-                Radimo direktno s vašim timom. Ne isporučujemo dokumentaciju — isporučujemo rješenja koja rade.
+                We work directly with your team. We don&apos;t deliver documentation — we deliver solutions that work.
               </p>
             </div>
 
@@ -95,10 +96,11 @@ export default function ONama() {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold mb-2 font-display text-[color:var(--color-text-primary)]">
-                Mjerljivi rezultati
+                Measurable results
               </h3>
               <p className="text-sm leading-relaxed text-[color:var(--color-text-muted)]">
-                Svaki projekt definira konkretne KPI-jeve unaprijed. Znate što dobivate — i kako izmjeriti uspjeh.
+                Every project defines concrete KPIs upfront. You know what you&apos;re getting — and how to measure
+                success.
               </p>
             </div>
 
@@ -113,10 +115,11 @@ export default function ONama() {
                 </svg>
               </div>
               <h3 className="text-sm font-semibold mb-2 font-display text-[color:var(--color-text-primary)]">
-                Podrška nakon implementacije
+                Post-implementation support
               </h3>
               <p className="text-sm leading-relaxed text-[color:var(--color-text-muted)]">
-                Ne nestajemo nakon go-live. Tu smo kad nešto treba prilagoditi, proširiti ili popraviti.
+                We don&apos;t disappear after go-live. We&apos;re here when something needs adjusting, extending, or
+                fixing.
               </p>
             </div>
           </div>

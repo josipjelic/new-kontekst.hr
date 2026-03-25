@@ -63,7 +63,7 @@ React SPA built with Vite. Single-page marketing site — no client-side router 
 
 **State management**: Minimal — local React state for UI (mobile nav toggle, form state). No global state library.
 
-**Implemented components (phase 2)**: `layout/Nav.jsx`, `layout/Footer.jsx`, `sections/Hero.jsx`, `sections/Usluge.jsx`, `sections/KakoRadimo.jsx`, `sections/ONama.jsx`, `sections/Kontakt.jsx` (form → `POST ${VITE_API_URL}/api/contact`, default `http://localhost:3000`). App shell: `Nav` → `<main>` → sections (`Home`) → `Footer`. Scroll reveal: `hooks/useScrollReveal.js` (IntersectionObserver + `prefers-reduced-motion`) toggles `.visible` on `.reveal`. SEO meta + JSON-LD in `src/index.html` (Vite root). Frontend tests: `npm test` (Vitest, `src/**/*.test.jsx`).
+**Implemented components (phase 2)**: Per-locale folders `components/hr/` and `components/en/` — `Nav.jsx`, `Footer.jsx`, `Hero.jsx`, `Services.jsx`, `HowWeWork.jsx`, `AboutUs.jsx`, `Contact.jsx` (form → `POST ${VITE_API_URL}/api/contact`, default `http://localhost:3000`). App shell: `Nav` → `<main>` → sections (`Home`) → `Footer`. Scroll reveal: `hooks/useScrollReveal.js` (IntersectionObserver + `prefers-reduced-motion`) toggles `.visible` on `.reveal`. SEO meta + JSON-LD in `src/index.html` (Vite root). Frontend tests: `npm test` (Vitest, `src/**/*.test.jsx`).
 
 **Component structure**:
 ```
@@ -71,7 +71,7 @@ client/
   src/
     components/
       ui/           # Button, Badge, SectionLabel, Card, etc.
-      sections/     # Hero, Usluge, KakoRadimo, ONama, Kontakt, Footer
+      sections/     # Hero, Services, HowWeWork, AboutUs, Contact, Footer
       layout/       # Navbar, PageWrapper
     assets/
       css/          # Tailwind config, custom.css
@@ -91,9 +91,9 @@ client/
 
 **Data fetching pattern**: Minimal — contact form POSTs to the backend API. No server-state caching (no React Query for v1).
 
-**Pointer-driven motion**: `usePointerMotion` (`src/hooks/usePointerMotion.js`) mounted in `App.jsx` — `pointermove` → refs → one `requestAnimationFrame` loop with lerp; writes `--pointer-nx` / `--pointer-ny` on `:root`. Hero uses parallax wrappers + `.hero-spotlight`; Usluge uses `useServiceCardTilt` for hover-scoped `--tilt-*` on `article.service-card`. Disabled for `prefers-reduced-motion`, coarse pointer, or `hover: none`. Spec and backlog for P3–P6: [`docs/technical/POINTER_MOTION_HANDOVER.md`](POINTER_MOTION_HANDOVER.md).
+**Pointer-driven motion**: `usePointerMotion` (`src/hooks/usePointerMotion.js`) mounted in `App.jsx` — `pointermove` → refs → one `requestAnimationFrame` loop with lerp; writes `--pointer-nx` / `--pointer-ny` on `:root`. Hero uses parallax wrappers + `.hero-spotlight`; the services section (`Services.jsx`) uses `useServiceCardTilt` for hover-scoped `--tilt-*` on `article.service-card`. Disabled for `prefers-reduced-motion`, coarse pointer, or `hover: none`. Spec and backlog for P3–P6: [`docs/technical/POINTER_MOTION_HANDOVER.md`](POINTER_MOTION_HANDOVER.md).
 
-**Locale layout (hr / en)**: Croatian UI lives under `src/components/hr/` (Nav, Footer, Hero, Usluge, KakoRadimo, ONama, Kontakt) and is composed by `src/pages/hr/Home.jsx`. English mirrors the same filenames under `src/components/en/` and `src/pages/en/Home.jsx` (Helmet + `lang="en"` meta on the EN page). Shared hooks and assets stay outside these folders. `App.jsx` wires `react-router-dom` routes `/` and `/en` to the respective shells.
+**Locale layout (hr / en)**: Croatian UI lives under `src/components/hr/` (Nav, Footer, Hero, Services, HowWeWork, AboutUs, Contact) and is composed by `src/pages/hr/Home.jsx`. English mirrors the same filenames under `src/components/en/` and `src/pages/en/Home.jsx` (Helmet + `lang="en"` meta on the EN page). Shared hooks and assets stay outside these folders. `App.jsx` wires `react-router-dom` routes `/` and `/en` to the respective shells.
 
 ---
 
@@ -215,7 +215,7 @@ All tokens are defined as CSS custom properties in `assets/css/custom.css`.
 | Token | Value | Usage |
 |-------|-------|-------|
 | `--color-surface-base` | `#07090D` | Page background, darkest layer |
-| `--color-surface-raised` | `#0D1117` | Sections that sit above base (Usluge, About, Footer) |
+| `--color-surface-raised` | `#0D1117` | Sections that sit above base (Services, About, Footer) |
 | `--color-surface-overlay` | `#131920` | Cards, panels, overlays |
 | `--color-surface-border` | `rgba(255,255,255,0.07)` | Subtle separators, card borders |
 | `--color-surface-border-mid` | `rgba(255,255,255,0.12)` | Slightly more prominent borders |
@@ -347,10 +347,10 @@ Each section has a distinct surface and separator treatment to create rhythm wit
 | Section | Surface token | Top separator |
 |---------|--------------|---------------|
 | Hero | `--color-surface-base` | None |
-| Usluge | `--color-surface-raised` | Gradient line (teal→indigo) |
+| Services | `--color-surface-raised` | Gradient line (teal→indigo) |
 | Kako radimo | `--color-surface-base` | None (contrast from surface change) |
 | O nama | `--color-surface-raised` | Gradient line (indigo→teal) |
-| Kontakt | `--color-surface-base` | None |
+| Contact | `--color-surface-base` | None |
 | Footer | `--color-surface-raised` | `--color-surface-border` solid |
 
 ---
