@@ -1,13 +1,13 @@
-# [Project Name] — Claude Instructions
+# Kontekst.hr — Claude Instructions
 
-> Stack: [e.g., Next.js 14 · TypeScript · PostgreSQL · Prisma · Railway]
-> Last updated: [YYYY-MM-DD]
+> Stack: Plain HTML · Tailwind CSS (CDN) · Digital Ocean App Platform
+> Last updated: 2026-03-25
 
 ## Project Context
 
-[2–3 sentences: what this product does, who it serves, and the core problem it solves.]
+Kontekst.hr je stranica tvrtke koja se bavi poslovnim automatizacijama, n8n workflowima i razvojem AI aplikacija. Ciljna skupina su vlasnici tvrtki koji žele optimizirati i automatizirati svoje poslovanje. Stranica je marketinška prezentacija usluga tvrtke, optimizirana za SEO na hrvatskom jeziku.
 
-**Tech stack summary**: [Frontend] · [Backend] · [Database] · [Hosting]
+**Tech stack summary**: Plain HTML · Tailwind CSS via CDN · No backend · No database · Digital Ocean App Platform
 
 ---
 
@@ -19,14 +19,11 @@ Delegate to specialist agents for focused work. Claude selects them automaticall
 |-------|------|----------------|
 | `project-manager` | Backlog & coordination | "What's next?", sprint planning, breaking down features, reprioritizing |
 | `systems-architect` | Architecture & ADRs | New feature design, tech decisions, system integration |
-| `frontend-developer` | UI implementation | Components, pages, client-side state, styling |
-| `backend-developer` | API & business logic | Endpoints, auth, background jobs, integrations |
-| `ui-ux-designer` | UX & design system | User flows, wireframes, component specs, accessibility |
-| `database-expert` | Schema & queries | Migrations, schema design, query optimization |
-| `qa-engineer` | Testing (Playwright) | E2E tests, test strategy, coverage gaps |
+| `frontend-developer` | UI implementation | HTML structure, Tailwind styling, sections, animations |
+| `ui-ux-designer` | UX & design system | Layout, visual hierarchy, futuristic design elements, accessibility |
+| `qa-engineer` | Testing | Cross-browser testing, responsiveness checks, accessibility audit |
 | `documentation-writer` | Living docs | User guide updates, post-feature documentation |
-| `cicd-engineer` | CI/CD & GitHub Actions | Pipelines, deployments, branch protection, release automation |
-| `docker-expert` | Containerization | Dockerfiles, docker-compose, image optimization, container networking |
+| `cicd-engineer` | CI/CD & deployment | Digital Ocean App Platform config, GitHub Actions |
 
 ---
 
@@ -38,26 +35,28 @@ These apply to all agents at all times. No exceptions without explicit human ins
 2. **TODO.md is the living backlog.** Agents may add items, mark items complete, and move items to "Completed". Preserve section order and existing item priority — do not reorder items within a section unless explicitly asked to reprioritize.
 3. **All commits use Conventional Commits format** (see Git Conventions below).
 4. **Update the relevant `docs/` file** after every significant change before marking a task complete.
-5. **Run tests before marking any implementation task complete.**
-6. **Never hardcode secrets, credentials, or environment-specific values** in source code.
-7. **Consult `docs/technical/DECISIONS.md`** before proposing changes that may conflict with prior architectural decisions.
+5. **Never hardcode secrets, credentials, or environment-specific values** in source code.
+6. **Consult `docs/technical/DECISIONS.md`** before proposing changes that may conflict with prior architectural decisions.
+7. **All content is in Croatian** unless explicitly instructed otherwise.
+8. **All HTML must be SEO-optimized** — meta tags, structured data, alt text, semantic elements.
 
 ---
 
 ## Project Structure
 
 ```
-src/                    # Application source code
-  app/                  # [e.g., Next.js App Router pages]
-  components/           # Shared UI components
-  lib/                  # Utilities, helpers, shared logic
-tests/
-  e2e/                  # Playwright E2E tests (*.spec.ts)
+kontekst.hr/
+  index.html              # Main (and only) HTML page
+  assets/
+    css/                  # Custom CSS overrides (if needed beyond Tailwind)
+    js/                   # Custom JavaScript (minimal, for interactions)
+    images/               # Images, icons, illustrations
+  logo-light.svg          # Company logo (white version)
 docs/
-  user/USER_GUIDE.md    # User-facing documentation
-  technical/            # Architecture, API, DB, decisions
-.claude/agents/         # Specialist agent definitions
-.tasks/                 # Detailed task files — one per TODO item (owned by @project-manager)
+  user/USER_GUIDE.md
+  technical/              # Architecture, decisions
+.claude/agents/           # Specialist agent definitions
+.tasks/                   # Detailed task files
 ```
 
 ---
@@ -76,9 +75,9 @@ docs/
 
 Examples:
 ```
-feat(auth): add OAuth2 login with Google
-fix(api): handle null response from payment provider
-docs(user-guide): update onboarding section after flow change
+feat(hero): add animated headline for hero section
+fix(nav): fix mobile hamburger menu toggle
+style(services): adjust card spacing on mobile
 ```
 
 ### Branch Naming
@@ -87,13 +86,11 @@ feature/<ticket-id>-short-description
 fix/<ticket-id>-short-description
 chore/<description>
 docs/<description>
-refactor/<description>
 ```
 
 ### PR Requirements
 - PR title follows Conventional Commits format
-- Fill out `.github/PULL_REQUEST_TEMPLATE.md` completely — do not delete sections
-- Link to the related issue/ticket (`Closes #XXX`)
+- Fill out `.github/PULL_REQUEST_TEMPLATE.md` completely
 - At least one reviewer required before merge
 - All CI checks must pass
 
@@ -101,42 +98,42 @@ refactor/<description>
 
 ## Code Style
 
-> Fill in when project tooling is set up.
-
-- **Language**: TypeScript (strict mode)
-- **Formatter**: [Prettier — config in `.prettierrc`]
-- **Linter**: [ESLint — config in `.eslintrc`]
-- **Import style**: [absolute imports from `src/`]
-- **No `console.log`** in production code — use the project logger utility
-- **No commented-out code** committed — delete it or track it in TODO.md
+- **Language**: HTML5 + vanilla JavaScript (ES6+) where needed
+- **Styling**: Tailwind CSS via CDN — utility-first, no custom build step
+- **Custom CSS**: Only when Tailwind utilities are insufficient — in `assets/css/custom.css`
+- **JavaScript**: Minimal — only for mobile nav toggle, scroll behaviour, and micro-interactions
+- **No `console.log`** in production code
+- **No commented-out code** committed
+- **Semantic HTML**: Use appropriate elements (`<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`)
+- **Accessibility**: All images need `alt` attributes, all interactive elements need labels
 
 ---
 
-## Testing Conventions
+## Design Guidelines
 
-> Fill in when test infrastructure is set up.
+- **Palette**: Based on provided greyscale scheme — dark backgrounds (#212529, #343a40) with light text (#f8f9fa, #e9ecef)
+- **Feel**: Futuristic, clean, technical — geometric shapes, subtle grid patterns, gradient accents
+- **Typography**: System font stack or Google Fonts (Inter or similar sans-serif)
+- **Language**: Croatian throughout
+- **Sections**: Hero, Usluge, Kako radimo, O nama, Kontakt
 
-- **Unit tests**: [Vitest — colocated as `*.test.ts` next to source files]
-- **E2E tests**: [Playwright — in `tests/e2e/*.spec.ts`]
-- **Run unit**: `[npm test]`
-- **Run E2E**: `[npm run test:e2e]`
-- **Coverage target**: 80% for new features
-- E2E tests use Page Object Model pattern and `data-testid` selectors
+---
+
+## SEO Requirements
+
+- Croatian-language title tags and meta descriptions
+- Open Graph tags for social sharing
+- JSON-LD structured data for the business
+- Target keywords: "automatizacija poslovanja", "n8n Hrvatska", "AI aplikacije za poslovanje", "poslovne automatizacije"
+- Semantic HTML headings hierarchy (one `<h1>` per page)
 
 ---
 
 ## Environment & Commands
 
-> Fill in when project is initialized.
-
-- **Node**: [x.x.x] (see `.nvmrc`)
-- **Package manager**: [npm / pnpm / yarn]
-- `[npm run dev]` — start dev server
-- `[npm run build]` — production build
-- `[npm test]` — unit tests
-- `[npm run test:e2e]` — E2E tests
-- `[npm run lint]` — lint check
-- `[npm run typecheck]` — TypeScript check
+- **No build step** — plain HTML with Tailwind CDN
+- **Local dev**: Open `index.html` directly in browser, or use VS Code Live Server extension
+- **Deploy**: Push to `main` branch → Digital Ocean App Platform auto-deploys
 
 ---
 
@@ -144,6 +141,4 @@ refactor/<description>
 
 @docs/technical/ARCHITECTURE.md
 @docs/technical/DECISIONS.md
-@docs/technical/API.md
-@docs/technical/DATABASE.md
 @docs/user/USER_GUIDE.md

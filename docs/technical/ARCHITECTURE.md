@@ -12,24 +12,26 @@ Read by: All agents. Always read before making implementation decisions.
 
 # System Architecture
 
-> Last updated: [YYYY-MM-DD]
-> Version: [x.x.x]
+> Last updated: 2026-03-25
+> Version: 1.0
 
 ---
 
 ## Overview
 
-[2–3 paragraph description of the system — what it does, how the main components relate, and the key architectural choices that define it.]
+Kontekst.hr je statična single-page marketinška web stranica. Nema backend-a, nema baze podataka, nema build procesa. Stranica se sastoji od jednog `index.html` filea s Tailwind CSS-om učitanim putem CDN-a i minimalnim vanilla JavaScript kodom za interakcije.
+
+Hosting je na Digital Ocean App Platform koji servira statičke fileove direktno. Deploy se odvija automatski pri svakom pushu na `main` granu.
 
 ```
-[ASCII diagram of system components and their relationships]
-
-  [Client]
-     │
-     ▼
-[Frontend App] ──── [API Layer] ──── [Database]
-                        │
-                   [External Services]
+[Posjetitelj (Browser)]
+        │
+        ▼
+[Digital Ocean App Platform]
+  (serves static files)
+        │
+        ▼
+[index.html + Tailwind CDN + assets/]
 ```
 
 ---
@@ -38,14 +40,11 @@ Read by: All agents. Always read before making implementation decisions.
 
 | Layer | Technology | Version | Why Chosen |
 |-------|-----------|---------|------------|
-| Frontend | [e.g., Next.js] | [14.x] | [e.g., SSR, App Router, strong ecosystem] |
-| Styling | [e.g., Tailwind CSS] | [3.x] | |
-| Backend | [e.g., Node.js / Fastify] | [x.x] | |
-| Database | [e.g., PostgreSQL] | [15] | |
-| ORM | [e.g., Prisma] | [x.x] | |
-| Auth | [e.g., NextAuth.js] | [x.x] | |
-| Hosting | [e.g., Railway] | | |
-| CI/CD | [e.g., GitHub Actions] | | |
+| Frontend | Plain HTML5 | - | Maksimalna jednostavnost, nema ovisnosti, brzo učitavanje |
+| Styling | Tailwind CSS (CDN) | 3.x | Utility-first, bez build stepa, brza iteracija |
+| JavaScript | Vanilla JS (ES6+) | - | Minimalni JS za nav i micro-interakcije, nema frameworka |
+| Hosting | Digital Ocean App Platform | - | Jednostavan deploy iz Gita, dobra dostupnost |
+| Version Control | Git / GitHub | - | Standard |
 
 ---
 
@@ -91,11 +90,10 @@ src/components/
 **Environments**:
 | Environment | URL | Branch | Notes |
 |-------------|-----|--------|-------|
-| Production | [URL] | `main` | Auto-deploys on merge |
-| Staging | [URL] | `staging` | Auto-deploys on merge |
-| Local | `localhost:3000` | any | `npm run dev` |
+| Production | https://kontekst.hr (TBD) | `main` | Auto-deploys on push |
+| Local | `file:///` ili Live Server | any | Otvori index.html direktno u browseru |
 
-**CI/CD**: [e.g., GitHub Actions — runs lint, typecheck, unit tests, and E2E tests on every PR. Deploys on merge to main.]
+**CI/CD**: Push na `main` → Digital Ocean App Platform automatski deploya statičke fileove. Nema test pipeline-a za v1 (statična stranica).
 
 ---
 

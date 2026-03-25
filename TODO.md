@@ -7,24 +7,25 @@
 
 ## In Progress
 
-- [ ] (WIP) #001 — [Short description of what's currently being worked on] [area: setup] → [.tasks/001-short-title.md](.tasks/001-short-title.md)
+_(nothing in progress)_
 
 ---
 
 ## Up Next (prioritized)
 
-- [ ] #002 — [Short description] [area: backend] → [.tasks/002-short-title.md](.tasks/002-short-title.md)
-- [ ] #003 — [Short description] [area: frontend] → [.tasks/003-short-title.md](.tasks/003-short-title.md)
-- [ ] #004 — [Short description] [area: database] → [.tasks/004-short-title.md](.tasks/004-short-title.md)
+- [ ] #001 — HTML boilerplate, Tailwind setup, i navigacijski header [area: frontend] → [.tasks/001-html-boilerplate-and-nav.md](.tasks/001-html-boilerplate-and-nav.md)
+- [ ] #002 — Hero sekcija s futurističkim dizajnom i CTA [area: frontend] → [.tasks/002-hero-section.md](.tasks/002-hero-section.md)
+- [ ] #003 — Sekcija Usluge — 3 kartice usluga [area: frontend] → [.tasks/003-usluge-section.md](.tasks/003-usluge-section.md)
 
 ---
 
 ## Backlog
 
-- [ ] #005 — [Short description] [area: frontend] → [.tasks/005-short-title.md](.tasks/005-short-title.md)
-- [ ] #006 — [Short description] [area: backend] → [.tasks/006-short-title.md](.tasks/006-short-title.md)
-- [ ] #007 — [Short description] [area: docs] → [.tasks/007-short-title.md](.tasks/007-short-title.md)
-- [ ] #008 — [Short description] [area: qa] → [.tasks/008-short-title.md](.tasks/008-short-title.md)
+- [ ] #004 — Sekcija Kako radimo — proces u koracima [area: frontend] → [.tasks/004-kako-radimo-section.md](.tasks/004-kako-radimo-section.md)
+- [ ] #005 — Sekcija O nama [area: frontend] → [.tasks/005-o-nama-section.md](.tasks/005-o-nama-section.md)
+- [ ] #006 — Sekcija Kontakt i footer [area: frontend] → [.tasks/006-kontakt-and-footer.md](.tasks/006-kontakt-and-footer.md)
+- [ ] #007 — SEO optimizacija: meta tagovi, Open Graph, JSON-LD structured data [area: frontend] → [.tasks/007-seo-optimization.md](.tasks/007-seo-optimization.md)
+- [ ] #008 — Digital Ocean App Platform deployment konfiguracija [area: infra] → [.tasks/008-digitalocean-deployment.md](.tasks/008-digitalocean-deployment.md)
 
 ---
 
@@ -46,12 +47,8 @@ Every TODO item must have a corresponding `.tasks/NNN-*.md` file. @project-manag
 
 **Area tags** help agents know which specialist to use:
 - `frontend` → @frontend-developer
-- `backend` → @backend-developer
-- `database` → @database-expert
 - `design` → @ui-ux-designer
 - `qa` → @qa-engineer
 - `docs` → @documentation-writer
-- `infra` → @systems-architect
+- `infra` → @systems-architect / @cicd-engineer
 - `setup` → general
-
-**Priority**: Items higher in "Up Next" are higher priority. Agents move completed items to "Completed" and may add new items to "Backlog". Only humans reorder items within a section to change priority, unless explicitly asked to reprioritize.

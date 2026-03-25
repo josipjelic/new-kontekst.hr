@@ -20,35 +20,35 @@ Read by: All agents. Check this file before proposing changes that may conflict 
 
 | ID | Title | Status | Date |
 |----|-------|--------|------|
-| ADR-001 | [Initial tech stack selection] | Accepted | [YYYY-MM-DD] |
+| ADR-001 | Plain HTML + Tailwind CDN umjesto JS frameworka | Accepted | 2026-03-25 |
 
 ---
 
-## ADR-001: [Initial Tech Stack Selection]
+## ADR-001: Plain HTML + Tailwind CDN umjesto JS frameworka
 
-**Date**: [YYYY-MM-DD]
+**Date**: 2026-03-25
 **Status**: Accepted
-**Deciders**: [Human name] / @systems-architect
+**Deciders**: Josip / @systems-architect
 
 ### Context
 
-[Describe the situation at project start. What were the key requirements driving the tech stack decision? What constraints existed (team familiarity, budget, timeline, scale expectations)?]
+Kontekst.hr je marketinška stranica bez dinamičkog sadržaja, korisničkih računa ili baze podataka. Jedine interakcije su navigation toggle na mobitelu i smooth scroll — ništa što zahtijeva reaktivni UI framework. Projekt treba biti što brže isporučen i što lakše maintainabilan bez DevOps overhead-a.
 
 ### Options Considered
 
-1. **[Option A]**: [Technology/stack] — Pros: [...] Cons: [...]
-2. **[Option B]**: [Technology/stack] — Pros: [...] Cons: [...]
-3. **[Option C]**: [Technology/stack] — Pros: [...] Cons: [...]
+1. **Plain HTML + Tailwind CDN**: Bez build stepa, otvori index.html u browseru. Pros: nulta kompleksnost, brz deploy, maximalni performance. Cons: nema component reusability, nema hot reload bez alata.
+2. **Next.js (React)**: SSR/SSG, TypeScript, bogat ekosustav. Pros: skalabilno, TypeScript, lako dodati dinamičke feature-e later. Cons: overkill za marketing stranicu, Node dependency, build pipeline, deployment kompleksniji.
+3. **Astro**: Static site generator dizajniran za content-heavy stranice. Pros: odlična SEO podrška, partial hydration, islands architecture. Cons: još jedan alat za učiti, build step neophodan, nepotrebna kompleksnost za jednostavnu marketing stranicu.
 
 ### Decision
 
-[What was decided and the primary reason. Be specific — "we chose X because of Y" not just "X is good".]
+Odabrano: **Plain HTML + Tailwind CSS via CDN**. Za marketing stranicu s 5–6 sekcija i nultom dinamičnošću, svaki JS framework donosi više overhead-a nego benefita. Tailwind CDN omogućuje brzu stilizaciju bez build koraka.
 
 ### Consequences
 
-- **Positive**: [What becomes easier or better as a result]
-- **Negative**: [Trade-offs accepted — what becomes harder]
-- **Neutral**: [What changes but is neither better nor worse]
+- **Positive**: Nulta build kompleksnost, deploy je trivijalan (push → DO App Platform), maksimalna brzina stranice, lako za maintainati
+- **Negative**: Nema component reusability — HTML se ponavlja za slične UI blokove; ako stranica naraste, migacija na framework bit će potrebna
+- **Neutral**: Tailwind via CDN uključuje cijeli CSS bundle (~3MB) bez tree-shakinga — prihvatljivo za marketing stranicu, može se optimizirati u v2
 
 ---
 
