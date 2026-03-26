@@ -305,7 +305,7 @@ export default function Questionnaire() {
               >
                 <p className="section-label">{currentQuestion.category.toUpperCase()}</p>
               </div>
-              <p className="question-text">{currentQuestion.text}</p>
+              <p className="question-text" data-testid="question-text">{currentQuestion.text}</p>
 
               <fieldset>
                 <legend className="sr-only">{currentQuestion.text}</legend>
