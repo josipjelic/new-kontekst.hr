@@ -310,8 +310,8 @@ Validation `message` values are Croatian (e.g. “Ime je obavezno.”).
 **Response 200** (Croatian locale):
 ```json
 {
-  "tier": "srednji",
-  "score": 52,
+  "tier": "Graditelj",
+  "score": 5,
   "assessment": "Vaša tvrtka pokazuje solidne temelje za digitalnu transformaciju..."
 }
 ```
@@ -319,8 +319,8 @@ Validation `message` values are Croatian (e.g. “Ime je obavezno.”).
 **Response 200** (English locale):
 ```json
 {
-  "tier": "intermediate",
-  "score": 52,
+  "tier": "Builder",
+  "score": 5,
   "assessment": "Your company shows solid foundations for digital transformation..."
 }
 ```
@@ -328,18 +328,16 @@ Validation `message` values are Croatian (e.g. “Ime je obavezno.”).
 **Tier values by locale**:
 | Score Range | Croatian (`locale: "hr"`) | English (`locale: "en"`) |
 |-------------|---------------------------|--------------------------|
-| 0-33 | `"pocetnik"` | `"beginner"` |
-| 34-66 | `"srednji"` | `"intermediate"` |
-| 67-100 | `"spreman"` | `"ready"` |
-
-Note: Tier values use ASCII-safe strings (no diacritics) for reliable JSON handling.
+| 0-3 | `"Istraživač"` | `"Explorer"` |
+| 4-7 | `"Graditelj"` | `"Builder"` |
+| 8-10 | `"Spreman za akciju"` | `"Ready to Act"` |
 
 **Response fields**:
 | Field | Type | Description |
 |-------|------|-------------|
 | `tier` | string | AI readiness classification (see table above) |
-| `score` | integer | Numeric score from 0 to 100 |
-| `assessment` | string | 150-300 word personalised assessment in the requested locale |
+| `score` | integer | Numeric score from 0 to 10 (sum of individual answer scores) |
+| `assessment` | string | 150-250 word personalised assessment in the requested locale |
 
 **Response 422** (validation errors):
 ```json

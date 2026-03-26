@@ -13,7 +13,21 @@ _(nothing in progress)_
 
 ## Up Next (prioritized)
 
-_(nothing up next — see Backlog)_
+### AI Readiness Questionnaire
+
+> **Context**: Multi-step wizard at /upitnik (HR) and /en/questionnaire (EN) that uses Claude Haiku via OpenRouter to generate a personalised AI readiness assessment for business owners.
+>
+> **Critical path**: #024 → #026 → #027 → #028 → #029 + #030 (parallel)
+>
+> **Parallel opportunities**: #024 and #025 can run concurrently. #029 and #030 can run concurrently after #028.
+
+- [ ] #024 — AI Readiness Questionnaire: Architecture & API contract [area: infra] → [.tasks/024-questionnaire-architecture.md](.tasks/024-questionnaire-architecture.md)
+- [ ] #025 — AI Readiness Questionnaire: Copy & system prompt [area: docs] → [.tasks/025-questionnaire-copy.md](.tasks/025-questionnaire-copy.md)
+- [ ] #026 — AI Readiness Questionnaire: UX spec [area: design] → [.tasks/026-questionnaire-ux-spec.md](.tasks/026-questionnaire-ux-spec.md)
+- [ ] #027 — AI Readiness Questionnaire: Backend API implementation [area: backend] → [.tasks/027-questionnaire-backend.md](.tasks/027-questionnaire-backend.md)
+- [ ] #028 — AI Readiness Questionnaire: Frontend implementation [area: frontend] → [.tasks/028-questionnaire-frontend.md](.tasks/028-questionnaire-frontend.md)
+- [ ] #029 — AI Readiness Questionnaire: QA [area: qa] → [.tasks/029-questionnaire-qa.md](.tasks/029-questionnaire-qa.md)
+- [ ] #030 — AI Readiness Questionnaire: Documentation update [area: docs] → [.tasks/030-questionnaire-docs.md](.tasks/030-questionnaire-docs.md)
 
 ---
 

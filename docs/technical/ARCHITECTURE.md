@@ -95,6 +95,8 @@ client/
 
 **Locale layout (hr / en)**: Croatian UI lives under `src/components/hr/` (Nav, Footer, Hero, Services, HowWeWork, AboutUs, Contact) and is composed by `src/pages/hr/Home.jsx`. English mirrors the same filenames under `src/components/en/` and `src/pages/en/Home.jsx` (Helmet + `lang="en"` meta on the EN page). Shared hooks and assets stay outside these folders. `App.jsx` wires `react-router-dom` routes `/` and `/en` to the respective shells.
 
+**Nav component**: The `Nav` component accepts an optional `hideCta` prop (boolean, default `false`). When `hideCta={true}`, the main CTA button ("Razgovarajmo" / "Let's talk") is hidden from the nav. This is used on questionnaire pages to avoid competing CTAs. See `src/pages/hr/Questionnaire.jsx` and `src/pages/en/Questionnaire.jsx`.
+
 ---
 
 ### Backend Architecture
@@ -184,7 +186,7 @@ nginx.conf                  # SPA try_files, gzip, proxy /api and /health → ba
 
 ## Questionnaire System
 
-> Added: 2026-03-26 | ADR: ADR-003 | Status: Design complete, implementation pending
+> Added: 2026-03-26 | ADR: ADR-003 | Status: Implemented (#028, #030)
 
 ### Overview
 
@@ -233,16 +235,16 @@ src/
     en/Questionnaire.jsx    # Page shell: EnNav + Helmet (en) + Questionnaire + Footer
 ```
 
-**State management**: Local React state within the questionnaire component. Tracks current step (0-4), selected answers, loading state, result, and error. No global state needed.
+**State management**: Local React state within the questionnaire component. Tracks current step (1–5 for questions, 6 for loading, 7 for result display, 8 for error state), selected answers, loading state, result, and error. No global state library needed.
 
 **UX flow**:
 1. Visitor lands on `/upitnik` or `/en/questionnaire`
-2. 5-step wizard: one question per step, 3 answer options each (radio or card selection)
-3. Progress indicator shows current step (e.g. "Korak 2 od 5" / "Step 2 of 5")
-4. After step 5, a "Generate assessment" button triggers `POST /api/questionnaire`
-5. Loading state with spinner/skeleton while waiting (1-4 seconds typical)
-6. Result card displays: tier badge, score, and narrative assessment paragraph
-7. CTA below result to contact Kontekst (link to `/#kontakt` or `/en#contact`)
+2. 5-step wizard: one question per step, 3 answer options each (radio button selection)
+3. Progress bar and step counter show current question (e.g. "Pitanje 2 od 5" / "Question 2 of 5")
+4. After step 5, a "Show my results" button (Croatian: "Prikaži moje rezultate") triggers `POST /api/questionnaire`
+5. Loading state with pulsing indicator while waiting (typically 2–4 seconds for Claude Haiku response)
+6. Result card displays: tier name (e.g. "Graditelj"), numeric score (0–10), and AI-generated assessment paragraph (150–250 words)
+7. CTAs below result: primary CTA to contact (link to `/#kontakt` or `/en#contact`), secondary CTA to services or process section
 
 **SEO**: Each questionnaire page gets its own `<Helmet>` with locale-appropriate title, description, and `<link rel="canonical">`. The pages are indexable and contribute to the site's authority on AI/automation topics.
 
@@ -294,58 +296,48 @@ The system prompt establishes the evaluator role and output schema. The user mes
 
 *System prompt* (locale-aware -- Croatian example):
 ```
-Ti si stručnjak za poslovnu AI spremnost u Hrvatskoj. Na temelju odgovora na 5 pitanja,
-procijeni koliko je tvrtka spremna za uvođenje AI i automatizacije.
+Ti si konzultant za poslovnu automatizaciju i AI. Tvoj zadatak je napisati personaliziranu procjenu AI spremnosti za vlasnika tvrtke na temelju njegovih odgovora na 5 pitanja.
 
-Odgovori ISKLJUČIVO valjanim JSON objektom u ovom formatu:
-{
-  "tier": "početnik" | "srednji" | "spreman",
-  "score": <cijeli broj 0-100>,
-  "assessment": "<150-300 riječi personalizirane procjene na hrvatskom jeziku>"
-}
-
-Smjernice za ocjenjivanje:
-- "početnik" (0-33): Tvrtka je na početku digitalne transformacije
-- "srednji" (34-66): Tvrtka ima temelje, ali treba strategiju za AI
-- "spreman" (67-100): Tvrtka je dobro pozicionirana za AI implementaciju
-
-Procjena mora biti konkretna, korisna i vezana uz njihove specifične odgovore.
-Ne koristi generičke fraze. Budi profesionalan ali pristupačan.
+Pravila:
+- Odgovori isključivo JSON objektom ovog oblika: {"tier": "<string>", "score": <integer>, "assessment": "<string>"}
+- "tier" je jedna od: "Istraživač", "Graditelj", "Spreman za akciju"
+- "score" je cijeli broj od 0 do 10 (zbroj bodova iz odgovora)
+- "assessment" je 150 do 250 riječi, pisan u drugom licu (Vi/vaše), na hrvatskom jeziku
+- Procjena mora biti konkretna i osobna — referenciraj što je korisnik odgovorio
+- Ne izmišljaj detalje koji nisu u odgovorima
+- Ne koristi korporativni žargon; piši kao iskusan savjetnik koji izravno govori vlasniku tvrtke
+- Završi procjenu s jednim konkretnim sljedećim korakom koji korisnik može poduzeti
+- Ton: profesionalan, direktan, poticajan — ne prodavački
 ```
 
 *English system prompt equivalent*:
 ```
-You are an expert AI readiness consultant for businesses. Based on answers to 5 questions,
-assess how ready the company is to adopt AI and automation.
+You are a business automation and AI consultant. Your task is to write a personalised AI readiness assessment for a business owner based on their answers to 5 questions.
 
-Respond ONLY with a valid JSON object in this format:
-{
-  "tier": "beginner" | "intermediate" | "ready",
-  "score": <integer 0-100>,
-  "assessment": "<150-300 words of personalised assessment in English>"
-}
-
-Scoring guidelines:
-- "beginner" (0-33): Company is at the start of digital transformation
-- "intermediate" (34-66): Company has foundations but needs an AI strategy
-- "ready" (67-100): Company is well-positioned for AI implementation
-
-The assessment must be specific, actionable, and tied to their specific answers.
-Avoid generic phrases. Be professional but approachable.
+Rules:
+- Respond only with a JSON object in this exact shape: {"tier": "<string>", "score": <integer>, "assessment": "<string>"}
+- "tier" must be one of: "Explorer", "Builder", "Ready to Act"
+- "score" is an integer from 0 to 10 (sum of answer scores)
+- "assessment" is 150 to 250 words, written in second person (you/your), in English
+- The assessment must be specific and personal — reference what the user actually answered
+- Do not invent details that are not present in the answers
+- Avoid corporate jargon; write as an experienced advisor speaking directly to a business owner
+- End the assessment with one concrete next step the user can take
+- Tone: professional, direct, encouraging — not salesy
 ```
 
-*User message construction*: The 5 answers are mapped to human-readable question/answer text before being sent. The backend holds a lookup table of question texts and answer texts (both locales) so the prompt includes meaningful context, not just "q1: a". Example:
+*User message construction*: The 5 answers are mapped to human-readable question/answer text before being sent. The backend holds a lookup table of question texts and answer texts (both locales) so the prompt includes meaningful context, not just "q1: a". Example (Croatian):
 
 ```
 Odgovori korisnika:
 
-1. Koliko zaposlenika ima vaša tvrtka?
-   Odgovor: 11-50 zaposlenika
+1. Ponavljajući zadaci — a: Svakodnevno — i puno vremena odlazi na to
+2. Dokumentiranost procesa — b: Djelomično dokumentirani, ali nedosljedno
+3. Korišteni alati — b: Nekoliko SaaS alata (npr. CRM, računovodstvo)
+4. Poznatost problema — c: Da, točno znamo što želimo automatizirati
+5. Vremenski okvir — b: U idućih 3–6 mjeseci, ako vidimo smisao
 
-2. Koliki dio poslovnih procesa je digitaliziran?
-   Odgovor: Većina procesa je digitalizirana
-
-...
+Ukupan zbroj bodova: 7/10
 ```
 
 **Response parsing**:

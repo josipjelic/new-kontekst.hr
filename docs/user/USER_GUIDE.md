@@ -8,7 +8,7 @@ Read by: @qa-engineer (to understand expected user behavior and flows), team mem
 
 # Kontekst.hr — User Guide
 
-> Last updated: 2026-03-25
+> Last updated: 2026-03-26
 > Audience: Developers and team members supporting the marketing site
 > Live site copy language: Croatian
 
@@ -86,6 +86,20 @@ Alongside the form or below it: "Ili nam napišite direktno" + mailto link to `i
 
 Links (Usluge, Kako radimo, O nama, Kontakt) + copyright text + email link.
 
+### AI Readiness Questionnaire
+
+The questionnaire is a standalone multi-step wizard at `/upitnik` (Croatian) and `/en/questionnaire` (English) that helps business owners assess their readiness for AI and business automation. It is not part of the home page; visitors navigate to it via a direct URL or a future navigation link.
+
+**What it does**: The user answers 5 multiple-choice questions about their business (team size, process documentation, current tools, pain points, timeline). The frontend sends the answers to the backend, which calculates a score and calls Claude Haiku via OpenRouter to generate a personalised assessment paragraph. The user then sees their AI readiness tier, numeric score, and a tailored recommendation.
+
+**For end users**: The questionnaire takes about 2 minutes. At the end, they receive one of three tiers: "Istraživač" (Explorer, score 0–3), "Graditelj" (Builder, score 4–7), or "Spreman za akciju" (Ready to Act, score 8–10). Each tier comes with a headline, supporting text, and AI-generated assessment explaining their readiness and a concrete next step. Below the result are CTAs to book a call or visit the services section.
+
+**For team members**: The questionnaire is implemented as:
+- **Routes**: `/upitnik` (Croatian page) and `/en/questionnaire` (English page)
+- **Frontend**: `src/pages/hr/Questionnaire.jsx` and `src/pages/en/Questionnaire.jsx` render the page shell (Nav, Questionnaire, Footer). The component `src/components/hr/Questionnaire.jsx` and `src/components/en/Questionnaire.jsx` manage the 5-step wizard state and result display.
+- **Backend**: `POST /api/questionnaire` (see API.md for contract). Rate-limited to 3 requests per 15 minutes per IP.
+- **Integration**: The backend requires `OPENROUTER_API_KEY` and `OPENROUTER_MODEL` env vars (see "Local Development" section below). In test mode (`NODE_ENV=test`), the OpenRouter call is mocked.
+
 ---
 
 ## Contacting Kontekst (User Perspective)
@@ -121,6 +135,8 @@ The site meets WCAG 2.1 AA standards:
 |-------|-----|-----------|
 | Contact form shows "Previše pokušaja" | Rate limiting — too many form submissions from your IP in a short time | Wait several minutes, then try again. Or email directly: `info@kontekst.hr` |
 | Contact form fails with a server error | Backend API is down or unreachable | Refresh the page and try again. If the problem persists, email `info@kontekst.hr` directly |
+| Questionnaire shows "Previše pokušaja" | Rate limiting — too many questionnaire submissions from your IP in 15 minutes (limit is 3 per 15 min) | Wait 15 minutes, then try again. Or contact `info@kontekst.hr` directly. |
+| Questionnaire result doesn't load (shows "Procjena traje predugo" or generic error) | The AI assessment service (OpenRouter) is temporarily unavailable or the request timed out | Click the back button and try again. If the problem persists, you can still use the contact form to reach out. |
 | Page layout looks broken (sections misaligned, text huge or tiny) | Likely a browser compatibility issue, ad blocker, or old browser | Try a recent version of Chrome, Firefox, Safari, or Edge. If you use an aggressive ad blocker, try disabling it for this site. |
 | Animations are jerky or slow | Your device is under heavy load, or your browser needs an update | Close other browser tabs and applications. Update your browser. These animations are not essential to using the site. |
 
@@ -168,6 +184,29 @@ docker compose -f docker-compose.prod.yml up --build
 2. Scroll to Contact or click "Razgovarajmo"
 3. Fill in the form and submit
 4. Check the terminal running the backend to see the email log (or check your configured email service)
+
+### Testing the questionnaire
+
+1. Add the required env vars to `backend/.env`:
+   ```env
+   OPENROUTER_API_KEY=sk-or-v1-your-key-here
+   OPENROUTER_MODEL=anthropic/claude-haiku-4-5
+   ```
+   (You may also set `NODE_ENV=test` to skip the real OpenRouter call and return a mock response.)
+
+2. Start the backend and frontend:
+   ```bash
+   docker compose up
+   # or npm run dev (both services) without Docker
+   ```
+
+3. Visit http://localhost:5173/upitnik (Croatian) or http://localhost:5173/en/questionnaire (English)
+
+4. Answer all 5 questions and click "Prikaži moje rezultate" / "Show my results"
+
+5. Wait for the assessment (typically 2–4 seconds). You should see a result card with tier, score, and AI-generated assessment.
+
+6. If `NODE_ENV=test` or `OPENROUTER_API_KEY` is not set, a mock or error response will be returned (and logged to the backend console).
 
 ### Deployment
 
