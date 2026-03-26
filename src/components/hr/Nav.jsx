@@ -4,7 +4,7 @@ import { LOGO_LIGHT_URL } from '../../constants/assets.js';
 
 const SCROLL_THRESHOLD_PX = 50;
 
-export default function Nav() {
+export default function Nav({ hideCta = false }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -76,11 +76,13 @@ export default function Nav() {
                 EN
               </Link>
             </li>
-            <li>
-              <a href="#kontakt" className="nav-cta">
-                Razgovarajmo
-              </a>
-            </li>
+            {!hideCta && (
+              <li>
+                <a href="#kontakt" className="nav-cta">
+                  Razgovarajmo
+                </a>
+              </li>
+            )}
           </ul>
 
           <button
@@ -160,16 +162,18 @@ export default function Nav() {
                 EN — English
               </Link>
             </li>
-            <li>
-              <a
-                href="#kontakt"
-                className="block mx-4 mt-2 mb-2 py-3 text-center rounded-lg font-semibold text-sm"
-                style={{ background: 'var(--color-accent)', color: '#07090D' }}
-                onClick={closeMobileMenu}
-              >
-                Razgovarajmo
-              </a>
-            </li>
+            {!hideCta && (
+              <li>
+                <a
+                  href="#kontakt"
+                  className="block mx-4 mt-2 mb-2 py-3 text-center rounded-lg font-semibold text-sm"
+                  style={{ background: 'var(--color-accent)', color: '#07090D' }}
+                  onClick={closeMobileMenu}
+                >
+                  Razgovarajmo
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
