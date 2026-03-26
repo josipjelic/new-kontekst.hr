@@ -4,6 +4,7 @@ import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import healthRouter from './routes/health.js';
 import contactRouter from './routes/contact.js';
+import questionnaireRouter from './routes/questionnaire.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/health', healthRouter);
 
 const apiRouter = express.Router();
 apiRouter.use(contactRouter);
+apiRouter.use(questionnaireRouter);
 app.use('/api', apiGeneralLimiter, apiRouter);
 
 app.use((req, res) => {

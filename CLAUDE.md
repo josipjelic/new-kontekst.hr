@@ -70,6 +70,7 @@ docs/
   technical/              # Architecture, decisions, API
   content/                # Content strategy (English docs; live copy may be Croatian)
 .claude/agents/           # Specialist agent definitions
+.claude/templates/        # Blank doc templates (synced from upstream — do not edit)
 .tasks/                   # Detailed task files — one per TODO item
 ```
 

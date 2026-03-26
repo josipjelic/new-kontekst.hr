@@ -129,12 +129,15 @@ Kontekst.hr is a specialized agency for business automation and AI solutions, ai
 | AI aplikacije za poslovanje | commercial | / | verify | med | targeting | 2026-03-25 |
 | poslovne automatizacije | commercial | / | verify | med | targeting | 2026-03-25 |
 | automatizacija poslovnih procesa | commercial | / | verify | med | targeting | 2026-03-25 |
+| AI spremnost | informational | /upitnik | verify | low | targeting | 2026-03-26 |
+| digitalna transformacija hrvatska | informational | /upitnik | verify | med | targeting | 2026-03-26 |
 
 ### Secondary Keywords (supporting, per page)
 
 | Page | Secondary Keywords (HR) |
 |------|--------------------|
 | / | workflow automatizacija, n8n workflow, AI rješenja za tvrtke, integracija poslovnih alata |
+| /upitnik | automatizacija poslovanja, AI rješenja, procjena AI spremnosti, poslovni procesi |
 
 ### Content Clusters
 
@@ -176,15 +179,34 @@ Copy is recorded here after it goes live. Variants awaiting A/B test results are
 
 ---
 
-### [Page 2: e.g., Pricing]
+### /upitnik — AI Readiness Questionnaire (Croatian)
 
-**Title tag**: [exact text]
-**Meta description**: [exact text]
+**Title tag**: `Upitnik AI spremnosti — Kontekst.hr` (37 chars)
+**Meta description**: `Odgovorite na 5 pitanja i dobijte personaliziranu procjenu AI i automatizacije za vaše poslovanje. Besplatno. Rezultat za 2 minute.` (132 chars)
+**Canonical**: `https://kontekst.hr/upitnik`
 
 **H1**:
-> [Headline text]
+> Koliko je vaše poslovanje spremno za AI?
 
-**Primary CTA**: [CTA text]
+**Primary CTAs** (vary by result tier — see `docs/content/questionnaire-copy.md` Section 6):
+- Tier 1: Razgovarajmo o vašim mogućnostima → `/#kontakt`
+- Tier 2: Dogovorite besplatni razgovor → `/#kontakt`
+- Tier 3: Pokrenimo prvi projekt → `/#kontakt`
+
+**Full copy spec**: `docs/content/questionnaire-copy.md`
+
+---
+
+### /en/questionnaire — AI Readiness Questionnaire (English)
+
+**Title tag**: `AI Readiness Check for Your Business — Kontekst` (48 chars)
+**Meta description**: `Answer 5 questions and get a personalised AI and automation readiness assessment for your business. Free. Results in under 2 minutes.` (134 chars)
+**Canonical**: `https://kontekst.hr/en/questionnaire`
+
+**H1**:
+> How ready is your business for AI?
+
+**Full copy spec**: `docs/content/questionnaire-copy.md`
 
 ---
 
@@ -205,6 +227,10 @@ All approved CTAs in active use. New CTAs must be added here before implementati
 | Pošalji poruku | Contact form submit button | primary | Action-oriented; same context as form, so "poruku" is clear. | 2026-03-25 |
 | Ili nam napišite direktno | Contact section (email alternative) | secondary | Plain language; acknowledges the form is not the only option. Precedes the mailto link. | 2026-03-25 |
 | Hvala! Vaša poruka je poslana. Javit ćemo se uskoro. | Contact form success message | — | Confirmation + expectation-setting. Warm and brief. | 2026-03-25 |
+| Razgovarajmo o vašim mogućnostima | /upitnik result page — Tier 1 (Istraživač) | primary | Softer CTA for low-readiness users; no commitment language. | 2026-03-26 |
+| Dogovorite besplatni razgovor | /upitnik result page — Tier 2 (Graditelj) | primary | Mid-commitment CTA; emphasises "free" + concrete next step. | 2026-03-26 |
+| Pokrenimo prvi projekt | /upitnik result page — Tier 3 (Spreman za akciju) | primary | High-intent CTA for users who scored 8–10; action-led, no hedge. | 2026-03-26 |
+| Prikaži moje rezultate | /upitnik wizard — final question submit | primary | Frames submission as receiving value, not sending data. | 2026-03-26 |
 
 ---
 
@@ -232,6 +258,7 @@ Applied to all pages unless a page-level override exists in the Page Copy Librar
 | Article | Blog posts | not started (no blog yet — add when blog launches) |
 | FAQPage | Contact section (if FAQ added) | pending |
 | BreadcrumbList | Locale pages (/en, /) | simple 2-item list (Home, Locale) — not essential for single-page |
+| BreadcrumbList | /upitnik, /en/questionnaire | planned — 2-item: Home → Questionnaire. Delegate spec to @frontend-developer (#028) |
 | ContactPoint | Contact section | live — telephone and email contact methods |
 
 ### Redirect Map
@@ -259,6 +286,7 @@ For v1 (launch), all content is on the homepage. Future: Add blog posts or case 
 | Publish date | Title / Topic | Type | Primary keyword | Status | Owner |
 |-------------|--------------|------|----------------|--------|-------|
 | 2026-03-25 | Kontekst.hr homepage | landing page | automatizacija poslovanja | live | [@copywriter-seo] |
+| 2026-03-26 | AI Readiness Questionnaire (/upitnik) | interactive tool / landing | AI spremnost | copy done (#025) — pending implementation (#028) | [@copywriter-seo] |
 | (future) | Case study: e-commerce automation | blog/case study | n8n e-commerce | planned | [@copywriter-seo] |
 | (future) | Guide: Why manual workflows cost you time | blog/guide | poslovne automatizacije | planned | [@copywriter-seo] |
 | (future) | AI + n8n: Smart automation | blog/guide | AI aplikacije za poslovanje | planned | [@copywriter-seo] |
@@ -272,3 +300,4 @@ For v1 (launch), all content is on the homepage. Future: Add blog posts or case 
 | 2026-03-25 | Documentation language: strategy doc in English; live Croatian copy retained in Page Copy Library. |
 | 2026-03-25 | Full content + SEO revision of index.html — improved all section copy, added og:image, og:image:alt, twitter:image, twitter:image:alt, meta author/language, upgraded JSON-LD from LocalBusiness to ProfessionalService + WebSite, added hasOfferCatalog. Updated keyword targets and page copy library. |
 | 2026-03-25 | Initial content strategy — brand voice and keyword framework defined |
+| 2026-03-26 | #025 AI Readiness Questionnaire copy complete. Added questionnaire-copy.md with all 5 questions (HR+EN), scoring tiers, Claude Haiku system prompt templates, result page copy, and UI strings. Added /upitnik and /en/questionnaire to keyword targets and page copy library. Added 4 new CTAs to CTA library. |

@@ -4,7 +4,7 @@ import { LOGO_LIGHT_URL } from '../../constants/assets.js';
 
 const SCROLL_THRESHOLD_PX = 50;
 
-export default function Nav() {
+export default function Nav({ hideCta = false }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -67,6 +67,11 @@ export default function Nav() {
               </a>
             </li>
             <li>
+              <Link to="/upitnik" className="nav-link text-sm font-medium">
+                Upitnik
+              </Link>
+            </li>
+            <li>
               <Link
                 to="/en"
                 className="text-xs font-medium transition-opacity opacity-60 hover:opacity-100"
@@ -76,11 +81,13 @@ export default function Nav() {
                 EN
               </Link>
             </li>
-            <li>
-              <a href="#kontakt" className="nav-cta">
-                Razgovarajmo
-              </a>
-            </li>
+            {!hideCta && (
+              <li>
+                <a href="#kontakt" className="nav-cta">
+                  Razgovarajmo
+                </a>
+              </li>
+            )}
           </ul>
 
           <button
@@ -152,6 +159,15 @@ export default function Nav() {
             </li>
             <li>
               <Link
+                to="/upitnik"
+                className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
+                onClick={closeMobileMenu}
+              >
+                Upitnik
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/en"
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg opacity-60"
                 aria-label="Switch to English version"
@@ -160,16 +176,18 @@ export default function Nav() {
                 EN — English
               </Link>
             </li>
-            <li>
-              <a
-                href="#kontakt"
-                className="block mx-4 mt-2 mb-2 py-3 text-center rounded-lg font-semibold text-sm"
-                style={{ background: 'var(--color-accent)', color: '#07090D' }}
-                onClick={closeMobileMenu}
-              >
-                Razgovarajmo
-              </a>
-            </li>
+            {!hideCta && (
+              <li>
+                <a
+                  href="#kontakt"
+                  className="block mx-4 mt-2 mb-2 py-3 text-center rounded-lg font-semibold text-sm"
+                  style={{ background: 'var(--color-accent)', color: '#07090D' }}
+                  onClick={closeMobileMenu}
+                >
+                  Razgovarajmo
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
