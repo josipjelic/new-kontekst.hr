@@ -67,6 +67,11 @@ export default function Nav({ hideCta = false }) {
               </a>
             </li>
             <li>
+              <Link to="/upitnik" className="nav-link text-sm font-medium">
+                Upitnik
+              </Link>
+            </li>
+            <li>
               <Link
                 to="/en"
                 className="text-xs font-medium transition-opacity opacity-60 hover:opacity-100"
@@ -151,6 +156,15 @@ export default function Nav({ hideCta = false }) {
               >
                 O nama
               </a>
+            </li>
+            <li>
+              <Link
+                to="/upitnik"
+                className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
+                onClick={closeMobileMenu}
+              >
+                Upitnik
+              </Link>
             </li>
             <li>
               <Link

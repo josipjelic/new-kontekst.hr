@@ -67,6 +67,11 @@ export default function Nav({ hideCta = false }) {
               </a>
             </li>
             <li>
+              <Link to="/en/questionnaire" className="nav-link text-sm font-medium">
+                Questionnaire
+              </Link>
+            </li>
+            <li>
               <Link
                 to="/"
                 className="text-xs font-medium transition-opacity opacity-60 hover:opacity-100"
@@ -151,6 +156,15 @@ export default function Nav({ hideCta = false }) {
               >
                 About
               </a>
+            </li>
+            <li>
+              <Link
+                to="/en/questionnaire"
+                className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
+                onClick={closeMobileMenu}
+              >
+                Questionnaire
+              </Link>
             </li>
             <li>
               <Link

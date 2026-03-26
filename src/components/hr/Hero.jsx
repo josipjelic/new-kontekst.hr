@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Hero() {
   return (
     <section
@@ -54,6 +56,9 @@ export default function Hero() {
           <a href="#usluge" className="btn-ghost">
             Pogledajte usluge
           </a>
+          <Link to="/upitnik" className="btn-ghost">
+            Provjerite svoju AI spremnost &rarr;
+          </Link>
         </div>
 
         <div
