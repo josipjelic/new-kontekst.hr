@@ -1,0 +1,79 @@
+# App Platform spec for lobster-app (josipjelic/new-kontekst.hr).
+# Apply: doctl apps update 9fd74081-3545-4b9a-b1df-391a67ef50b2 --spec deploy/digitalocean-lobster-app-spec.yaml
+# OPENROUTER_API_KEY is stored as SECRET; value below is DO encrypted blob (rotate via dashboard if needed).
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: new-kontekst-hr-backend
+      match:
+        path:
+          prefix: /api
+    - component:
+        name: new-kontekst-hr-src
+      match:
+        path:
+          prefix: /
+name: lobster-app
+region: fra
+services:
+  - dockerfile_path: backend/Dockerfile
+    envs:
+      - key: PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "3000"
+      - key: NODE_ENV
+        scope: RUN_AND_BUILD_TIME
+        value: production
+      - key: CORS_ORIGIN
+        scope: RUN_AND_BUILD_TIME
+        value: https://lobster-app-q7ip3.ondigitalocean.app
+      - key: SMTP_HOST
+        scope: RUN_AND_BUILD_TIME
+      - key: SMTP_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "587"
+      - key: SMTP_USER
+        scope: RUN_AND_BUILD_TIME
+      - key: SMTP_PASS
+        scope: RUN_AND_BUILD_TIME
+      - key: SMTP_FROM
+        scope: RUN_AND_BUILD_TIME
+      - key: OPENROUTER_API_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:VfyYq7KzHzJ+lyYEyxllTnlmLOORZSxU:PX/CMPdfsp9Dg6ewsPFE2ppzTfdAWTRr0SqOWmutcRheaCCSrup/uxphxUnXA2/Iq6tGAWRgv/vkkfXwFRQvrPXm+GbbatiRX6bGkd5zKFrGLNPMvhrhUp4=]
+      - key: OPENROUTER_MODEL
+        scope: RUN_AND_BUILD_TIME
+        value: anthropic/claude-haiku-4-5
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: josipjelic/new-kontekst.hr
+    http_port: 3000
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: new-kontekst-hr-backend
+    source_dir: backend
+static_sites:
+  - environment_slug: html
+    envs:
+      - key: PORT
+        scope: BUILD_TIME
+        value: "3000"
+      - key: NODE_ENV
+        scope: BUILD_TIME
+        value: production
+      - key: VITE_API_URL
+        scope: BUILD_TIME
+        value: ""
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: josipjelic/new-kontekst.hr
+    name: new-kontekst-hr-src
+    source_dir: src

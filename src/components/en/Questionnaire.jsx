@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '');
-const QUESTIONNAIRE_URL = `${API_BASE}/api/questionnaire`;
+import { apiUrl } from '../../utils/apiBase.js';
+
+const QUESTIONNAIRE_URL = apiUrl('/api/questionnaire');
 
 const QUESTIONS = [
   {

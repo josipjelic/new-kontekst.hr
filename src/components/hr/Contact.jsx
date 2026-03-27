@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { apiUrl } from '../../utils/apiBase.js';
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '');
-const CONTACT_URL = `${API_BASE}/api/contact`;
+const CONTACT_URL = apiUrl('/api/contact');
 
 function validateFields(name, email, message) {
   const errors = { name: '', email: '', message: '' };
