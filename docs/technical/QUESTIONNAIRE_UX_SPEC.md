@@ -43,12 +43,11 @@ The questionnaire pages use the **same Nav and Footer** as the main site locale 
 deliberate choice: the page is part of the site, not a detached landing page. Visitors who finish
 and want to learn more can use the Nav without disorientation.
 
-However, the Nav CTA ("Razgovarajmo" / "Let's talk") is suppressed on these pages. The wizard
-IS the conversion mechanism. Offering a parallel route out reduces completion. Implement this by
-passing a prop to Nav: `hideCta={true}` on questionnaire page shells.
+The Nav CTA ("Razgovarajmo" / "Let's talk") is shown on these pages so visitors can open contact
+while or after using the wizard. Use the default `<Nav />` (do not pass `hideCta`).
 
 ```
-<Nav hideCta={true} />
+<Nav />
 <main id="main-content">
   <section class="questionnaire-page">
     <!-- hero copy (H1 + subheadline) -->

@@ -95,7 +95,7 @@ client/
 
 **Locale layout (hr / en)**: Croatian UI lives under `src/components/hr/` (Nav, Footer, Hero, Services, HowWeWork, AboutUs, Contact) and is composed by `src/pages/hr/Home.jsx`. English mirrors the same filenames under `src/components/en/` and `src/pages/en/Home.jsx` (Helmet + `lang="en"` meta on the EN page). Shared hooks and assets stay outside these folders. `App.jsx` wires `react-router-dom` routes `/` and `/en` to the respective shells.
 
-**Nav component**: The `Nav` component accepts an optional `hideCta` prop (boolean, default `false`). When `hideCta={true}`, the main CTA button ("Razgovarajmo" / "Let's talk") is hidden from the nav. This is used on questionnaire pages to avoid competing CTAs. See `src/pages/hr/Questionnaire.jsx` and `src/pages/en/Questionnaire.jsx`.
+**Nav component**: The `Nav` component accepts an optional `hideCta` prop (boolean, default `false`). When `hideCta={true}`, the main CTA button ("Razgovarajmo" / "Let's talk") is hidden from the nav. Questionnaire pages (`/upitnik`, `/en/questionnaire`) use the default and show the CTA so visitors can jump to contact from the wizard.
 
 ---
 

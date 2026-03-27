@@ -25,7 +25,7 @@ export default function QuestionnairePage() {
         <link rel="canonical" href="https://kontekst.hr/en/questionnaire" />
         <meta name="robots" content="index, follow" />
       </Helmet>
-      <Nav hideCta={true} />
+      <Nav />
       <main id="main-content">
         <QuestionnaireWizard />
       </main>
