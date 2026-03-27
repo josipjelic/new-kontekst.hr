@@ -33,6 +33,8 @@ const apiRouter = express.Router();
 apiRouter.use(contactRouter);
 apiRouter.use(questionnaireRouter);
 app.use('/api', apiGeneralLimiter, apiRouter);
+// App Platform ingress with path prefix /api forwards to the service with the prefix stripped (/contact, /questionnaire).
+app.use(apiGeneralLimiter, apiRouter);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });
