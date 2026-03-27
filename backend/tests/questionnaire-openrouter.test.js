@@ -39,10 +39,12 @@ async function getFreshApp() {
 describe('POST /api/questionnaire — OpenRouter integration (mocked fetch)', () => {
   const originalEnv = process.env.NODE_ENV;
   const originalKey = process.env.OPENROUTER_API_KEY;
+  const originalDebugLog = process.env.QUESTIONNAIRE_DEBUG_LOG;
 
   beforeEach(() => {
     process.env.NODE_ENV = 'production';
     process.env.OPENROUTER_API_KEY = 'test-key-mock';
+    process.env.QUESTIONNAIRE_DEBUG_LOG = '0';
   });
 
   // Restore env and all stubs after each test
@@ -52,6 +54,11 @@ describe('POST /api/questionnaire — OpenRouter integration (mocked fetch)', ()
       delete process.env.OPENROUTER_API_KEY;
     } else {
       process.env.OPENROUTER_API_KEY = originalKey;
+    }
+    if (originalDebugLog === undefined) {
+      delete process.env.QUESTIONNAIRE_DEBUG_LOG;
+    } else {
+      process.env.QUESTIONNAIRE_DEBUG_LOG = originalDebugLog;
     }
     vi.restoreAllMocks();
   });

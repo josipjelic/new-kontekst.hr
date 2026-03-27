@@ -376,7 +376,7 @@ Validation `message` values are Croatian (e.g. “Ime je obavezno.”).
 - Use Node 20 built-in `fetch` -- no new HTTP client dependency
 - Use `AbortController` with 10-second timeout for the OpenRouter call
 - OpenRouter request: `POST https://openrouter.ai/api/v1/chat/completions` with headers `Authorization: Bearer ${OPENROUTER_API_KEY}`, `Content-Type: application/json`, `HTTP-Referer: https://kontekst.hr`, `X-Title: Kontekst.hr Questionnaire`
-- Model from `process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4-5'`
+- Model from `process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5'` (OpenRouter slug uses `4.5`, not `4-5`)
 - Request `response_format: { "type": "json_object" }` and `max_tokens: 800`, `temperature: 0.7`
 - Parse `response.choices[0].message.content` as JSON; validate `tier`, `score`, `assessment` fields
 - Constrained answer values (`"a"`, `"b"`, `"c"`) prevent prompt injection -- no free text reaches the LLM
@@ -388,7 +388,7 @@ Validation `message` values are Croatian (e.g. “Ime je obavezno.”).
 ```env
 # OpenRouter — AI questionnaire (ADR-003)
 OPENROUTER_API_KEY=sk-or-v1-your-key-here
-OPENROUTER_MODEL=anthropic/claude-haiku-4-5
+OPENROUTER_MODEL=anthropic/claude-haiku-4.5
 ```
 
 ---

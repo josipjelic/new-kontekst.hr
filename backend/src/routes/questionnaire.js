@@ -2,6 +2,30 @@ import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
 import { body, validationResult } from 'express-validator';
 
+/** OpenRouter model slug (was wrongly `claude-haiku-4-5`; correct id uses dot: `4.5`). */
+const DEFAULT_OPENROUTER_MODEL = 'anthropic/claude-haiku-4.5';
+
+/** Set `QUESTIONNAIRE_DEBUG_LOG=0` to silence temporary troubleshooting logs. */
+function qDebug(message, detail) {
+  if (process.env.QUESTIONNAIRE_DEBUG_LOG === '0') return;
+  if (detail !== undefined) {
+    console.error(`[questionnaire-debug] ${message}`, detail);
+  } else {
+    console.error(`[questionnaire-debug] ${message}`);
+  }
+}
+
+async function readOpenRouterResponseBody(res) {
+  if (typeof res.text === 'function') {
+    return res.text();
+  }
+  if (typeof res.json === 'function') {
+    const data = await res.json();
+    return JSON.stringify(data);
+  }
+  return '';
+}
+
 // ---------------------------------------------------------------------------
 // Rate limiter — 3 requests per 15 minutes per IP
 // ---------------------------------------------------------------------------
@@ -239,8 +263,12 @@ router.post(
 
     const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
+      qDebug('OPENROUTER_API_KEY is missing or empty');
       return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
     }
+
+    const model = process.env.OPENROUTER_MODEL || DEFAULT_OPENROUTER_MODEL;
+    qDebug('OpenRouter request', { model, locale, rawScore });
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10_000);
@@ -256,7 +284,7 @@ router.post(
           'X-Title': 'Kontekst.hr Questionnaire',
         },
         body: JSON.stringify({
-          model: process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4-5',
+          model,
           messages: [
             { role: 'system', content: SYSTEM_PROMPT[locale] },
             { role: 'user', content: userMessage },
@@ -269,14 +297,33 @@ router.post(
 
       clearTimeout(timeoutId);
 
+      const responseText = await readOpenRouterResponseBody(openRouterRes);
+
       if (!openRouterRes.ok) {
+        qDebug(`OpenRouter HTTP ${openRouterRes.status} ${openRouterRes.statusText}`, {
+          bodyPreview: responseText.slice(0, 1200),
+        });
         return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
       }
 
-      const openRouterData = await openRouterRes.json();
+      let openRouterData;
+      try {
+        openRouterData = JSON.parse(responseText);
+      } catch (parseErr) {
+        qDebug('Failed to parse OpenRouter JSON envelope', {
+          err: parseErr?.message,
+          bodyPreview: responseText.slice(0, 800),
+        });
+        return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
+      }
+
       const rawContent = openRouterData?.choices?.[0]?.message?.content;
 
       if (!rawContent) {
+        qDebug('OpenRouter response missing choices[0].message.content', {
+          keys: openRouterData && typeof openRouterData === 'object' ? Object.keys(openRouterData) : [],
+          bodyPreview: responseText.slice(0, 600),
+        });
         return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
       }
 
@@ -284,6 +331,9 @@ router.post(
       try {
         parsed = JSON.parse(rawContent);
       } catch {
+        qDebug('Model content is not valid JSON', {
+          contentPreview: String(rawContent).slice(0, 500),
+        });
         return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
       }
 
@@ -291,8 +341,13 @@ router.post(
         typeof parsed.assessment !== 'string' ||
         parsed.assessment.length === 0
       ) {
+        qDebug('Parsed JSON missing non-empty assessment string', {
+          parsedKeys: parsed && typeof parsed === 'object' ? Object.keys(parsed) : [],
+        });
         return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
       }
+
+      qDebug('OpenRouter OK', { assessmentChars: parsed.assessment.length });
 
       // Use backend-computed tier and score as source of truth;
       // only the assessment text comes from the model
@@ -305,9 +360,11 @@ router.post(
       clearTimeout(timeoutId);
 
       if (err.name === 'AbortError') {
+        qDebug('OpenRouter request aborted (timeout)', { timeoutMs: 10_000 });
         return res.status(504).json({ error: ERROR_MESSAGES.timeout[locale] });
       }
 
+      qDebug('OpenRouter fetch threw', { name: err?.name, message: err?.message });
       return res.status(500).json({ error: ERROR_MESSAGES.server[locale] });
     }
   },

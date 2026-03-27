@@ -190,7 +190,7 @@ docker compose -f docker-compose.prod.yml up --build
 1. Add the required env vars to `backend/.env`:
    ```env
    OPENROUTER_API_KEY=sk-or-v1-your-key-here
-   OPENROUTER_MODEL=anthropic/claude-haiku-4-5
+   OPENROUTER_MODEL=anthropic/claude-haiku-4.5
    ```
    (You may also set `NODE_ENV=test` to skip the real OpenRouter call and return a mock response.)
 

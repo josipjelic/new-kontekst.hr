@@ -205,7 +205,7 @@ The AI Readiness Questionnaire is a standalone multi-step wizard that collects 5
     │
     ▼ HTTPS POST (fetch)
 [OpenRouter API]
-  anthropic/claude-haiku-4-5
+  anthropic/claude-haiku-4.5
     │
     ▼ JSON response
 [Express Backend]
@@ -270,7 +270,7 @@ src/
 **OpenRouter integration**:
 - Uses Node 20 built-in `fetch` (no new HTTP client dependency)
 - Endpoint: `https://openrouter.ai/api/v1/chat/completions`
-- Model: read from `OPENROUTER_MODEL` env var (default: `anthropic/claude-haiku-4-5`)
+- Model: read from `OPENROUTER_MODEL` env var (default: `anthropic/claude-haiku-4.5`)
 - Auth: `Authorization: Bearer ${OPENROUTER_API_KEY}`
 - Additional headers: `HTTP-Referer: https://kontekst.hr`, `X-Title: Kontekst.hr Questionnaire`
 - Timeout: 10 seconds (`AbortController` with `setTimeout`)
@@ -279,7 +279,7 @@ src/
 **Request shape sent to OpenRouter**:
 ```json
 {
-  "model": "anthropic/claude-haiku-4-5",
+  "model": "anthropic/claude-haiku-4.5",
   "messages": [
     { "role": "system", "content": "<system prompt>" },
     { "role": "user", "content": "<formatted answers>" }
@@ -370,7 +370,7 @@ Note: The rate limiter fires before locale is known from the body, so its 429 me
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `OPENROUTER_API_KEY` | Yes (production) | -- | API key from openrouter.ai for LLM calls |
-| `OPENROUTER_MODEL` | No | `anthropic/claude-haiku-4-5` | Model identifier; change without code deploy |
+| `OPENROUTER_MODEL` | No | `anthropic/claude-haiku-4.5` | Model identifier; change without code deploy |
 
 These must be added to `backend/.env.example` and configured in Digital Ocean App Platform environment settings for production.
 
