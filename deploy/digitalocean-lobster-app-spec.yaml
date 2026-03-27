@@ -60,11 +60,11 @@ services:
     name: new-kontekst-hr-backend
     source_dir: backend
 static_sites:
-  - environment_slug: html
+  # Vite + React: must build to dist/; "html" + source_dir src only served raw main.jsx (no bundle).
+  - build_command: npm ci && npm run build
+    catchall_document: index.html
+    environment_slug: node-js
     envs:
-      - key: PORT
-        scope: BUILD_TIME
-        value: "3000"
       - key: NODE_ENV
         scope: BUILD_TIME
         value: production
@@ -76,4 +76,5 @@ static_sites:
       deploy_on_push: true
       repo: josipjelic/new-kontekst.hr
     name: new-kontekst-hr-src
-    source_dir: src
+    output_dir: dist
+    source_dir: /
