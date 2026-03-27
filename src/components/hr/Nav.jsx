@@ -46,25 +46,25 @@ export default function Nav({ hideCta = false }) {
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Glavna navigacija">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#" className="flex-shrink-0" aria-label="Kontekst.hr — na vrh stranice">
+          <Link to="/" className="flex-shrink-0" aria-label="Kontekst.hr — početna stranica">
             <img src={LOGO_LIGHT_URL} alt="Kontekst.hr logotip" className="h-7 lg:h-8 w-auto" />
-          </a>
+          </Link>
 
           <ul className="hidden md:flex items-center gap-8" role="list">
             <li>
-              <a href="#usluge" className="nav-link text-sm font-medium">
+              <Link to="/#usluge" className="nav-link text-sm font-medium">
                 Usluge
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#kako-radimo" className="nav-link text-sm font-medium">
+              <Link to="/#kako-radimo" className="nav-link text-sm font-medium">
                 Kako radimo
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#o-nama" className="nav-link text-sm font-medium">
+              <Link to="/#o-nama" className="nav-link text-sm font-medium">
                 O nama
-              </a>
+              </Link>
             </li>
             <li>
               <Link to="/upitnik" className="nav-link text-sm font-medium">
@@ -83,9 +83,9 @@ export default function Nav({ hideCta = false }) {
             </li>
             {!hideCta && (
               <li>
-                <a href="#kontakt" className="nav-cta">
+                <Link to="/#kontakt" className="nav-cta">
                   Razgovarajmo
-                </a>
+                </Link>
               </li>
             )}
           </ul>
@@ -131,31 +131,31 @@ export default function Nav({ hideCta = false }) {
         >
           <ul className="py-4 space-y-1 px-2" role="list">
             <li>
-              <a
-                href="#usluge"
+              <Link
+                to="/#usluge"
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
                 onClick={closeMobileMenu}
               >
                 Usluge
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#kako-radimo"
+              <Link
+                to="/#kako-radimo"
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
                 onClick={closeMobileMenu}
               >
                 Kako radimo
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#o-nama"
+              <Link
+                to="/#o-nama"
                 className="mobile-nav-link block px-4 py-3 text-base font-medium rounded-lg"
                 onClick={closeMobileMenu}
               >
                 O nama
-              </a>
+              </Link>
             </li>
             <li>
               <Link
@@ -178,14 +178,14 @@ export default function Nav({ hideCta = false }) {
             </li>
             {!hideCta && (
               <li>
-                <a
-                  href="#kontakt"
+                <Link
+                  to="/#kontakt"
                   className="block mx-4 mt-2 mb-2 py-3 text-center rounded-lg font-semibold text-sm"
                   style={{ background: 'var(--color-accent)', color: '#07090D' }}
                   onClick={closeMobileMenu}
                 >
                   Razgovarajmo
-                </a>
+                </Link>
               </li>
             )}
           </ul>
