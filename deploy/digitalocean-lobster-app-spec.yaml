@@ -61,13 +61,11 @@ services:
     source_dir: backend
 static_sites:
   # Vite + React: must build to dist/; "html" + source_dir src only served raw main.jsx (no bundle).
-  - build_command: npm ci && npm run build
+  # Install devDependencies (Vite, Tailwind, etc.); NODE_ENV=production skips them and breaks vite build.
+  - build_command: npm ci --include=dev && npm run build
     catchall_document: index.html
     environment_slug: node-js
     envs:
-      - key: NODE_ENV
-        scope: BUILD_TIME
-        value: production
       - key: VITE_API_URL
         scope: BUILD_TIME
         value: ""
