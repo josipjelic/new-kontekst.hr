@@ -44,6 +44,8 @@
    ============================================================ */
 html {
   scroll-behavior: smooth;
+  /* Offset fixed header (h-16–h-20) when scrolling to #section via router */
+  scroll-padding-top: 5rem;
   background-color: var(--color-surface-base);
 }
 

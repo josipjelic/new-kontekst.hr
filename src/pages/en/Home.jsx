@@ -4,8 +4,11 @@ import Services from '../../components/en/Services.jsx';
 import HowWeWork from '../../components/en/HowWeWork.jsx';
 import AboutUs from '../../components/en/AboutUs.jsx';
 import Contact from '../../components/en/Contact.jsx';
+import { useScrollToHash } from '../../hooks/useScrollToHash.js';
 
 export default function Home() {
+  useScrollToHash('/en');
+
   return (
     <>
       <Helmet htmlAttributes={{ lang: 'en' }}>
