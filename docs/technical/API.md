@@ -69,6 +69,7 @@ All error responses follow this structure:
 
 ## Rate Limiting
 
+- **Reverse proxies**: set `TRUST_PROXY=1` on the backend when deployed behind DigitalOcean App Platform (or nginx) so `express-rate-limit` accepts `X-Forwarded-For` and does not error.
 - **Global (`/api/*`)**: 100 requests per IP per 15-minute window (`express-rate-limit`, standard `RateLimit-*` headers).
 - **`POST /api/contact`**: additionally 5 requests per IP per 15-minute window (counts every POST to contact, including failed validation).
 - **429 response** (contact endpoint): body is localized — `{ "error": "Previše zahtjeva. Pokušajte ponovo za nekoliko minuta." }` (“Too many requests. Try again in a few minutes.”)

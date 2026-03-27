@@ -9,6 +9,12 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
+// Behind reverse proxies (e.g. DigitalOcean App Platform) express-rate-limit needs this
+// or it throws ERR_ERL_UNEXPECTED_X_FORWARDED_FOR when X-Forwarded-For is present.
+if (process.env.TRUST_PROXY === '1' || process.env.TRUST_PROXY === 'true') {
+  app.set('trust proxy', 1);
+}
+
 const nodeEnv = process.env.NODE_ENV || 'development';
 if (nodeEnv !== 'test') {
   app.use(morgan(nodeEnv === 'production' ? 'combined' : 'dev'));

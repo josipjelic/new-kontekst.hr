@@ -63,6 +63,41 @@ describe('POST /api/questionnaire — OpenRouter integration (mocked fetch)', ()
     vi.restoreAllMocks();
   });
 
+  it('returns 200 when model wraps JSON in markdown fences (```json)', async () => {
+    const mockAssessment = 'Fenced mock assessment text that is long enough for display.';
+    const inner = JSON.stringify({
+      tier: 'ignored',
+      score: 99,
+      assessment: mockAssessment,
+    });
+    const mockApiResponse = {
+      choices: [
+        {
+          message: {
+            content: '```json\n' + inner + '\n```',
+          },
+        },
+      ],
+    };
+
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => mockApiResponse,
+      }),
+    );
+
+    const app = await getFreshApp();
+    const res = await request(app)
+      .post('/api/questionnaire')
+      .send({ answers: validAnswersHr, locale: 'hr' })
+      .expect(200);
+
+    expect(res.body.tier).toBe('Graditelj');
+    expect(res.body.assessment).toBe(mockAssessment);
+  });
+
   it('returns 200 with model assessment when OpenRouter responds successfully', async () => {
     const mockAssessment = 'This is a mock personalised assessment from the model.';
     const mockApiResponse = {

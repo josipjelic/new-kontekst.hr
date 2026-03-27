@@ -26,6 +26,9 @@ services:
       - key: PORT
         scope: RUN_AND_BUILD_TIME
         value: "3000"
+      - key: TRUST_PROXY
+        scope: RUN_AND_BUILD_TIME
+        value: "1"
       - key: NODE_ENV
         scope: RUN_AND_BUILD_TIME
         value: production

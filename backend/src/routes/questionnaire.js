@@ -26,6 +26,14 @@ async function readOpenRouterResponseBody(res) {
   return '';
 }
 
+/** Some models wrap JSON in ```json fences despite response_format json_object. */
+function stripMarkdownJsonFence(content) {
+  const s = String(content).trim();
+  const m = s.match(/^```(?:json)?\s*\r?\n?([\s\S]*?)\r?\n?```\s*$/i);
+  if (m) return m[1].trim();
+  return s;
+}
+
 // ---------------------------------------------------------------------------
 // Rate limiter — 3 requests per 15 minutes per IP
 // ---------------------------------------------------------------------------
@@ -329,7 +337,7 @@ router.post(
 
       let parsed;
       try {
-        parsed = JSON.parse(rawContent);
+        parsed = JSON.parse(stripMarkdownJsonFence(rawContent));
       } catch {
         qDebug('Model content is not valid JSON', {
           contentPreview: String(rawContent).slice(0, 500),
